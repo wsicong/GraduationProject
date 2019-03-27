@@ -4,15 +4,21 @@ server:
     uri-encoding: UTF-8
 
 spring:
+
+  thymeleaf:
+    cache: false
+
   http:
     encoding:
       charset: UTF-8
       enabled: true
       force: true
+
   #设置开启热部署
   devtools:
     restart:
       enabled: true
+
   datasource:
     name: mysql
     #连接池类型

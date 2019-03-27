@@ -53,7 +53,7 @@ public class CodeGenerator {
     public static void main(String[] args) {
         /*genCode("admin_user");//管理员用户表*/
         //genCode("user");
-        genCode("role");//角色表
+        /*genCode("role");//角色表*/
         /*genCode("menu");//菜单表*/
 /*        genCode("role_menu");//角色—菜单表
         genCode("sys_dict");//字典表*/
