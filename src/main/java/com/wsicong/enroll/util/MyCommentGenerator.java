@@ -23,7 +23,6 @@ import org.mybatis.generator.config.PropertyRegistry;
  * mybatis generator 自定义comment生成器.
  * 基于MBG 1.3.2.
  * @author ZhangAY 2016-02-19
- *
  */
 public class MyCommentGenerator implements CommentGenerator {
 
@@ -229,7 +228,7 @@ public class MyCommentGenerator implements CommentGenerator {
     }
 
     public void addClassComment(InnerClass innerClass, IntrospectedTable introspectedTable, boolean markAsDoNotDelete) {
-        if (suppressAllComments) {
+        /*if (suppressAllComments) {
             return;
         }
 
@@ -245,9 +244,9 @@ public class MyCommentGenerator implements CommentGenerator {
         sb.append(systemPro.getProperty("user.name"));
         sb.append(" ");
         sb.append(currentDateStr);
-
+*/
         //		addJavadocTag(innerClass, markAsDoNotDelete);
 
-        innerClass.addJavaDocLine(" */");
+        //innerClass.addJavaDocLine(" */");
     }
 }

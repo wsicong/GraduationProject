@@ -3,7 +3,13 @@ server:
   tomcat:
     uri-encoding: UTF-8
 
+wsicong:
+  picpath: D:/demo-images/
+
 spring:
+
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${wsicong.picpath}
 
   thymeleaf:
     cache: false

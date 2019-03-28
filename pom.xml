@@ -19,9 +19,50 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!--默认生成配置-->
         <java.version>1.8</java.version>
+        <shiro.version>1.3.1</shiro.version>
     </properties>
 
     <dependencies>
+
+        <!--spring boot 整合shiro依赖-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <!--shiro依赖-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-all</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <!--thymeleaf-shiro标签-->
+        <dependency>
+            <groupId>com.github.theborakompanioni</groupId>
+            <artifactId>thymeleaf-extras-shiro</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
+        <!-- 导入log4j2依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+
+        <!--shiro添加ehcache缓存 -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+            <version>1.2.6</version>
+        </dependency>
+
+        <!-- oval 参数校验 -->
+        <dependency>
+            <groupId>net.sf.oval</groupId>
+            <artifactId>oval</artifactId>
+            <version>1.86</version>
+        </dependency>
+
         <!--默认生成依赖，开始-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
