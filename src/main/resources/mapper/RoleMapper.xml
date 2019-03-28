@@ -114,4 +114,48 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--分页查询角色列表-->
+  <select id="findList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from role
+  </select>
+
+  <!--查询角色列表-->
+  <resultMap id="rolePerms" type="com.wsicong.enroll.vo.RoleVO">
+    <id column="id" property="id"/>
+    <result column="role_name" property="roleName"/>
+    <result column="code" property="code"/>
+    <result column="descpt" property="descpt"/>
+    <result column="insert_uid" property="insertUid"/>
+    <result column="insert_time" property="insertTime"/>
+    <collection property="rolePerms" ofType="com.wsicong.enroll.model.RolePermissionKey">
+      <result column="role_id" property="roleId"/>
+      <result column="permit_id" property="permitId"/>
+    </collection>
+  </resultMap>
+  <select id="findRoleAndPerms" resultMap="rolePerms">
+    select
+    r.*,rp.role_id,rp.permit_id
+    from role r
+    INNER JOIN role_permission rp ON r.id=rp.role_id
+    WHERE r.id=#{id}
+  </select>
+
+  <!--根据用户id查询角色数据-->
+  <select id="getRoleByUserId" resultType="Role">
+    select
+    ur.role_id id,r.role_name,r.code
+    from user_role ur
+    INNER JOIN role r ON r.id=ur.role_id
+    WHERE ur.user_id=#{userId}
+  </select>
+
+  <!--查询角色列表-->
+  <select id="getRoles" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from role
+  </select>
 </mapper>
