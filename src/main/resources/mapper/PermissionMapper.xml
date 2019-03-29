@@ -28,13 +28,13 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.wsicong.enroll.model.Permission">
-    insert into permission (id, name, pid, 
-      zindex, istype, descpt, 
-      code, icon, page, insert_time, 
+    insert into permission (id, name, pid,
+      zindex, istype, descpt,
+      code, icon, page, insert_time,
       update_time)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, 
-      #{zindex,jdbcType=INTEGER}, #{istype,jdbcType=INTEGER}, #{descpt,jdbcType=VARCHAR}, 
-      #{code,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{page,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER},
+      #{zindex,jdbcType=INTEGER}, #{istype,jdbcType=INTEGER}, #{descpt,jdbcType=VARCHAR},
+      #{code,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{page,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP},
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
     <insert id="insertSelective" parameterType="com.wsicong.enroll.model.Permission">

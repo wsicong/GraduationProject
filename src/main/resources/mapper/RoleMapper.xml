@@ -14,7 +14,7 @@
     id, role_name, descpt, code, insert_uid, insert_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-    select 
+      select
     <include refid="Base_Column_List" />
     from role
     where id = #{id,jdbcType=INTEGER}
@@ -24,11 +24,11 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wsicong.enroll.model.Role">
-    insert into role (id, role_name, descpt, 
-      code, insert_uid, insert_time, 
+    insert into role (id, role_name, descpt,
+      code, insert_uid, insert_time,
       update_time)
-    values (#{id,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{descpt,jdbcType=VARCHAR}, 
-      #{code,jdbcType=VARCHAR}, #{insertUid,jdbcType=INTEGER}, #{insertTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{descpt,jdbcType=VARCHAR},
+      #{code,jdbcType=VARCHAR}, #{insertUid,jdbcType=INTEGER}, #{insertTime,jdbcType=TIMESTAMP},
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wsicong.enroll.model.Role">

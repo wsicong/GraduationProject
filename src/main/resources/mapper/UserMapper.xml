@@ -17,7 +17,7 @@
         <result column="version" property="version" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, username, mobile, email, password, insert_uid, insert_time, update_time, is_del, 
+    id, username, mobile, email, password, insert_uid, insert_time, update_time, is_del,
     is_job, mcode, send_time, version
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -31,15 +31,15 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.wsicong.enroll.model.User">
-    insert into user (id, username, mobile, 
-      email, password, insert_uid, 
-      insert_time, update_time, is_del, 
-      is_job, mcode, send_time, 
+    insert into user (id, username, mobile,
+      email, password, insert_uid,
+      insert_time, update_time, is_del,
+      is_job, mcode, send_time,
       version)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{insertUid,jdbcType=INTEGER}, 
-      #{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDel,jdbcType=BIT}, 
-      #{isJob,jdbcType=BIT}, #{mcode,jdbcType=VARCHAR}, #{sendTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{insertUid,jdbcType=INTEGER},
+      #{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDel,jdbcType=BIT},
+      #{isJob,jdbcType=BIT}, #{mcode,jdbcType=VARCHAR}, #{sendTime,jdbcType=TIMESTAMP},
       #{version,jdbcType=INTEGER})
   </insert>
     <insert id="insertSelective" parameterType="com.wsicong.enroll.model.User">
