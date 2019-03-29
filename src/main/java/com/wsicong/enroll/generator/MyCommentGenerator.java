@@ -1,4 +1,4 @@
-package com.wsicong.enroll.util;
+package com.wsicong.enroll.generator;
 
 import static org.mybatis.generator.internal.util.StringUtility.isTrue;
 

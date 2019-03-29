@@ -1,4 +1,4 @@
-package com.wsicong.enroll.util;
+package com.wsicong.enroll.generator;
 
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;

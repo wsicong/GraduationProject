@@ -21,7 +21,7 @@
         <!-- genenat entity时,生成toString -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
 
-        <commentGenerator type="com.wsicong.enroll.util.MyCommentGenerator">
+        <commentGenerator type="com.wsicong.enroll.generator.MyCommentGenerator">
             <!--生成的注释包含时间戳-->
             <property name="suppressDate" value="true"/>
             <!--是否去除自动生成的注释 true：是 ： false:否-->
