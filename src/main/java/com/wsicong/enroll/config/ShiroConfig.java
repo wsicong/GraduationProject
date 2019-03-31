@@ -200,10 +200,10 @@ public class ShiroConfig {
      *
      * @return
      */
-    @Bean
+    /*@Bean
     public ShiroDialect shiroDialect() {
         return new ShiroDialect();
-    }
+    }*/
 
 
     /**

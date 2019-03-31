@@ -1,4 +1,4 @@
-package com.wsicong.enroll.controller;
+package com.wsicong.enroll.controller.user;
 
 import com.wsicong.enroll.model.Permission;
 import com.wsicong.enroll.model.Role;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 

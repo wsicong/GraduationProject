@@ -75,3 +75,17 @@ pagehelper:
   params: count=countSql
   returnPageInfo: check
 
+#Httpclient
+httpclient:
+  config:
+    proxyhost: 192.168.10.120
+    proxyPort: 8080
+    retryTime: 2
+    connMaxTotal: 20
+    maxPerRoute: 20
+    connectTimeout: 3000
+    connectRequestTimeout: 2000
+    socketTimeout: 3000
+    timeToLive: 10
+
+

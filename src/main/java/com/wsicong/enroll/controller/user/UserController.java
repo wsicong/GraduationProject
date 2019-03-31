@@ -1,4 +1,4 @@
-package com.wsicong.enroll.controller;
+package com.wsicong.enroll.controller.user;
 
 import com.wsicong.enroll.dto.UserDTO;
 import com.wsicong.enroll.dto.UserSearchDTO;

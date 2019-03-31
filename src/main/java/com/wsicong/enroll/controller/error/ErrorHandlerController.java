@@ -1,4 +1,4 @@
-package com.wsicong.enroll.controller;
+package com.wsicong.enroll.controller.error;
 
 import com.wsicong.enroll.enums.ExceptionEnum;
 import com.wsicong.enroll.util.Result;

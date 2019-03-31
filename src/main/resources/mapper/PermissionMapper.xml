@@ -169,8 +169,15 @@
         ORDER BY zindex
     </select>
 
+    <!--=Start findChildPerm 查找所有子节点权限-->
+    <select id="findChildPerm" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from permission
+        where pid=#{pid}
+    </select>
     <!--查找所有子节点权限-->
-    <resultMap id="findPermission" type="com.wsicong.enroll.vo.PermissionVO">
+    <!--<resultMap id="findPermission" type="com.wsicong.enroll.vo.PermissionVO">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="pid" column="pid"/>
@@ -186,11 +193,11 @@
             <result property="code" column="code"/>
             <result property="page" column="page"/>
         </collection>
-    </resultMap>
+    </resultMap>-->
 
     <sql id="PermColumn">
     id, name,pid pId, zindex, istype, code, icon, page
-  </sql>
+    </sql>
 
     <select id="findPerms" resultType="com.wsicong.enroll.vo.PermissionVO">
         select
