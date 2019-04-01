@@ -79,7 +79,7 @@ pagehelper:
 httpclient:
   config:
     proxyhost: 192.168.10.120
-    proxyPort: 8080
+    proxyPort: 8088
     retryTime: 2
     connMaxTotal: 20
     maxPerRoute: 20

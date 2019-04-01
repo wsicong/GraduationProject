@@ -40,7 +40,7 @@
       #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{insertUid,jdbcType=INTEGER},
       #{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDel,jdbcType=BIT},
       #{isJob,jdbcType=BIT}, #{mcode,jdbcType=VARCHAR}, #{sendTime,jdbcType=TIMESTAMP},
-      #{version,jdbcType=INTEGER})
+      0)
   </insert>
     <insert id="insertSelective" parameterType="com.wsicong.enroll.model.User">
         insert into user
