@@ -57,6 +57,7 @@ public class CodeGenerator {
         /*genCode("menu");//菜单表*/
 /*        genCode("role_menu");//角色—菜单表
         genCode("sys_dict");//字典表*/
+        genCode("hobby");
         //genCodeByCustomModelName("输入表名","输入自定义Model名称");
     }
 

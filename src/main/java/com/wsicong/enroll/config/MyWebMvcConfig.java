@@ -37,7 +37,7 @@ public class MyWebMvcConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         // 路径根据后期项目的扩展，进行调整
         registry.addInterceptor(userActionInterceptor())
-                .addPathPatterns("/user/**", "/auth/**")
+                .addPathPatterns("/user/**", "/auth/**", "/enroll/**")
                 .excludePathPatterns("/user/sendMsg", "/user/login");
         super.addInterceptors(registry);
     }

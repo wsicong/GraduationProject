@@ -5,7 +5,7 @@ package com.wsicong.enroll.core;
  */
 public final class ProjectConstant {
     //项目基础包名，根据自己公司的项目修改
-    public static final String BASE_PACKAGE="com.wsicong.enroll";
+    public static final String BASE_PACKAGE = "com.wsicong.generator";
 
     //Model所在包
     public static final String MODEL_PACKAGE=BASE_PACKAGE+".model";

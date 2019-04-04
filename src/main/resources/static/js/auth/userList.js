@@ -66,6 +66,7 @@ $(function () {
         });
         //监听提交
         form.on('submit(userSubmit)', function (data) {
+            console.log('进入按钮监听')
             // TODO 校验
             formSubmit(data);
             return false;
