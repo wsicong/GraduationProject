@@ -2,9 +2,11 @@ package com.wsicong.enroll.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.wsicong.enroll.dto.HobbySearchDTO;
 import com.wsicong.enroll.mapper.HobbyMapper;
 import com.wsicong.enroll.model.Hobby;
 import com.wsicong.enroll.service.HobbyService;
+import com.wsicong.enroll.util.DateUtil;
 import com.wsicong.enroll.util.PageDataResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -31,10 +34,12 @@ public class HobbyServiceImpl implements HobbyService {
      * @return
      */
     @Override
-    public PageDataResult list(int page, int limit, Hobby hobby) {
+    public PageDataResult list(int page, int limit, HobbySearchDTO hobbySearch) {
+        //时间处理
+
         PageDataResult result = new PageDataResult();
         PageHelper.startPage(page, limit);
-        List<Hobby> hobbyList = hobbyMapper.selectHobbyList(hobby);
+        List<Hobby> hobbyList = hobbyMapper.selectHobbyList(hobbySearch);
         //拿到分页查询后的数据
         PageInfo<Hobby> pageInfo = new PageInfo<>(hobbyList);
         result.setTotals(Long.valueOf(pageInfo.getTotal()).intValue());
@@ -43,15 +48,27 @@ public class HobbyServiceImpl implements HobbyService {
     }
 
     /**
-     * 新增兴趣分类
+     * 添加/更新兴趣
      *
      * @param hobby
      * @return
      */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = 30000, rollbackFor = {RuntimeException.class, Exception.class})
-    public String add(Hobby hobby) {
-        hobbyMapper.insert(hobby);
+    public String setHobby(Hobby hobby) {
+        //id为不为空时，说明为更新操作,否则为新增操作
+        if (null != hobby.getId()) {
+            hobby.setUpdateTime(new Date());
+            hobbyMapper.updateByPrimaryKeySelective(hobby);
+        } else {
+            Hobby existHobby = this.hobbyMapper.selectByHobbyName(hobby.getHobbyName());
+            System.out.println("+++++++++++++++++++++" + existHobby);
+            if (null != existHobby) {
+                return "该兴趣已存在，不能重复添加";
+            } else {
+                hobbyMapper.insert(hobby);
+            }
+        }
         return "ok";
     }
 
@@ -64,5 +81,16 @@ public class HobbyServiceImpl implements HobbyService {
     @Override
     public String delete(Integer id) {
         return hobbyMapper.deleteByPrimaryKey(id) == 1 ? "ok" : "删除失败，请您稍后再试";
+    }
+
+    /**
+     * 根据id查找兴趣
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Hobby getHobby(Integer id) {
+        return hobbyMapper.selectByPrimaryKey(id);
     }
 }

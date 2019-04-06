@@ -1,4 +1,6 @@
-/*兴趣类别列表*/
+/**
+ * 兴趣列表
+ */
 var pageCurr;
 $(function () {
     layui.use('table', function () {
@@ -29,10 +31,11 @@ $(function () {
                 , {field: 'hobbyName', title: '兴趣名称'}
                 , {field: 'hobbyInfo', title: '简介'}
                 , {field: 'enable', title: '是否启用', width: 95, templet: '#enableTpl'}
-                , {field: 'createBy', title: '创建者'}
-                , {field: 'createTime', title: '创建时间'}
-                , {field: 'updateBy', title: '更新者'}
-                , {field: 'updateTime', title: '更新时间'}
+                , {field: 'createBy', title: '创建者', hide: true}
+                , {field: 'createTime', title: '创建时间', sort: true}
+                , {field: 'updateBy', title: '更新者', hide: true}
+                , {field: 'updateTime', title: '更新时间', sort: true}
+                , {field: 'remark', title: '备注'}
                 , {fixed: 'right', title: '操作', width: 140, align: 'center', toolbar: '#optBar'}
             ]]
             , done: function (res, curr, count) {
@@ -53,7 +56,7 @@ $(function () {
             setHobbyEnable(obj, this.value, this.name, obj.elem.checked);
         });
 
-        //监听编辑和删除操作
+        //监听工具条，编辑和删除操作
         table.on('tool(hobbyTable)', function (obj) {
             var data = obj.data;
             if (obj.event === 'del') {
@@ -95,13 +98,13 @@ $(function () {
 
 //设置是否启用该兴趣分类
 function setHobbyEnable(obj, id, hobbyName, checked) {
-    var isEnable = checked ? 0 : 1;
+    var isEnable = checked ? 1 : 0;
     var hobbyIsEnable = checked ? '启用' : '禁用';
     //是否启用
-    layer.confirm('您确定要吧兴趣：' + hobbyName + '设置为' + hobbyIsEnable + '状态码？', {
+    layer.confirm('您确定要吧兴趣：' + hobbyName + '设置为' + hobbyIsEnable + '状态吗？', {
         btn: ['确认', '取消']
     }, function () {
-        $.post("/hobby/setHobbyEnable", {"id": id, "enable": isEnable,}, function (data) {
+        $.post("/hobby/setHobbyEnable", {"id": id, "enable": isEnable}, function (data) {
             if (isLogin(data)) {
                 if (data == "ok") {
                     //回调弹框
@@ -137,11 +140,11 @@ function submitAjax(obj, currentUser) {
     $.ajax({
         type: 'POST',
         data: $('#hobbyForm').serialize(),
-        url: '/hobby/add',
+        url: '/hobby/setHobby',
         success: function (data) {
             //判断是否登录
             if (isLogin(data)) {
-                if (data = 'ok') {
+                if (data == 'ok') {
                     layer.alert('操作成功', function () {
                         //关闭所有弹出层
                         layer.closeAll();
@@ -153,7 +156,7 @@ function submitAjax(obj, currentUser) {
                     layer.alert(data, function () {
                         layer.closeAll();
                         load(obj);
-                    })
+                    });
                 }
             }
         },
@@ -170,15 +173,18 @@ function submitAjax(obj, currentUser) {
 
 //清除数据
 function cleanHobby() {
-    $('#hobbyName').val('');
+    /*$('#hobbyName').val('');
     $('#hobbyInfo').val('');
+    $('#enable').removeAttr('checked');*/
     /*$('#enable').val('');*/
-    /*$('#hobbyForm')[0].reset();
-    layui.form.render();*/
+    $('#hobbyForm')[0].reset();
+    layui.form.render();
 }
 
 function addHobby() {
     openHobby(null, '新增兴趣分类');
+    //重新渲染下form表单 否则复选框无效
+    layui.form.render('checkbox');
 }
 
 //打开弹出层
@@ -186,7 +192,7 @@ function openHobby(id, title) {
     if (id == null || id == "") {
         $("#id").val("");
     }
-    var setHobby = layer.open({
+    layer.open({
         type: 1,
         title: title,
         fixed: false,
@@ -230,14 +236,16 @@ function delHobby(obj, id, hobbyName) {
 }
 
 function editHobby(obj, id) {
-    $.get("/hobby/editHobby", {"id": id}, function (data) {
+    $.get("/hobby/getHobby", {"id": id}, function (data) {
         if (isLogin(data)) {
             if (data.msg == 'ok' && data.hobby != null) {
                 $("#id").val(data.hobby.id == null ? '' : data.hobby.id);
                 $("#hobbyName").val(data.hobby.hobbyName == null ? '' : data.hobby.hobbyName);
                 $("#hobbyInfo").val(data.hobby.hobbyInfo == null ? '' : data.hobby.hobbyInfo);
-                /*$("#enable").val(data.hobby.enable == true ? 1 : data.hobby.enable);*/
+                /*$("#enable").checked(data.hobby.enable == true ? true : false);*/
                 openHobby(id, '编辑兴趣分类');
+                /*layui.form.render();*/
+                /*layui.form.render('checkbox');*/
             } else {
                 //弹出错误提示
                 layer.alert(data.msg, function () {

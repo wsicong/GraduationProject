@@ -1,5 +1,6 @@
 package com.wsicong.enroll.controller.enroll;
 
+import com.wsicong.enroll.dto.HobbySearchDTO;
 import com.wsicong.enroll.model.Hobby;
 import com.wsicong.enroll.model.User;
 import com.wsicong.enroll.service.HobbyService;
@@ -11,6 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 兴趣班管理Controller
@@ -34,8 +38,8 @@ public class HobbyController {
     /*@RequiresPermissions("hobbyType")*/
     @PostMapping("/getHobbyList")
     @ResponseBody
-    public PageDataResult getHobbyList(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit, Hobby hobby) {
-        logger.debug("分页查询兴趣分类列表！搜索条件：hobbySearch：" + ",page:" + page + ",每页记录数量limit:" + limit);
+    public PageDataResult getHobbyList(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit, HobbySearchDTO hobbySearch) {
+        logger.debug("分页查询兴趣分类列表！搜索条件：hobbySearch：" + hobbySearch + ",page:" + page + ",每页记录数量limit:" + limit);
 
         PageDataResult result = new PageDataResult();
         try {
@@ -46,7 +50,7 @@ public class HobbyController {
                 limit = 10;
             }
             // 获取兴趣分类列表
-            result = hobbyService.list(page, limit, hobby);
+            result = hobbyService.list(page, limit, hobbySearch);
             logger.debug("兴趣分类列表查询=result:" + result);
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,20 +60,19 @@ public class HobbyController {
     }
 
     /**
-     * 新增兴趣类别
+     * 添加/更新兴趣
      *
      * @param hobby
      * @return
      */
-    @PostMapping("/add")
+    @PostMapping("/setHobby")
     @ResponseBody
-    public String add(Hobby hobby) {
-        logger.debug("操作：增加兴趣类别：" + hobby);
+    public String setHobby(Hobby hobby) {
+        logger.debug("操作：添加/更新兴趣：" + hobby);
         if ((hobby.getEnable()) == null) {
             hobby.setEnable(false);
         }
-        hobbyService.add(hobby);
-        return "ok";
+        return hobbyService.setHobby(hobby);
     }
 
     /**
@@ -97,6 +100,42 @@ public class HobbyController {
             msg = "操作异常，请您稍后再试";
         }
         return msg;
+    }
+
+    /**
+     * 根据id查询兴趣数据
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/getHobby")
+    @ResponseBody
+    public Map<String, Object> getHobby(@RequestParam("id") Integer id) {
+        logger.debug("查询兴趣数据！id：" + id);
+        Map<String, Object> map = new HashMap<>();
+        try {
+            if (null == id) {
+                logger.debug("查询兴趣数据==请求参数有误，请您稍后再试");
+                map.put("msg", "请求参数有误，请您稍后再试");
+                return map;
+            }
+            //查询兴趣
+            Hobby hobby = hobbyService.getHobby(id);
+            logger.debug("查询兴趣数据！hobby=" + hobby);
+            if (null != hobby) {
+                map.put("hobby", hobby);
+                map.put("msg", "ok");
+            } else {
+                map.put("msg", "查询兴趣信息有误，请您稍后再试");
+            }
+            logger.debug("查询兴趣数据成功！map=" + map);
+            return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("msg", "查询兴趣数据有误，请您稍后再试！");
+            logger.error("查询兴趣数据异常！", e);
+        }
+        return map;
     }
 
 }

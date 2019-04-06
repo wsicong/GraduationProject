@@ -13,11 +13,22 @@
 
         <form id="hobbySearch" class="layui-form layui-form-pane" method="post" action="" style="margin-top: 20px;">
             <div class="layui-form-item">
-                <label class="layui-form-label">兴趣类别</label>
+                <label class="layui-form-label">兴趣名称</label>
                 <div class="layui-input-inline">
-                    <input id="hobbyType" name="hobbyType" autocomplete="off" class="layui-input" type="text"/>
+                    <input id="hobbyNameSearch" name="hobbyNameSearch" autocomplete="off" class="layui-input"
+                           type="text"/>
                 </div>
-                <label class="layui-form-label">创建时间</label>
+
+                <!--<label class="layui-form-label">是否启用</label>
+                <div class="layui-input-inline">
+                    <select id="enableSearch" name="enableSearch" lay-verify="" lay-search>
+                        <option value="">请选择</option>
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select>
+                </div>-->
+
+                <!--<label class="layui-form-label">创建时间</label>
                 <div class="layui-input-inline" style="width: 175px;">
                     <input name="insertTimeStart" id="insertTimeStart" placeholder="yyyy-MM-dd" autocomplete="off"
                            class="layui-input" type="text"/>
@@ -26,7 +37,7 @@
                 <div class="layui-input-inline" style="width: 175px;">
                     <input name="insertTimeEnd" id="insertTimeEnd" placeholder="yyyy-MM-dd" autocomplete="off"
                            class="layui-input" type="text"/>
-                </div>
+                </div>-->
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 <button class="layui-btn" lay-submit="" lay-filter="searchSubmit">搜索</button>
             </div>
@@ -40,13 +51,13 @@
             <shiro:principal property="id"></shiro:principal>
         </div>
 
-        <!--是否启用单选-->
+        <!--是否启用开关-->
         <script id="enableTpl" type="text/html">
             {{# if(d.enable){}}
-            <input type="checkbox" name="{{d.hobbyName}}" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用"
+            <input type="checkbox" name="{{d.hobbyName}}" value="{{d.enable}}" lay-skin="switch" lay-text="启用|禁用"
                    lay-filter="isEnableTpl" checked="checked"/>
             {{#  } else { }}
-            <input type="checkbox" name="{{d.hobbyName}}" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用"
+            <input type="checkbox" name="{{d.hobbyName}}" value="{{d.enable}}" lay-skin="switch" lay-text="启用|禁用"
                    lay-filter="isEnableTpl"/>
             {{#  } }}
         </script>
@@ -56,6 +67,21 @@
             <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
         </script>
+
+        <!-- &lt;!&ndash;时间转化&ndash;&gt;
+         <script id="updateTime" type="text/html">
+             {{# if(d.updateTime!=null){}}
+             {{DateUtils.formatterDate(d.updateTime)}}
+             {{#  } else { }}
+             {{#  } }}
+         </script>
+
+         <script id="createTime" type="text/html">
+             {{# if(d.createTime!=null){}}
+             {{DateUtils.formatterDate(d.createTime)}}
+             {{#  } else { }}
+             {{#  } }}
+         </script>-->
 
     </div>
 

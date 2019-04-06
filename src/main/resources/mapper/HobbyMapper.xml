@@ -140,21 +140,46 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-    <!--查询兴趣分类列表-->
-    <select id="selectHobbyList" resultMap="BaseResultMap">
+    <!--分页查询兴趣分类列表-->
+    <select id="selectHobbyList" resultType="com.wsicong.enroll.dto.HobbyDTO">
         select
-        <include refid="Base_Column_List"/>
+        id,
+        hobby_name,
+        hobby_info,
+        is_enable,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        remark
         from e_hobby
         <where>
-            <if test="hobbyName != null and hobbyName != ''">
-                AND hobby_name = #{hobbyName}
+            <if test="hobbySearch.hobbyNameSearch != null and hobbySearch.hobbyNameSearch != ''">
+                AND hobby_name like CONCAT(CONCAT('%',#{hobbySearch.hobbyNameSearch}),'%')
             </if>
-            <if test="hobbyInfo != null and hobbyInfo != ''">
-                AND hobby_info = #{hobbyInfo}
-            </if>
-            <if test="enable != null and enable != ''">
-                AND is_enable = #{enable}
+            <if test="hobbySearch.enableSearch != null and hobbySearch.enableSearch != ''">
+                AND is_enable = #{hobbySearch.enableSearch}
             </if>
         </where>
     </select>
+
+    <!--selectByHobbyName 根据兴趣名称查询兴趣-->
+    <select id="selectByHobbyName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from e_hobby
+        where
+        hobby_name = #{hobbyName}
+    </select>
+
+    <!--updateEnable 更新兴趣启用状态-->
+    <update id="updateEnable">
+        update
+        e_hobby
+        set
+        is_enable = #{enable},
+        update_time =NOW()
+        where
+        id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

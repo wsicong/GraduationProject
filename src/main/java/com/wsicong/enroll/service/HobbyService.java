@@ -1,5 +1,6 @@
 package com.wsicong.enroll.service;
 
+import com.wsicong.enroll.dto.HobbySearchDTO;
 import com.wsicong.enroll.model.Hobby;
 import com.wsicong.enroll.util.PageDataResult;
 
@@ -11,15 +12,15 @@ public interface HobbyService {
      * @param limit
      * @return
      */
-    PageDataResult list(int page, int limit, Hobby hobby);
+    PageDataResult list(int page, int limit, HobbySearchDTO hobbySearch);
 
     /**
-     * 新增兴趣分类
+     * 设置兴趣分类
      *
      * @param hobby
      * @return
      */
-    String add(Hobby hobby);
+    String setHobby(Hobby hobby);
 
     /**
      * 删除兴趣分类
@@ -28,4 +29,12 @@ public interface HobbyService {
      * @return
      */
     String delete(Integer id);
+
+    /**
+     * 根据id查找兴趣
+     *
+     * @param id
+     * @return
+     */
+    Hobby getHobby(Integer id);
 }
