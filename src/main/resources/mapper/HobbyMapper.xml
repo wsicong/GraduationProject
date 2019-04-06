@@ -146,7 +146,7 @@
         id,
         hobby_name,
         hobby_info,
-        is_enable,
+        is_enable as enable ,
         create_by,
         create_time,
         update_by,
@@ -157,10 +157,17 @@
             <if test="hobbySearch.hobbyNameSearch != null and hobbySearch.hobbyNameSearch != ''">
                 AND hobby_name like CONCAT(CONCAT('%',#{hobbySearch.hobbyNameSearch}),'%')
             </if>
-            <if test="hobbySearch.enableSearch != null and hobbySearch.enableSearch != ''">
-                AND is_enable = #{hobbySearch.enableSearch}
+            <if test="hobbySearch.insertTimeStart!=null and hobbySearch.insertTimeStart!=''">
+                AND create_time &gt;= #{hobbySearch.insertTimeStart}
             </if>
+            <if test="hobbySearch.insertTimeEnd!=null and hobbySearch.insertTimeEnd!=''">
+                AND create_time &lt;= #{hobbySearch.insertTimeEnd}
+            </if>
+            <!--<if test="hobbySearch.enableSearch != null and hobbySearch.enableSearch != ''">
+                AND is_enable = #{hobbySearch.enableSearch}
+            </if>-->
         </where>
+        order by create_time desc
     </select>
 
     <!--selectByHobbyName 根据兴趣名称查询兴趣-->
@@ -177,7 +184,7 @@
         update
         e_hobby
         set
-        is_enable = #{enable},
+        is_enable = #{isEnable,jdbcType=INTEGER},
         update_time =NOW()
         where
         id = #{id,jdbcType=INTEGER}

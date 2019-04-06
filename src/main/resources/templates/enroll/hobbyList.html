@@ -28,16 +28,17 @@
                     </select>
                 </div>-->
 
-                <!--<label class="layui-form-label">创建时间</label>
+                <label class="layui-form-label">创建时间</label>
                 <div class="layui-input-inline" style="width: 175px;">
-                    <input name="insertTimeStart" id="insertTimeStart" placeholder="yyyy-MM-dd" autocomplete="off"
+                    <input name="insertTimeStart" id="insertTimeStart" placeholder="yyyy-MM-dd HH:mm:ss"
+                           autocomplete="off"
                            class="layui-input" type="text"/>
                 </div>
                 <div class="layui-form-mid">-</div>
                 <div class="layui-input-inline" style="width: 175px;">
-                    <input name="insertTimeEnd" id="insertTimeEnd" placeholder="yyyy-MM-dd" autocomplete="off"
+                    <input name="insertTimeEnd" id="insertTimeEnd" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off"
                            class="layui-input" type="text"/>
-                </div>-->
+                </div>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 <button class="layui-btn" lay-submit="" lay-filter="searchSubmit">搜索</button>
             </div>
@@ -51,13 +52,13 @@
             <shiro:principal property="id"></shiro:principal>
         </div>
 
-        <!--是否启用开关-->
+        <!--开关，是否启用兴趣-->
         <script id="enableTpl" type="text/html">
             {{# if(d.enable){}}
-            <input type="checkbox" name="{{d.hobbyName}}" value="{{d.enable}}" lay-skin="switch" lay-text="启用|禁用"
+            <input type="checkbox" name="{{d.hobbyName}}" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用"
                    lay-filter="isEnableTpl" checked="checked"/>
             {{#  } else { }}
-            <input type="checkbox" name="{{d.hobbyName}}" value="{{d.enable}}" lay-skin="switch" lay-text="启用|禁用"
+            <input type="checkbox" name="{{d.hobbyName}}" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用"
                    lay-filter="isEnableTpl"/>
             {{#  } }}
         </script>

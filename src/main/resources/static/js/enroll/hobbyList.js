@@ -51,7 +51,7 @@ $(function () {
         });
 
         //监听是否启用兴趣分类
-        form.on('swith(isEnableTpl)', function (obj) {
+        form.on('switch(isEnableTpl)', function (obj) {
             var data = obj.data;
             setHobbyEnable(obj, this.value, this.name, obj.elem.checked);
         });
@@ -82,9 +82,11 @@ $(function () {
         //日期
         laydate.render({
             elem: '#insertTimeStart'
+            , type: 'datetime'
         });
         laydate.render({
             elem: '#insertTimeEnd'
+            , type: 'datetime'
         });
         //TODO 数据校验
         //监听搜索框
@@ -101,31 +103,36 @@ function setHobbyEnable(obj, id, hobbyName, checked) {
     var isEnable = checked ? 1 : 0;
     var hobbyIsEnable = checked ? '启用' : '禁用';
     //是否启用
-    layer.confirm('您确定要吧兴趣：' + hobbyName + '设置为' + hobbyIsEnable + '状态吗？', {
+    layer.confirm('您确定要把兴趣：' + hobbyName + '设置为' + hobbyIsEnable + '状态吗？', {
         btn: ['确认', '取消']
-    }, function () {
-        $.post("/hobby/setHobbyEnable", {"id": id, "enable": isEnable}, function (data) {
-            if (isLogin(data)) {
-                if (data == "ok") {
-                    //回调弹框
-                    layer.alert("操作成功！", function () {
-                        layer.closeAll();
-                        //加载load方法
-                        load(obj);
-                    });
-                } else {
-                    layer.alert(data, function () {
-                        layer.closeAll();
-                        //加载load方法
-                        load(obj);//自定义
-                    });
+        , yes: function () {
+            $.post("/hobby/setHobbyEnable", {"id": id, "isEnable": isEnable}, function (data) {
+                if (isLogin(data)) {
+                    if (data == "ok") {
+                        //回调弹框
+                        layer.alert("操作成功！", function () {
+                            layer.closeAll();
+                            //加载load方法
+                            load(obj);
+                        });
+                    } else {
+                        layer.alert(data, function () {
+                            layer.closeAll();
+                            //加载load方法
+                            load(obj);//自定义
+                        });
+                    }
                 }
-            }
-        });
-    }, function () {
-        layer.closeAll();
-        //加载load方法
-        load(obj);
+            });
+        }, btn2: function () {
+            layer.closeAll();
+            //加载load方法
+            load(obj);
+        }, cancel: function () {
+            layer.closeAll();
+            //加载load方法
+            load(obj);
+        }
     });
 }
 
@@ -183,8 +190,8 @@ function cleanHobby() {
 
 function addHobby() {
     openHobby(null, '新增兴趣分类');
-    //重新渲染下form表单 否则复选框无效
-    layui.form.render('checkbox');
+    /*//重新渲染下form表单 否则复选框无效
+    layui.form.render('checkbox');*/
 }
 
 //打开弹出层
@@ -242,10 +249,13 @@ function editHobby(obj, id) {
                 $("#id").val(data.hobby.id == null ? '' : data.hobby.id);
                 $("#hobbyName").val(data.hobby.hobbyName == null ? '' : data.hobby.hobbyName);
                 $("#hobbyInfo").val(data.hobby.hobbyInfo == null ? '' : data.hobby.hobbyInfo);
-                /*$("#enable").checked(data.hobby.enable == true ? true : false);*/
+                if (data.hobby.enable) {
+                    $("#enable").prop("checked", true);
+                }
+                /*$("#enable").check((data.hobby.enable == true) ? true : false);*/
                 openHobby(id, '编辑兴趣分类');
                 /*layui.form.render();*/
-                /*layui.form.render('checkbox');*/
+                layui.form.render('checkbox');
             } else {
                 //弹出错误提示
                 layer.alert(data.msg, function () {

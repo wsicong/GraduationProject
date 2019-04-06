@@ -37,4 +37,13 @@ public interface HobbyService {
      * @return
      */
     Hobby getHobby(Integer id);
+
+    /**
+     * 设置是否启用兴趣
+     *
+     * @param id
+     * @param isEnable
+     * @return
+     */
+    String setEnable(Integer id, Integer isEnable);
 }

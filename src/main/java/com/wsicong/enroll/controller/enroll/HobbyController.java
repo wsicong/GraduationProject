@@ -33,7 +33,7 @@ public class HobbyController {
     }
 
     /**
-     * 分页查询兴趣分类列表
+     * 分页查询兴趣列表
      */
     /*@RequiresPermissions("hobbyType")*/
     @PostMapping("/getHobbyList")
@@ -136,6 +136,38 @@ public class HobbyController {
             logger.error("查询兴趣数据异常！", e);
         }
         return map;
+    }
+
+    /**
+     * 设置是否启用兴趣
+     *
+     * @param id
+     * @param isEnable
+     * @return
+     */
+    @PostMapping("/setHobbyEnable")
+    @ResponseBody
+    public String setHobbyEnable(@RequestParam("id") Integer id, @RequestParam("isEnable") Integer isEnable) {
+        logger.debug("设置兴趣是都启用！id:" + id + ",isEnable:" + isEnable);
+        String msg = "";
+        try {
+            if (null == id || null == isEnable) {
+                logger.debug("设置兴趣是否启用，结果=请求参数有误，请您稍后再试");
+                return "请求参数有误，请您稍后再试";
+            }
+            User existUser = (User) SecurityUtils.getSubject().getPrincipal();
+            if (null == existUser) {
+                logger.debug("设置兴趣是否启用，结果=您未登录或登录超时，请您登录后再试");
+                return "您未登录或登录超时，请您登录后再试";
+            }
+            //设置兴趣是否启用
+            msg = hobbyService.setEnable(id, isEnable);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("设置兴趣是否启用异常！", e);
+            msg = "操作异常，请您稍后再试！";
+        }
+        return msg;
     }
 
 }

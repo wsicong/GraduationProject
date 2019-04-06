@@ -8,6 +8,7 @@ import com.wsicong.enroll.model.Hobby;
 import com.wsicong.enroll.service.HobbyService;
 import com.wsicong.enroll.util.DateUtil;
 import com.wsicong.enroll.util.PageDataResult;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,12 +37,26 @@ public class HobbyServiceImpl implements HobbyService {
     @Override
     public PageDataResult list(int page, int limit, HobbySearchDTO hobbySearch) {
         //时间处理
-
+        /*if (null != hobbySearch) {
+            if (StringUtils.isNotEmpty(hobbySearch.getInsertTimeStart()) && StringUtils.isEmpty(hobbySearch.getInsertTimeEnd())) {
+                hobbySearch.setInsertTimeEnd(DateUtil.format(new Date()));
+            } else if (StringUtils.isEmpty(hobbySearch.getInsertTimeStart()) && StringUtils.isNotEmpty(hobbySearch.getInsertTimeEnd())) {
+                hobbySearch.setInsertTimeStart(DateUtil.format(new Date()));
+            }
+            if (StringUtils.isNotEmpty(hobbySearch.getInsertTimeStart()) && StringUtils.isNotEmpty(hobbySearch.getInsertTimeEnd())) {
+                if (hobbySearch.getInsertTimeEnd().compareTo(hobbySearch.getInsertTimeStart()) < 0) {
+                    String temp = hobbySearch.getInsertTimeStart();
+                    hobbySearch.setInsertTimeStart(hobbySearch.getInsertTimeEnd());
+                    hobbySearch.setInsertTimeEnd(temp);
+                }
+            }
+        }*/
         PageDataResult result = new PageDataResult();
         PageHelper.startPage(page, limit);
         List<Hobby> hobbyList = hobbyMapper.selectHobbyList(hobbySearch);
         //拿到分页查询后的数据
         PageInfo<Hobby> pageInfo = new PageInfo<>(hobbyList);
+        // 设置获取到的总记录数total：
         result.setTotals(Long.valueOf(pageInfo.getTotal()).intValue());
         result.setList(hobbyList);
         return result;
@@ -66,6 +81,7 @@ public class HobbyServiceImpl implements HobbyService {
             if (null != existHobby) {
                 return "该兴趣已存在，不能重复添加";
             } else {
+                hobby.setCreateTime(new Date());
                 hobbyMapper.insert(hobby);
             }
         }
@@ -92,5 +108,18 @@ public class HobbyServiceImpl implements HobbyService {
     @Override
     public Hobby getHobby(Integer id) {
         return hobbyMapper.selectByPrimaryKey(id);
+    }
+
+
+    /**
+     * 设置是否启用兴趣
+     *
+     * @param id
+     * @param isEnable
+     * @return
+     */
+    @Override
+    public String setEnable(Integer id, Integer isEnable) {
+        return hobbyMapper.updateEnable(id, isEnable) == 1 ? "ok" : "操作失败，请您稍后再试";
     }
 }

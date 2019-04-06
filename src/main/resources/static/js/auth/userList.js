@@ -105,29 +105,34 @@ function setJobUser(obj, id, nameVersion, checked) {
     //是否离职
     layer.confirm('您确定要把用户：' + name + '设置为' + userIsJob + '状态吗？', {
         btn: ['确认', '返回'] //按钮
-    }, function () {
-        $.post("/user/setJobUser", {"id": id, "job": isJob, "version": version}, function (data) {
-            if (isLogin(data)) {
-                if (data == "ok") {
-                    //回调弹框
-                    layer.alert("操作成功！", function () {
-                        layer.closeAll();
-                        //加载load方法
-                        load(obj);
-                    });
-                } else {
-                    layer.alert(data, function () {
-                        layer.closeAll();
-                        //加载load方法
-                        load(obj);//自定义
-                    });
+        , yes: function () {
+            $.post("/user/setJobUser", {"id": id, "job": isJob, "version": version}, function (data) {
+                if (isLogin(data)) {
+                    if (data == "ok") {
+                        //回调弹框
+                        layer.alert("操作成功！", function () {
+                            layer.closeAll();
+                            //加载load方法
+                            load(obj);
+                        });
+                    } else {
+                        layer.alert(data, function () {
+                            layer.closeAll();
+                            //加载load方法
+                            load(obj);//自定义
+                        });
+                    }
                 }
-            }
-        });
-    }, function () {
-        layer.closeAll();
-        //加载load方法
-        load(obj);
+            });
+        }, btn2: function () {
+            layer.closeAll();
+            //加载load方法
+            load(obj);
+        }, cancel: function () {
+            layer.closeAll();
+            //加载load方法
+            load(obj);
+        }
     });
 }
 
