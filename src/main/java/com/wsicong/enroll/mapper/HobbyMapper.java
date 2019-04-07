@@ -2,6 +2,7 @@ package com.wsicong.enroll.mapper;
 
 import com.wsicong.enroll.dto.HobbySearchDTO;
 import com.wsicong.enroll.model.Hobby;
+import com.wsicong.enroll.vo.HobbyVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -43,4 +44,17 @@ public interface HobbyMapper {
      * @return
      */
     int updateEnable(@Param("id") Integer id, @Param("isEnable") Integer isEnable);
+
+    /**
+     * 获取所有兴趣
+     *
+     * @return
+     */
+    List<Hobby> selectHobbies();
+
+    /**
+     * 根据id获取兴趣类别及其子兴趣（状态为启用）
+     */
+    HobbyVO selectHobbyById(Integer id);
+
 }

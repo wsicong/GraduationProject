@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wsicong.enroll.mapper.HobbyTypeMapper">
+    <resultMap id="BaseResultMap" type="com.wsicong.enroll.model.HobbyType">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="hobby_id" property="hobbyId" jdbcType="INTEGER"/>
+        <result column="hobby_type_name" property="hobbyTypeName" jdbcType="VARCHAR"/>
+        <result column="hobby_type_info" property="hobbyTypeInfo" jdbcType="VARCHAR"/>
+        <result column="study_materials" property="studyMaterials" jdbcType="VARCHAR"/>
+        <result column="is_enable" property="enable" jdbcType="BIT"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, hobby_id, hobby_type_name, hobby_type_info, study_materials, is_enable, create_by, 
+    create_time, update_by, update_time, remark
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from e_hobby_type
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from e_hobby_type
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.wsicong.enroll.model.HobbyType">
+    insert into e_hobby_type (id, hobby_id, hobby_type_name, 
+      hobby_type_info, study_materials, is_enable, 
+      create_by, create_time, update_by, 
+      update_time, remark)
+    values (#{id,jdbcType=INTEGER}, #{hobbyId,jdbcType=INTEGER}, #{hobbyTypeName,jdbcType=VARCHAR}, 
+      #{hobbyTypeInfo,jdbcType=VARCHAR}, #{studyMaterials,jdbcType=VARCHAR}, #{enable,jdbcType=BIT}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.wsicong.enroll.model.HobbyType">
+        insert into e_hobby_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="hobbyId != null">
+                hobby_id,
+            </if>
+            <if test="hobbyTypeName != null">
+                hobby_type_name,
+            </if>
+            <if test="hobbyTypeInfo != null">
+                hobby_type_info,
+            </if>
+            <if test="studyMaterials != null">
+                study_materials,
+            </if>
+            <if test="enable != null">
+                is_enable,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="hobbyId != null">
+                #{hobbyId,jdbcType=INTEGER},
+            </if>
+            <if test="hobbyTypeName != null">
+                #{hobbyTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="hobbyTypeInfo != null">
+                #{hobbyTypeInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="studyMaterials != null">
+                #{studyMaterials,jdbcType=VARCHAR},
+            </if>
+            <if test="enable != null">
+                #{enable,jdbcType=BIT},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wsicong.enroll.model.HobbyType">
+        update e_hobby_type
+        <set>
+            <if test="hobbyId != null">
+                hobby_id = #{hobbyId,jdbcType=INTEGER},
+            </if>
+            <if test="hobbyTypeName != null">
+                hobby_type_name = #{hobbyTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="hobbyTypeInfo != null">
+                hobby_type_info = #{hobbyTypeInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="studyMaterials != null">
+                study_materials = #{studyMaterials,jdbcType=VARCHAR},
+            </if>
+            <if test="enable != null">
+                is_enable = #{enable,jdbcType=BIT},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wsicong.enroll.model.HobbyType">
+    update e_hobby_type
+    set hobby_id = #{hobbyId,jdbcType=INTEGER},
+      hobby_type_name = #{hobbyTypeName,jdbcType=VARCHAR},
+      hobby_type_info = #{hobbyTypeInfo,jdbcType=VARCHAR},
+      study_materials = #{studyMaterials,jdbcType=VARCHAR},
+      is_enable = #{enable,jdbcType=BIT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <!--分页查询兴趣分类列表-->
+    <select id="selectHobbyTypeList" resultType="com.wsicong.enroll.dto.HobbyTypeDTO">
+        select
+        ht.id,
+        ht.hobby_id,
+        h.hobby_name as hobbyName,
+        ht.hobby_type_name,
+        ht.hobby_type_info,
+        ht.study_materials,
+        ht.is_enable as enable ,
+        ht.create_by,
+        ht.create_time,
+        ht.update_by,
+        ht.update_time,
+        ht.remark
+        from e_hobby_type ht
+        left join e_hobby h
+        on ht.hobby_id=h.id
+        <where>
+            <if test="hobbyTypeSearch.hobbyTypeNameSearch != null and hobbyTypeSearch.hobbyTypeNameSearch != ''">
+                AND ht.hobby_type_name like CONCAT(CONCAT('%',#{hobbyTypeSearch.hobbyTypeNameSearch}),'%')
+            </if>
+            <if test="hobbyTypeSearch.insertTimeStart!=null and hobbyTypeSearch.insertTimeStart!=''">
+                AND ht.create_time &gt;= #{hobbyTypeSearch.insertTimeStart}
+            </if>
+            <if test="hobbyTypeSearch.insertTimeEnd!=null and hobbyTypeSearch.insertTimeEnd!=''">
+                AND ht.create_time &lt;= #{hobbyTypeSearch.insertTimeEnd}
+            </if>
+            <!--<if test="hobbyTypeSearch.enableSearch != null and hobbyTypeSearch.enableSearch != ''">
+                AND is_enable = #{hobbyTypeSearch.enableSearch}
+            </if>-->
+        </where>
+        order by create_time desc
+    </select>
+
+    <!--根据兴趣分类名称查询兴趣-->
+    <select id="selectByHobbyTypeName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from e_hobby_type
+        where
+        hobby_type_name = #{hobbyTypeName}
+    </select>
+
+    <!--更新兴趣分类启用状态-->
+    <update id="updateEnable">
+        update
+        e_hobby_type
+        set
+        is_enable = #{isEnable,jdbcType=INTEGER},
+        update_time =NOW()
+        where
+        id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

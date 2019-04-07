@@ -4,9 +4,11 @@ import com.wsicong.enroll.dto.HobbySearchDTO;
 import com.wsicong.enroll.model.Hobby;
 import com.wsicong.enroll.util.PageDataResult;
 
+import java.util.List;
+
 public interface HobbyService {
     /**
-     * 分页查询兴趣分类列表
+     * 分页查询兴趣列表
      *
      * @param page
      * @param limit
@@ -15,7 +17,7 @@ public interface HobbyService {
     PageDataResult list(int page, int limit, HobbySearchDTO hobbySearch);
 
     /**
-     * 设置兴趣分类
+     * 设置兴趣
      *
      * @param hobby
      * @return
@@ -23,7 +25,7 @@ public interface HobbyService {
     String setHobby(Hobby hobby);
 
     /**
-     * 删除兴趣分类
+     * 删除兴趣
      *
      * @param id
      * @return
@@ -46,4 +48,11 @@ public interface HobbyService {
      * @return
      */
     String setEnable(Integer id, Integer isEnable);
+
+    /**
+     * 获取所有兴趣
+     *
+     * @return
+     */
+    List<Hobby> getHobbies();
 }

@@ -8,6 +8,7 @@ import com.wsicong.enroll.model.Hobby;
 import com.wsicong.enroll.service.HobbyService;
 import com.wsicong.enroll.util.DateUtil;
 import com.wsicong.enroll.util.PageDataResult;
+import com.wsicong.enroll.vo.HobbyVO;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -96,7 +97,13 @@ public class HobbyServiceImpl implements HobbyService {
      */
     @Override
     public String delete(Integer id) {
-        return hobbyMapper.deleteByPrimaryKey(id) == 1 ? "ok" : "删除失败，请您稍后再试";
+        //判断兴趣类别下是否有子兴趣
+        HobbyVO hobbyVO = hobbyMapper.selectHobbyById(id);
+        if (null != hobbyVO.getHobbyTypes() && hobbyVO.getHobbyTypes().size() > 0) {
+            return "删除失败，请先删除兴趣类别下的子兴趣！";
+        } else {
+            return hobbyMapper.deleteByPrimaryKey(id) == 1 ? "ok" : "删除失败，请您稍后再试";
+        }
     }
 
     /**
@@ -121,5 +128,10 @@ public class HobbyServiceImpl implements HobbyService {
     @Override
     public String setEnable(Integer id, Integer isEnable) {
         return hobbyMapper.updateEnable(id, isEnable) == 1 ? "ok" : "操作失败，请您稍后再试";
+    }
+
+    @Override
+    public List<Hobby> getHobbies() {
+        return hobbyMapper.selectHobbies();
     }
 }

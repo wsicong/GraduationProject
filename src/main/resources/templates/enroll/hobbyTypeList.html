@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <!--head部分-->
-<head th:include="layout :: htmlhead" th:with="title='兴趣设置'">
+<head th:include="layout :: htmlhead" th:with="title='兴趣分类设置'">
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -11,11 +11,11 @@
 
     <div class="layui-body" style="margin: 1%">
 
-        <form id="hobbySearch" class="layui-form layui-form-pane" method="post" action="" style="margin-top: 20px;">
+        <form id="hobbyTypeSearch" class="layui-form layui-form-pane" method="post" action="" style="margin-top: 20px;">
             <div class="layui-form-item">
-                <label class="layui-form-label">兴趣名称</label>
+                <label class="layui-form-label" style="width: 140px">兴趣分类名称</label>
                 <div class="layui-input-inline">
-                    <input id="hobbyNameSearch" name="hobbyNameSearch" autocomplete="off" class="layui-input"
+                    <input id="hobbyTypeNameSearch" name="hobbyTypeNameSearch" autocomplete="off" class="layui-input"
                            type="text"/>
                 </div>
 
@@ -44,9 +44,9 @@
             </div>
         </form>
 
-        <button class="layui-btn" onclick="addHobby();">新增</button>
+        <button class="layui-btn" onclick="addHobbyType();">新增</button>
 
-        <table id="hobbyList" lay-filter="hobbyTable"></table>
+        <table id="hobbyTypeList" lay-filter="hobbyTypeTable"></table>
 
         <div style="display:none;" id="currentUser">
             <shiro:principal property="id"></shiro:principal>
@@ -55,10 +55,10 @@
         <!--开关，是否启用兴趣-->
         <script id="enableTpl" type="text/html">
             {{# if(d.enable){}}
-            <input type="checkbox" name="{{d.hobbyName}}" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用"
+            <input type="checkbox" name="{{d.hobbyTypeName}}" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用"
                    lay-filter="isEnableTpl" checked="checked"/>
             {{#  } else { }}
-            <input type="checkbox" name="{{d.hobbyName}}" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用"
+            <input type="checkbox" name="{{d.hobbyTypeName}}" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用"
                    lay-filter="isEnableTpl"/>
             {{#  } }}
         </script>
@@ -87,21 +87,38 @@
     </div>
 
     <!--添加或编辑兴趣类别-->
-    <div id="setHobby" class="layer_self_wrap" style="display:none;">
-        <form id="hobbyForm" class="layui-form" method="post" action="" style="margin: 10px;">
+    <div id="setHobbyType" class="layer_self_wrap" style="display:none;">
+        <form id="hobbyTypeForm" class="layui-form" method="post" action="" style="margin: 10px;">
             <input id="pageNum" type="hidden" name="pageNum"/>
             <input id="id" type="hidden" name="id"/>
             <div class="layui-form-item">
                 <label class="layui-form-label">兴趣名称：</label>
                 <div class="layui-input-block">
-                    <input type="text" id="hobbyName" name="hobbyName" required lay-verify="required"
-                           placeholder="请输入兴趣名称" autocomplete="off" class="layui-input"/>
+                    <input type="text" id="hobbyTypeName" name="hobbyTypeName" required lay-verify="required"
+                           placeholder="请输入兴趣分类名称" autocomplete="off" class="layui-input"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">兴趣类别：</label>
+                <div class="layui-input-block">
+                    <select id="hobbyId" name="hobbyId" lay-verify="required" lay-search>
+                        <option value="">请选择</option>
+                        <!--<option value="1">舞蹈类</option>
+                        <option value="0">文化类</option>-->
+                    </select>
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">简介：</label>
+                <label class="layui-form-label">学习内容：</label>
                 <div class="layui-input-block">
-                    <textarea type="text" id="hobbyInfo" name="hobbyInfo" placeholder="请输入兴趣简介"
+                    <textarea type="text" id="hobbyTypeInfo" name="hobbyTypeInfo" placeholder="请输入学习内容简介"
+                              class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">学习用品：</label>
+                <div class="layui-input-block">
+                    <textarea type="text" id="studyMaterials" name="studyMaterials" placeholder="请输入学习用品说明"
                               class="layui-textarea"></textarea>
                 </div>
             </div>
@@ -113,7 +130,7 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block" style="margin-left: 10px;">
-                    <button class="layui-btn" lay-submit="" lay-filter="hobbySubmit">提交</button>
+                    <button class="layui-btn" lay-submit="" lay-filter="hobbyTypeSubmit">提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
@@ -123,7 +140,7 @@
     <!--底部-->
     <div th:replace="fragments/footer :: footer"></div>
     <script src="/js/dateUtils.js"></script>
-    <script src="/js/enroll/hobbyList.js"></script>
+    <script src="/js/enroll/hobbyTypeList.js"></script>
 </div>
 </body>
 </html>
