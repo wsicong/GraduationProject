@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wsicong.enroll.mapper.ClassMapper">
+    <resultMap id="BaseResultMap" type="com.wsicong.enroll.model.Class">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="hobby_type_id" property="hobbyTypeId" jdbcType="INTEGER"/>
+        <result column="class_name" property="className" jdbcType="VARCHAR"/>
+        <result column="student_describe" property="studentDescribe" jdbcType="VARCHAR"/>
+        <result column="student_age" property="studentAge" jdbcType="VARCHAR"/>
+        <result column="enroll_num" property="enrollNum" jdbcType="VARCHAR"/>
+        <result column="class_start_date" property="classStartDate" jdbcType="DATE"/>
+        <result column="class_end_date" property="classEndDate" jdbcType="DATE"/>
+        <result column="class_weeks" property="classWeeks" jdbcType="VARCHAR"/>
+        <result column="class_start_time" property="classStartTime" jdbcType="TIME"/>
+        <result column="class_end_time" property="classEndTime" jdbcType="TIME"/>
+        <result column="class_cost" property="classCost" jdbcType="VARCHAR"/>
+        <result column="class_hour" property="classHour" jdbcType="VARCHAR"/>
+        <result column="is_enable" property="enable" jdbcType="BIT"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, hobby_type_id, class_name, student_describe, student_age, enroll_num, class_start_date, 
+    class_end_date, class_weeks, class_start_time, class_end_time, class_cost, class_hour, 
+    is_enable, create_by, create_time, update_by, update_time, remark
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from e_class
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from e_class
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.wsicong.enroll.model.Class">
+    insert into e_class (id, hobby_type_id, class_name, 
+      student_describe, student_age, enroll_num, 
+      class_start_date, class_end_date, class_weeks, 
+      class_start_time, class_end_time, class_cost, 
+      class_hour, is_enable, create_by, 
+      create_time, update_by, update_time, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{hobbyTypeId,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, 
+      #{studentDescribe,jdbcType=VARCHAR}, #{studentAge,jdbcType=VARCHAR}, #{enrollNum,jdbcType=VARCHAR}, 
+      #{classStartDate,jdbcType=DATE}, #{classEndDate,jdbcType=DATE}, #{classWeeks,jdbcType=VARCHAR}, 
+      #{classStartTime,jdbcType=TIME}, #{classEndTime,jdbcType=TIME}, #{classCost,jdbcType=VARCHAR}, 
+      #{classHour,jdbcType=VARCHAR}, #{enable,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.wsicong.enroll.model.Class">
+        insert into e_class
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="hobbyTypeId != null">
+                hobby_type_id,
+            </if>
+            <if test="className != null">
+                class_name,
+            </if>
+            <if test="studentDescribe != null">
+                student_describe,
+            </if>
+            <if test="studentAge != null">
+                student_age,
+            </if>
+            <if test="enrollNum != null">
+                enroll_num,
+            </if>
+            <if test="classStartDate != null">
+                class_start_date,
+            </if>
+            <if test="classEndDate != null">
+                class_end_date,
+            </if>
+            <if test="classWeeks != null">
+                class_weeks,
+            </if>
+            <if test="classStartTime != null">
+                class_start_time,
+            </if>
+            <if test="classEndTime != null">
+                class_end_time,
+            </if>
+            <if test="classCost != null">
+                class_cost,
+            </if>
+            <if test="classHour != null">
+                class_hour,
+            </if>
+            <if test="enable != null">
+                is_enable,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="hobbyTypeId != null">
+                #{hobbyTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="className != null">
+                #{className,jdbcType=VARCHAR},
+            </if>
+            <if test="studentDescribe != null">
+                #{studentDescribe,jdbcType=VARCHAR},
+            </if>
+            <if test="studentAge != null">
+                #{studentAge,jdbcType=VARCHAR},
+            </if>
+            <if test="enrollNum != null">
+                #{enrollNum,jdbcType=VARCHAR},
+            </if>
+            <if test="classStartDate != null">
+                #{classStartDate,jdbcType=DATE},
+            </if>
+            <if test="classEndDate != null">
+                #{classEndDate,jdbcType=DATE},
+            </if>
+            <if test="classWeeks != null">
+                #{classWeeks,jdbcType=VARCHAR},
+            </if>
+            <if test="classStartTime != null">
+                #{classStartTime,jdbcType=TIME},
+            </if>
+            <if test="classEndTime != null">
+                #{classEndTime,jdbcType=TIME},
+            </if>
+            <if test="classCost != null">
+                #{classCost,jdbcType=VARCHAR},
+            </if>
+            <if test="classHour != null">
+                #{classHour,jdbcType=VARCHAR},
+            </if>
+            <if test="enable != null">
+                #{enable,jdbcType=BIT},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wsicong.enroll.model.Class">
+        update e_class
+        <set>
+            <if test="hobbyTypeId != null">
+                hobby_type_id = #{hobbyTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="className != null">
+                class_name = #{className,jdbcType=VARCHAR},
+            </if>
+            <if test="studentDescribe != null">
+                student_describe = #{studentDescribe,jdbcType=VARCHAR},
+            </if>
+            <if test="studentAge != null">
+                student_age = #{studentAge,jdbcType=VARCHAR},
+            </if>
+            <if test="enrollNum != null">
+                enroll_num = #{enrollNum,jdbcType=VARCHAR},
+            </if>
+            <if test="classStartDate != null">
+                class_start_date = #{classStartDate,jdbcType=DATE},
+            </if>
+            <if test="classEndDate != null">
+                class_end_date = #{classEndDate,jdbcType=DATE},
+            </if>
+            <if test="classWeeks != null">
+                class_weeks = #{classWeeks,jdbcType=VARCHAR},
+            </if>
+            <if test="classStartTime != null">
+                class_start_time = #{classStartTime,jdbcType=TIME},
+            </if>
+            <if test="classEndTime != null">
+                class_end_time = #{classEndTime,jdbcType=TIME},
+            </if>
+            <if test="classCost != null">
+                class_cost = #{classCost,jdbcType=VARCHAR},
+            </if>
+            <if test="classHour != null">
+                class_hour = #{classHour,jdbcType=VARCHAR},
+            </if>
+            <if test="enable != null">
+                is_enable = #{enable,jdbcType=BIT},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wsicong.enroll.model.Class">
+    update e_class
+    set hobby_type_id = #{hobbyTypeId,jdbcType=INTEGER},
+      class_name = #{className,jdbcType=VARCHAR},
+      student_describe = #{studentDescribe,jdbcType=VARCHAR},
+      student_age = #{studentAge,jdbcType=VARCHAR},
+      enroll_num = #{enrollNum,jdbcType=VARCHAR},
+      class_start_date = #{classStartDate,jdbcType=DATE},
+      class_end_date = #{classEndDate,jdbcType=DATE},
+      class_weeks = #{classWeeks,jdbcType=VARCHAR},
+      class_start_time = #{classStartTime,jdbcType=TIME},
+      class_end_time = #{classEndTime,jdbcType=TIME},
+      class_cost = #{classCost,jdbcType=VARCHAR},
+      class_hour = #{classHour,jdbcType=VARCHAR},
+      is_enable = #{enable,jdbcType=BIT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

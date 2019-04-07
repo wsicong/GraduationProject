@@ -5,8 +5,10 @@ import com.github.pagehelper.PageInfo;
 import com.wsicong.enroll.dto.HobbyTypeSearchDTO;
 import com.wsicong.enroll.mapper.HobbyTypeMapper;
 import com.wsicong.enroll.model.HobbyType;
+import com.wsicong.enroll.model.User;
 import com.wsicong.enroll.service.HobbyTypeService;
 import com.wsicong.enroll.util.PageDataResult;
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,9 +71,12 @@ public class HobbyTypeServiceImpl implements HobbyTypeService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = 30000, rollbackFor = {RuntimeException.class, Exception.class})
     public String setHobbyType(HobbyType hobbyType) {
+        //获取当前用户
+        User existUser = (User) SecurityUtils.getSubject().getPrincipal();
         //id为不为空时，说明为更新操作,否则为新增操作
         if (null != hobbyType.getId()) {
             hobbyType.setUpdateTime(new Date());
+            hobbyType.setUpdateBy(existUser.getId().toString());
             hobbyTypeMapper.updateByPrimaryKeySelective(hobbyType);
         } else {
             HobbyType existHobbyType = this.hobbyTypeMapper.selectByHobbyTypeName(hobbyType.getHobbyTypeName());
@@ -80,6 +85,7 @@ public class HobbyTypeServiceImpl implements HobbyTypeService {
                 return "该兴趣已存在，不能重复添加";
             } else {
                 hobbyType.setCreateTime(new Date());
+                hobbyType.setCreateBy(existUser.getId().toString());
                 hobbyTypeMapper.insert(hobbyType);
             }
         }
