@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<!--head部分-->
+<head th:include="layout :: htmlhead" th:with="title='兴趣班级设置'">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <!--头-->
+    <div th:replace="fragments/head :: header"></div>
+
+    <div class="layui-body" style="margin: 1%">
+
+        <form id="hobbyClassSearch" class="layui-form layui-form-pane" method="post" action=""
+              style="margin-top: 20px;">
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 140px">班级名称</label>
+                <div class="layui-input-inline">
+                    <input id="hobbyClassNameSearch" name="hobbyClassNameSearch" autocomplete="off" class="layui-input"
+                           type="text"/>
+                </div>
+
+                <!--<label class="layui-form-label">是否启用</label>
+                <div class="layui-input-inline">
+                    <select id="enableSearch" name="enableSearch" lay-verify="" lay-search>
+                        <option value="">请选择</option>
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select>
+                </div>-->
+
+                <label class="layui-form-label">创建时间</label>
+                <div class="layui-input-inline" style="width: 175px;">
+                    <input name="insertTimeStart" id="insertTimeStart" placeholder="yyyy-MM-dd HH:mm:ss"
+                           autocomplete="off"
+                           class="layui-input" type="text"/>
+                </div>
+                <div class="layui-form-mid">-</div>
+                <div class="layui-input-inline" style="width: 175px;">
+                    <input name="insertTimeEnd" id="insertTimeEnd" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off"
+                           class="layui-input" type="text"/>
+                </div>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <button class="layui-btn" lay-submit="" lay-filter="searchSubmit">搜索</button>
+            </div>
+        </form>
+
+        <button class="layui-btn" onclick="addHobbyClass();">新增</button>
+
+        <table id="hobbyClassList" lay-filter="hobbyClassTable"></table>
+
+        <div style="display:none;" id="currentUser">
+            <shiro:principal property="id"></shiro:principal>
+        </div>
+
+        <!--开关，是否启用兴趣-->
+        <script id="enableTpl" type="text/html">
+            {{# if(d.enable){}}
+            <input type="checkbox" name="{{d.className}}" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用"
+                   lay-filter="isEnableTpl" checked="checked"/>
+            {{#  } else { }}
+            <input type="checkbox" name="{{d.className}}" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用"
+                   lay-filter="isEnableTpl"/>
+            {{#  } }}
+        </script>
+
+        <!--操作栏-->
+        <script id="optBar" type="text/html">
+            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+        </script>
+
+        <!-- &lt;!&ndash;时间转化&ndash;&gt;
+         <script id="updateTime" type="text/html">
+             {{# if(d.updateTime!=null){}}
+             {{DateUtils.formatterDate(d.updateTime)}}
+             {{#  } else { }}
+             {{#  } }}
+         </script>
+
+         <script id="createTime" type="text/html">
+             {{# if(d.createTime!=null){}}
+             {{DateUtils.formatterDate(d.createTime)}}
+             {{#  } else { }}
+             {{#  } }}
+         </script>-->
+
+    </div>
+
+    <!--添加或编辑兴趣类别-->
+    <div id="setHobbyClass" class="layer_self_wrap" style="display:none;">
+        <form id="hobbyClassForm" class="layui-form" method="post" action="" style="margin: 10px;">
+            <input id="pageNum" type="hidden" name="pageNum"/>
+            <input id="id" type="hidden" name="id"/>
+            <div class="layui-inline" style="margin-top: 20px;">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">班级名称：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="className" name="className" required lay-verify="required"
+                                   placeholder="请输入班级名称" autocomplete="off" class="layui-input"/>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">招生年龄：</label>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" id="studentAgeMin" name="studentAgeMin" required lay-verify="required"
+                                   placeholder="最小年龄" autocomplete="off" class="layui-input"/>
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" id="studentAgeMax" name="studentAgeMax" required lay-verify="required"
+                                   placeholder="最大年龄" autocomplete="off" class="layui-input"/>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">招生人数：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="enrollNum" name="enrollNum" required lay-verify="required"
+                                   placeholder="请输入招生人数" autocomplete="off" class="layui-input"/>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">招生说明：</label>
+                    <div class="layui-input-block">
+                        <textarea type="text" id="studentDescribe" name="studentDescribe" placeholder="请输入招生说明"
+                                  class="layui-textarea"></textarea>
+                        <!--<input type="text" id="studentDescribe" name="studentDescribe" required lay-verify="required"
+                               placeholder="请输入招生说明" autocomplete="off" class="layui-input"/>-->
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">兴趣类别：</label>
+                    <div class="layui-input-inline">
+                        <select id="hobbyTypeId" name="hobbyTypeId" lay-verify="required" lay-search>
+                            <option value="">请选择</option>
+                            <!--<option value="1">舞蹈类</option>
+                            <option value="0">文化类</option>-->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">上课星期：</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" id="Monday" name="classWeeks" title="周一" value="1">
+                        <input type="checkbox" id="Tuesday" name="classWeeks" title="周二" value="2">
+                        <input type="checkbox" id="Wednesday" name="classWeeks" title="周三" value="3">
+                        <input type="checkbox" id="Thursday" name="classWeeks" title="周四" value="4">
+                        <input type="checkbox" id="Friday" name="classWeeks" title="周五" value="5">
+                        <!--<input type="text" id="classWeeks" name="classWeeks" required lay-verify="required"
+                               placeholder="请选择上课的星期" autocomplete="off" class="layui-input"/>-->
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">上课日期：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="classStartDateStr" name="classStartDateStr" required
+                                   lay-verify="required"
+                                   placeholder="开始日期" autocomplete="off" class="layui-input"/>
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline">
+                            <input type="text" id="classEndDateStr" name="classEndDateStr" required
+                                   lay-verify="required"
+                                   placeholder="结束日期" autocomplete="off" class="layui-input"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">上课时间：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="classStartTimeStr" name="classStartTimeStr" required
+                                   lay-verify="required"
+                                   placeholder="开始时间" autocomplete="off" class="layui-input"/>
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline">
+                            <input type="text" id="classEndTimeStr" name="classEndTimeStr" required
+                                   lay-verify="required"
+                                   placeholder="结束时间" autocomplete="off" class="layui-input"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">收费：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="classCost" name="classCost" required lay-verify="required"
+                               placeholder="请输入收费标准" autocomplete="off" class="layui-input"/>
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">元</div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">课时：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="classHour" name="classHour" required lay-verify="required"
+                               placeholder="请输入总课时" autocomplete="off" class="layui-input"/>
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">课时（说明：每次课为2课时，45分钟为1课时）</div>
+                </div>
+            </div>
+
+
+            <!--<div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">学习内容：</label>
+                <div class="layui-input-block">
+                <textarea type="text" id="hobbyClassInfo" name="hobbyClassInfo" placeholder="请输入学习内容简介"
+                          class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">学习用品：</label>
+                <div class="layui-input-block">
+                <textarea type="text" id="studyMaterials" name="studyMaterials" placeholder="请输入学习用品说明"
+                          class="layui-textarea"></textarea>
+                </div>
+            </div>-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否启用：</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" id="enable" name="enable" lay-skin="switch" lay-text="启用|禁用">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="margin-left: 10px;">
+                    <button class="layui-btn" lay-submit="" lay-filter="hobbyClassSubmit">提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!--底部-->
+    <div th:replace="fragments/footer :: footer"></div>
+    <script src="/js/dateUtils.js"></script>
+    <script src="/js/enroll/hobbyClassList.js"></script>
+</div>
+</body>
+</html>

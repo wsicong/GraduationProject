@@ -48,6 +48,19 @@ var DateUtils = {
         return result;
     },
 
+    formatterTime: function (date) {
+        var datetime = this.getGMTTime(date);
+        var result = (datetime.getHours() < 10 ? "0" + datetime.getHours()
+            : datetime.getHours())
+            + ":"
+            + (datetime.getMinutes() < 10 ? "0" + datetime.getMinutes()
+                : datetime.getMinutes())
+            + ":"
+            + (datetime.getSeconds() < 10 ? "0" + datetime.getSeconds()
+                : datetime.getSeconds());
+        return result;
+    },
+
     /**
      * @描述：格式化日期（含时间"00:00:00"）
      * @创建时间：2015年12月23日

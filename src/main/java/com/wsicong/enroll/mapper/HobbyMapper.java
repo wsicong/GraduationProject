@@ -53,7 +53,7 @@ public interface HobbyMapper {
     List<Hobby> selectHobbies();
 
     /**
-     * 根据id获取兴趣类别及其子兴趣（状态为启用）
+     * 根据id获取兴趣类别及其子兴趣
      */
     HobbyVO selectHobbyById(Integer id);
 

@@ -3,9 +3,9 @@ package com.wsicong.enroll.model;
 import java.util.Date;
 
 /**
- * 兴趣班级POJO
+ * 兴趣班POJO
  */
-public class Class {
+public class HobbyClass {
     /**
      * 班级id
      */
@@ -70,6 +70,11 @@ public class Class {
      * 课时
      */
     private String classHour;
+
+    /**
+     * 状态（1：正在报名，2：报名结束，3：正在授课，4：结束授课）
+     */
+    private Integer status;
 
     /**
      * 是否启用（1:启用，0：禁用）
@@ -205,6 +210,14 @@ public class Class {
         this.classHour = classHour;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public Boolean getEnable() {
         return enable;
     }
@@ -255,7 +268,7 @@ public class Class {
 
     @Override
     public String toString() {
-        return "Class{" +
+        return "HobbyClass{" +
                 "id=" + id +
                 ", hobbyTypeId=" + hobbyTypeId +
                 ", className='" + className + '\'' +
@@ -269,6 +282,7 @@ public class Class {
                 ", classEndTime=" + classEndTime +
                 ", classCost='" + classCost + '\'' +
                 ", classHour='" + classHour + '\'' +
+                ", status=" + status +
                 ", enable=" + enable +
                 ", createBy='" + createBy + '\'' +
                 ", createTime=" + createTime +

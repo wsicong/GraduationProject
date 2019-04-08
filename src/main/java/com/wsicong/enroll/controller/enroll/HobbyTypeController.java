@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -109,7 +110,7 @@ public class HobbyTypeController {
      */
     @GetMapping("/getHobbyType")
     @ResponseBody
-    public Map<String, Object> getHobby(@RequestParam("id") Integer id) {
+    public Map<String, Object> getHobbyType(@RequestParam("id") Integer id) {
         logger.debug("查询兴趣数据！id：" + id);
         Map<String, Object> map = new HashMap<>();
         try {
@@ -167,5 +168,19 @@ public class HobbyTypeController {
             msg = "操作异常，请您稍后再试！";
         }
         return msg;
+    }
+
+    @GetMapping("/getHobbyTypes")
+    @ResponseBody
+    public List<HobbyType> getHobbies() {
+        logger.debug("查找所有兴趣！");
+        List<HobbyType> hobbyTypes = null;
+        try {
+            return hobbyTypeService.getHobbyTypes();
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("查找所有兴趣异常！", e);
+        }
+        return hobbyTypes;
     }
 }

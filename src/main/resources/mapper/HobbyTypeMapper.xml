@@ -216,4 +216,13 @@
         where
         id = #{id,jdbcType=INTEGER}
     </update>
+
+    <!--查找所有启用的兴趣-->
+    <select id="selectHobbyTypes" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from e_hobby_type
+        where
+        is_enable=1
+    </select>
 </mapper>

@@ -4,6 +4,8 @@ import com.wsicong.enroll.dto.HobbyTypeSearchDTO;
 import com.wsicong.enroll.model.HobbyType;
 import com.wsicong.enroll.util.PageDataResult;
 
+import java.util.List;
+
 public interface HobbyTypeService {
     /**
      * 分页查询兴趣分类列表
@@ -46,4 +48,11 @@ public interface HobbyTypeService {
      * @return
      */
     String setEnable(Integer id, Integer isEnable);
+
+    /**
+     * 获取所有兴趣
+     *
+     * @return
+     */
+    List<HobbyType> getHobbyTypes();
 }

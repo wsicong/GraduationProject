@@ -56,8 +56,8 @@
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
-        <table tableName="e_class"
-               domainObjectName="Class"
+        <table tableName="e_hobby_class"
+               domainObjectName="HobbyClass"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

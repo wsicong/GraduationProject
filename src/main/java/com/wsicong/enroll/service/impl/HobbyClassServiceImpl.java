@@ -2,16 +2,17 @@ package com.wsicong.enroll.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.wsicong.enroll.dto.HobbyTypeSearchDTO;
-import com.wsicong.enroll.mapper.HobbyTypeMapper;
-import com.wsicong.enroll.model.HobbyType;
+import com.wsicong.enroll.dto.HobbyClassSearchDTO;
+import com.wsicong.enroll.mapper.HobbyClassMapper;
+import com.wsicong.enroll.model.HobbyClass;
 import com.wsicong.enroll.model.User;
-import com.wsicong.enroll.service.HobbyTypeService;
+import com.wsicong.enroll.service.HobbyClassService;
 import com.wsicong.enroll.util.PageDataResult;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -21,21 +22,14 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class HobbyTypeServiceImpl implements HobbyTypeService {
-    private static final Logger logger = LoggerFactory.getLogger(HobbyTypeServiceImpl.class);
+public class HobbyClassServiceImpl implements HobbyClassService {
+    private static final Logger logger = LoggerFactory.getLogger(HobbyClassServiceImpl.class);
 
     @Autowired
-    private HobbyTypeMapper hobbyTypeMapper;
+    private HobbyClassMapper hobbyClassMapper;
 
-    /**
-     * 分页查询兴趣分类列表
-     *
-     * @param page
-     * @param limit
-     * @return
-     */
     @Override
-    public PageDataResult list(int page, int limit, HobbyTypeSearchDTO hobbyTypeSearch) {
+    public PageDataResult list(int page, int limit, HobbyClassSearchDTO hobbyClassSearch) {
         //时间处理
         /*if (null != hobbyTypeSearch) {
             if (StringUtils.isNotEmpty(hobbyTypeSearch.getInsertTimeStart()) && StringUtils.isEmpty(hobbyTypeSearch.getInsertTimeEnd())) {
@@ -53,82 +47,51 @@ public class HobbyTypeServiceImpl implements HobbyTypeService {
         }*/
         PageDataResult result = new PageDataResult();
         PageHelper.startPage(page, limit);
-        List<HobbyType> hobbyTypeList = hobbyTypeMapper.selectHobbyTypeList(hobbyTypeSearch);
+        List<HobbyClass> hobbyClassList = hobbyClassMapper.selectHobbyClassList(hobbyClassSearch);
         //拿到分页查询后的数据
-        PageInfo<HobbyType> pageInfo = new PageInfo<>(hobbyTypeList);
+        PageInfo<HobbyClass> pageInfo = new PageInfo<>(hobbyClassList);
         // 设置获取到的总记录数total：
         result.setTotals(Long.valueOf(pageInfo.getTotal()).intValue());
-        result.setList(hobbyTypeList);
+        result.setList(hobbyClassList);
         return result;
     }
 
-    /**
-     * 添加/更新兴趣
-     *
-     * @param hobbyType
-     * @return
-     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = 30000, rollbackFor = {RuntimeException.class, Exception.class})
-    public String setHobbyType(HobbyType hobbyType) {
+    public String setHobbyClass(HobbyClass hobbyClass) {
         //获取当前用户
         User existUser = (User) SecurityUtils.getSubject().getPrincipal();
         //id为不为空时，说明为更新操作,否则为新增操作
-        if (null != hobbyType.getId()) {
-            hobbyType.setUpdateTime(new Date());
-            hobbyType.setUpdateBy(existUser.getId().toString());
-            hobbyTypeMapper.updateByPrimaryKeySelective(hobbyType);
+        if (null != hobbyClass.getId()) {
+            hobbyClass.setUpdateTime(new Date());
+            hobbyClass.setUpdateBy(existUser.getId().toString());
+            hobbyClassMapper.updateByPrimaryKeySelective(hobbyClass);
         } else {
-            HobbyType existHobbyType = this.hobbyTypeMapper.selectByHobbyTypeName(hobbyType.getHobbyTypeName());
-            System.out.println("+++++++++++++++++++++" + existHobbyType);
-            if (null != existHobbyType) {
-                return "该兴趣已存在，不能重复添加";
+            HobbyClass existHobbyClass = this.hobbyClassMapper.selectByHobbyClassName(hobbyClass.getClassName());
+            System.out.println("+++++++++++++++++++++" + existHobbyClass);
+            if (null != existHobbyClass) {
+                return "该兴趣班级已存在，不能重复添加";
             } else {
-                hobbyType.setCreateTime(new Date());
-                hobbyType.setCreateBy(existUser.getId().toString());
-                hobbyTypeMapper.insert(hobbyType);
+                hobbyClass.setCreateTime(new Date());
+                hobbyClass.setCreateBy(existUser.getId().toString());
+                hobbyClassMapper.insert(hobbyClass);
             }
         }
         return "ok";
     }
 
-    /**
-     * 删除兴趣分类
-     *
-     * @param id
-     * @return
-     */
     @Override
     public String delete(Integer id) {
-        return hobbyTypeMapper.deleteByPrimaryKey(id) == 1 ? "ok" : "删除失败，请您稍后再试";
+        return hobbyClassMapper.deleteByPrimaryKey(id) == 1 ? "ok" : "删除失败，请您稍后再试";
     }
 
-    /**
-     * 根据id查找兴趣分类
-     *
-     * @param id
-     * @return
-     */
     @Override
-    public HobbyType getHobbyType(Integer id) {
-        return hobbyTypeMapper.selectByPrimaryKey(id);
+    public HobbyClass getHobbyClass(Integer id) {
+        return hobbyClassMapper.selectByPrimaryKey(id);
     }
 
-
-    /**
-     * 设置是否启用兴趣分类
-     *
-     * @param id
-     * @param isEnable
-     * @return
-     */
     @Override
     public String setEnable(Integer id, Integer isEnable) {
-        return hobbyTypeMapper.updateEnable(id, isEnable) == 1 ? "ok" : "操作失败，请您稍后再试";
-    }
-
-    @Override
-    public List<HobbyType> getHobbyTypes() {
-        return hobbyTypeMapper.selectHobbyTypes();
+        return hobbyClassMapper.updateEnable(id, isEnable) == 1 ? "ok" : "操作失败，请您稍后再试";
     }
 }
