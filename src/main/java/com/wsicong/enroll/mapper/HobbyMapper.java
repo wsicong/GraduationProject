@@ -46,7 +46,7 @@ public interface HobbyMapper {
     int updateEnable(@Param("id") Integer id, @Param("isEnable") Integer isEnable);
 
     /**
-     * 获取所有兴趣
+     * 获取所有启用的兴趣
      *
      * @return
      */

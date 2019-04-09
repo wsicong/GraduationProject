@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wsicong.enroll.mapper.ChildMapper">
+    <resultMap id="BaseResultMap" type="com.wsicong.enroll.model.Child">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="child_name" property="childName" jdbcType="VARCHAR"/>
+        <result column="child_sex" property="childSex" jdbcType="VARCHAR"/>
+        <result column="child_birth" property="childBirth" jdbcType="DATE"/>
+        <result column="child_age" property="childAge" jdbcType="VARCHAR"/>
+        <result column="child_adress" property="childAdress" jdbcType="VARCHAR"/>
+        <result column="child_region" property="childRegion" jdbcType="VARCHAR"/>
+        <result column="child_nation" property="childNation" jdbcType="VARCHAR"/>
+        <result column="child_id_card" property="childIdCard" jdbcType="VARCHAR"/>
+        <result column="child_allergies" property="childAllergies" jdbcType="VARCHAR"/>
+        <result column="child_medical_history" property="childMedicalHistory" jdbcType="VARCHAR"/>
+        <result column="is_del" property="isDel" jdbcType="BIT"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, child_name, child_sex, child_birth, child_age, child_adress, child_region, child_nation, 
+    child_id_card, child_allergies, child_medical_history, is_del, create_by, create_time, 
+    update_by, update_time, remark
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from e_child
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from e_child
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.wsicong.enroll.model.Child">
+    insert into e_child (id, child_name, child_sex, 
+      child_birth, child_age, child_adress, 
+      child_region, child_nation, child_id_card, 
+      child_allergies, child_medical_history, is_del, 
+      create_by, create_time, update_by, 
+      update_time, remark)
+    values (#{id,jdbcType=INTEGER}, #{childName,jdbcType=VARCHAR}, #{childSex,jdbcType=VARCHAR}, 
+      #{childBirth,jdbcType=DATE}, #{childAge,jdbcType=VARCHAR}, #{childAdress,jdbcType=VARCHAR}, 
+      #{childRegion,jdbcType=VARCHAR}, #{childNation,jdbcType=VARCHAR}, #{childIdCard,jdbcType=VARCHAR}, 
+      #{childAllergies,jdbcType=VARCHAR}, #{childMedicalHistory,jdbcType=VARCHAR}, #{isDel,jdbcType=BIT}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.wsicong.enroll.model.Child">
+        insert into e_child
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="childName != null">
+                child_name,
+            </if>
+            <if test="childSex != null">
+                child_sex,
+            </if>
+            <if test="childBirth != null">
+                child_birth,
+            </if>
+            <if test="childAge != null">
+                child_age,
+            </if>
+            <if test="childAdress != null">
+                child_adress,
+            </if>
+            <if test="childRegion != null">
+                child_region,
+            </if>
+            <if test="childNation != null">
+                child_nation,
+            </if>
+            <if test="childIdCard != null">
+                child_id_card,
+            </if>
+            <if test="childAllergies != null">
+                child_allergies,
+            </if>
+            <if test="childMedicalHistory != null">
+                child_medical_history,
+            </if>
+            <if test="isDel != null">
+                is_del,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="childName != null">
+                #{childName,jdbcType=VARCHAR},
+            </if>
+            <if test="childSex != null">
+                #{childSex,jdbcType=VARCHAR},
+            </if>
+            <if test="childBirth != null">
+                #{childBirth,jdbcType=DATE},
+            </if>
+            <if test="childAge != null">
+                #{childAge,jdbcType=VARCHAR},
+            </if>
+            <if test="childAdress != null">
+                #{childAdress,jdbcType=VARCHAR},
+            </if>
+            <if test="childRegion != null">
+                #{childRegion,jdbcType=VARCHAR},
+            </if>
+            <if test="childNation != null">
+                #{childNation,jdbcType=VARCHAR},
+            </if>
+            <if test="childIdCard != null">
+                #{childIdCard,jdbcType=VARCHAR},
+            </if>
+            <if test="childAllergies != null">
+                #{childAllergies,jdbcType=VARCHAR},
+            </if>
+            <if test="childMedicalHistory != null">
+                #{childMedicalHistory,jdbcType=VARCHAR},
+            </if>
+            <if test="isDel != null">
+                #{isDel,jdbcType=BIT},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wsicong.enroll.model.Child">
+        update e_child
+        <set>
+            <if test="childName != null">
+                child_name = #{childName,jdbcType=VARCHAR},
+            </if>
+            <if test="childSex != null">
+                child_sex = #{childSex,jdbcType=VARCHAR},
+            </if>
+            <if test="childBirth != null">
+                child_birth = #{childBirth,jdbcType=DATE},
+            </if>
+            <if test="childAge != null">
+                child_age = #{childAge,jdbcType=VARCHAR},
+            </if>
+            <if test="childAdress != null">
+                child_adress = #{childAdress,jdbcType=VARCHAR},
+            </if>
+            <if test="childRegion != null">
+                child_region = #{childRegion,jdbcType=VARCHAR},
+            </if>
+            <if test="childNation != null">
+                child_nation = #{childNation,jdbcType=VARCHAR},
+            </if>
+            <if test="childIdCard != null">
+                child_id_card = #{childIdCard,jdbcType=VARCHAR},
+            </if>
+            <if test="childAllergies != null">
+                child_allergies = #{childAllergies,jdbcType=VARCHAR},
+            </if>
+            <if test="childMedicalHistory != null">
+                child_medical_history = #{childMedicalHistory,jdbcType=VARCHAR},
+            </if>
+            <if test="isDel != null">
+                is_del = #{isDel,jdbcType=BIT},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wsicong.enroll.model.Child">
+    update e_child
+    set child_name = #{childName,jdbcType=VARCHAR},
+      child_sex = #{childSex,jdbcType=VARCHAR},
+      child_birth = #{childBirth,jdbcType=DATE},
+      child_age = #{childAge,jdbcType=VARCHAR},
+      child_adress = #{childAdress,jdbcType=VARCHAR},
+      child_region = #{childRegion,jdbcType=VARCHAR},
+      child_nation = #{childNation,jdbcType=VARCHAR},
+      child_id_card = #{childIdCard,jdbcType=VARCHAR},
+      child_allergies = #{childAllergies,jdbcType=VARCHAR},
+      child_medical_history = #{childMedicalHistory,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=BIT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <!--分页查询儿童列表-->
+    <select id="selectChildList" resultType="com.wsicong.enroll.dto.ChildDTO">
+        select
+        id,
+        child_name,
+        child_sex,
+        child_birth,
+        child_age,
+        child_adress,
+        child_region,
+        child_nation,
+        child_id_card,
+        child_allergies,
+        child_medical_history,
+        is_del,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        remark
+        from e_child
+        <where>
+            <if test="childSearch.childNameSearch != null and childSearch.childNameSearch != ''">
+                AND child_name like CONCAT(CONCAT('%',#{childSearch.childNameSearch}),'%')
+            </if>
+            <if test="childSearch.insertTimeStart!=null and childSearch.insertTimeStart!=''">
+                AND create_time &gt;= #{childSearch.insertTimeStart}
+            </if>
+            <if test="childSearch.insertTimeEnd!=null and childSearch.insertTimeEnd!=''">
+                AND create_time &lt;= #{childSearch.insertTimeEnd}
+            </if>
+            <!--<if test="childSearch.enableSearch != null and childSearch.enableSearch != ''">
+                AND is_enable = #{childSearch.enableSearch}
+            </if>-->
+        </where>
+        order by create_time desc
+    </select>
+
+    <!--根据儿童姓名查询儿童信息-->
+    <select id="selectByChildName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from e_child
+        where
+        child_name = #{childName}
+    </select>
+
+    <!--查找所有未删除的儿童-->
+    <select id="selectChild" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from e_child
+        where
+        is_del=0
+    </select>
+</mapper>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wsicong.enroll.mapper.GuardianMapper">
+    <resultMap id="BaseResultMap" type="com.wsicong.enroll.model.Guardian">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="child_id" property="childId" jdbcType="INTEGER"/>
+        <result column="guardian_name" property="guardianName" jdbcType="VARCHAR"/>
+        <result column="guardian_sex" property="guardianSex" jdbcType="VARCHAR"/>
+        <result column="guardian_id_card" property="guardianIdCard" jdbcType="VARCHAR"/>
+        <result column="guardian_relation" property="guardianRelation" jdbcType="VARCHAR"/>
+        <result column="guardian_phone" property="guardianPhone" jdbcType="VARCHAR"/>
+        <result column="is_del" property="isDel" jdbcType="BIT"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, child_id, guardian_name, guardian_sex, guardian_id_card, guardian_relation, guardian_phone, 
+    is_del, create_by, create_time, update_by, update_time, remark
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from e_guardian
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from e_guardian
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.wsicong.enroll.model.Guardian">
+    insert into e_guardian (id, child_id, guardian_name, 
+      guardian_sex, guardian_id_card, guardian_relation, 
+      guardian_phone, is_del, create_by, 
+      create_time, update_by, update_time, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{childId,jdbcType=INTEGER}, #{guardianName,jdbcType=VARCHAR}, 
+      #{guardianSex,jdbcType=VARCHAR}, #{guardianIdCard,jdbcType=VARCHAR}, #{guardianRelation,jdbcType=VARCHAR}, 
+      #{guardianPhone,jdbcType=VARCHAR}, #{isDel,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.wsicong.enroll.model.Guardian">
+        insert into e_guardian
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="childId != null">
+                child_id,
+            </if>
+            <if test="guardianName != null">
+                guardian_name,
+            </if>
+            <if test="guardianSex != null">
+                guardian_sex,
+            </if>
+            <if test="guardianIdCard != null">
+                guardian_id_card,
+            </if>
+            <if test="guardianRelation != null">
+                guardian_relation,
+            </if>
+            <if test="guardianPhone != null">
+                guardian_phone,
+            </if>
+            <if test="isDel != null">
+                is_del,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="childId != null">
+                #{childId,jdbcType=INTEGER},
+            </if>
+            <if test="guardianName != null">
+                #{guardianName,jdbcType=VARCHAR},
+            </if>
+            <if test="guardianSex != null">
+                #{guardianSex,jdbcType=VARCHAR},
+            </if>
+            <if test="guardianIdCard != null">
+                #{guardianIdCard,jdbcType=VARCHAR},
+            </if>
+            <if test="guardianRelation != null">
+                #{guardianRelation,jdbcType=VARCHAR},
+            </if>
+            <if test="guardianPhone != null">
+                #{guardianPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="isDel != null">
+                #{isDel,jdbcType=BIT},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wsicong.enroll.model.Guardian">
+        update e_guardian
+        <set>
+            <if test="childId != null">
+                child_id = #{childId,jdbcType=INTEGER},
+            </if>
+            <if test="guardianName != null">
+                guardian_name = #{guardianName,jdbcType=VARCHAR},
+            </if>
+            <if test="guardianSex != null">
+                guardian_sex = #{guardianSex,jdbcType=VARCHAR},
+            </if>
+            <if test="guardianIdCard != null">
+                guardian_id_card = #{guardianIdCard,jdbcType=VARCHAR},
+            </if>
+            <if test="guardianRelation != null">
+                guardian_relation = #{guardianRelation,jdbcType=VARCHAR},
+            </if>
+            <if test="guardianPhone != null">
+                guardian_phone = #{guardianPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="isDel != null">
+                is_del = #{isDel,jdbcType=BIT},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wsicong.enroll.model.Guardian">
+    update e_guardian
+    set child_id = #{childId,jdbcType=INTEGER},
+      guardian_name = #{guardianName,jdbcType=VARCHAR},
+      guardian_sex = #{guardianSex,jdbcType=VARCHAR},
+      guardian_id_card = #{guardianIdCard,jdbcType=VARCHAR},
+      guardian_relation = #{guardianRelation,jdbcType=VARCHAR},
+      guardian_phone = #{guardianPhone,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=BIT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <!--分页查询监护人列表-->
+    <select id="selectGuardianList" resultType="com.wsicong.enroll.dto.GuardianDTO">
+        select
+        id,
+        child_id,
+        guardian_name,
+        guardian_sex,
+        guardian_id_card,
+        guardian_relation,
+        guardian_phone,
+        is_del,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        remark
+        from e_guardian
+        <where>
+            <if test="guardianSearch.guardianNameSearch != null and guardianSearch.guardianNameSearch != ''">
+                AND guardian_name like CONCAT(CONCAT('%',#{guardianSearch.guardianNameSearch}),'%')
+            </if>
+            <if test="guardianSearch.insertTimeStart!=null and guardianSearch.insertTimeStart!=''">
+                AND create_time &gt;= #{guardianSearch.insertTimeStart}
+            </if>
+            <if test="guardianSearch.insertTimeEnd!=null and guardianSearch.insertTimeEnd!=''">
+                AND create_time &lt;= #{guardianSearch.insertTimeEnd}
+            </if>
+            <!--<if test="guardianSearch.enableSearch != null and guardianSearch.enableSearch != ''">
+                AND is_enable = #{guardianSearch.enableSearch}
+            </if>-->
+        </where>
+        order by create_time desc
+    </select>
+
+    <!--根据监护人姓名查询监护人信息-->
+    <select id="selectByGuardianName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from e_guardian
+        where
+        guardian_name = #{guardianName}
+    </select>
+
+    <!--查找所有未删除的监护人-->
+    <select id="selectGuardian" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from e_guardian
+        where
+        is_del=0
+    </select>
+
+</mapper>

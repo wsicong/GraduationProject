@@ -17,7 +17,7 @@ public interface HobbyService {
     PageDataResult list(int page, int limit, HobbySearchDTO hobbySearch);
 
     /**
-     * 设置兴趣
+     * 设置兴趣（添加、修改）
      *
      * @param hobby
      * @return
@@ -50,7 +50,7 @@ public interface HobbyService {
     String setEnable(Integer id, Integer isEnable);
 
     /**
-     * 获取所有兴趣
+     * 获取所有兴趣（启用的）
      *
      * @return
      */
