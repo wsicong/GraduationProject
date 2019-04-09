@@ -34,7 +34,7 @@ $(function () {
                 , {field: 'studentDescribe', title: '招生说明'}
                 , {field: 'studentAge', title: '招生年龄'}
                 , {field: 'enrollNum', title: '招生人数'}
-                , {field: 'classTime', title: '上课时间'}
+                , {field: 'classTime', title: '上课时间', templet: '#classTimeTpl'}
                 , {field: 'classStartDate', title: '开始日期', hide: true}
                 , {field: 'classEndDate', title: '结束日期', hide: true}
                 , {field: 'classWeeks', title: '上课星期', hide: true}
@@ -74,7 +74,7 @@ $(function () {
         table.on('tool(hobbyClassTable)', function (obj) {
             var data = obj.data;
             if (obj.event === 'del') {
-                delHobbyClass(data, data.id, data.hobbyClassName);
+                delHobbyClass(data, data.id, data.className);
             } else if (obj.event === 'edit') {
                 editHobbyClass(data, data.id);
             }
@@ -306,9 +306,9 @@ function openHobbyClass(id, title) {
     });
 }
 
-function delHobbyClass(obj, id, hobbyClassName) {
+function delHobbyClass(obj, id, className) {
     if (null != id) {
-        layer.confirm('您确定要删除班级：' + hobbyClassName + '吗？', {
+        layer.confirm('您确定要删除班级：' + className + '吗？', {
             btn: ['确定', '取消']
         }, function () {
             $.post("/hobbyClass/delete", {"id": id}, function (data) {
@@ -371,6 +371,10 @@ function editHobbyClass(obj, id) {
                             $("#Thursday").prop("checked", true);
                         } else if (5 == classWeeks[p]) {
                             $("#Friday").prop("checked", true);
+                        } else if (6 == classWeeks[p]) {
+                            $("#Saturday").prop("checked", true);
+                        } else if (7 == classWeeks[p]) {
+                            $("#Sunday").prop("checked", true);
                         }
                     }
                 }

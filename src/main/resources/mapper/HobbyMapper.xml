@@ -199,7 +199,7 @@
         is_enable=1
     </select>
 
-    <!--根据id查询兴趣及其子兴趣（状态为启用）-->
+    <!--根据id查询兴趣及其子兴趣-->
     <resultMap id="getHobbyTypes" type="com.wsicong.enroll.vo.HobbyVO">
         <id column="id" property="id"/>
         <result column="hobby_name" property="hobbyName" jdbcType="VARCHAR"/>

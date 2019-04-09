@@ -16,7 +16,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width: 140px">班级名称</label>
                 <div class="layui-input-inline">
-                    <input id="hobbyClassNameSearch" name="hobbyClassNameSearch" autocomplete="off" class="layui-input"
+                    <input id="classNameSearch" name="classNameSearch" autocomplete="off" class="layui-input"
                            type="text"/>
                 </div>
 
@@ -68,6 +68,13 @@
         <script id="optBar" type="text/html">
             <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+        </script>
+
+        <!--拼接上课时间-->
+        <script id="classTimeTpl" type="text/html">
+            上课日期：{{d.classStartDate}}-{{d.classEndDate}}，
+            上课时间：{{d.classStartTime}}-{{d.classEndTime}}，
+            上课星期：{{d.classWeeks}}
         </script>
 
         <!-- &lt;!&ndash;时间转化&ndash;&gt;
@@ -154,6 +161,8 @@
                         <input type="checkbox" id="Wednesday" name="classWeeks" title="周三" value="3">
                         <input type="checkbox" id="Thursday" name="classWeeks" title="周四" value="4">
                         <input type="checkbox" id="Friday" name="classWeeks" title="周五" value="5">
+                        <input type="checkbox" id="Saturday" name="classWeeks" title="周六" value="6">
+                        <input type="checkbox" id="Sunday" name="classWeeks" title="周日" value="7">
                         <!--<input type="text" id="classWeeks" name="classWeeks" required lay-verify="required"
                                placeholder="请选择上课的星期" autocomplete="off" class="layui-input"/>-->
                     </div>

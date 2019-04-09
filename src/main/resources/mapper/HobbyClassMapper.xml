@@ -298,7 +298,7 @@
         on ht.id=hc.hobby_type_id
         <where>
             <if test="hobbyClassSearch.classNameSearch != null and hobbyClassSearch.classNameSearch != ''">
-                AND hc.hobby_class_name like CONCAT(CONCAT('%',#{hobbyClassSearch.classNameSearch}),'%')
+                AND hc.class_name like CONCAT(CONCAT('%',#{hobbyClassSearch.classNameSearch}),'%')
             </if>
             <if test="hobbyClassSearch.insertTimeStart!=null and hobbyClassSearch.insertTimeStart!=''">
                 AND hc.create_time &gt;= #{hobbyClassSearch.insertTimeStart}
