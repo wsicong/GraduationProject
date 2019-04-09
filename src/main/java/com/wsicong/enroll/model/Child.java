@@ -223,4 +223,27 @@ public class Child {
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Child{" +
+                "id=" + id +
+                ", childName='" + childName + '\'' +
+                ", childSex='" + childSex + '\'' +
+                ", childBirth=" + childBirth +
+                ", childAge='" + childAge + '\'' +
+                ", childAdress='" + childAdress + '\'' +
+                ", childRegion='" + childRegion + '\'' +
+                ", childNation='" + childNation + '\'' +
+                ", childIdCard='" + childIdCard + '\'' +
+                ", childAllergies='" + childAllergies + '\'' +
+                ", childMedicalHistory='" + childMedicalHistory + '\'' +
+                ", isDel=" + isDel +
+                ", createBy='" + createBy + '\'' +
+                ", createTime=" + createTime +
+                ", updateBy='" + updateBy + '\'' +
+                ", updateTime=" + updateTime +
+                ", remark='" + remark + '\'' +
+                '}';
+    }
 }

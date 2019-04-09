@@ -2,41 +2,61 @@ package com.wsicong.enroll.model;
 
 import java.util.Date;
 
-public class Guardian {
+public class EnrollRecord {
     /**
-     * 监护人信息表ID
+     * 报名表ID
      */
     private Integer id;
 
     /**
-     * 儿童ID
+     * 少儿信息ID
      */
     private Integer childId;
 
     /**
-     * 姓名
+     * 监护人信息ID
+     */
+    private Integer guardianId;
+
+    /**
+     * 班级信息ID
+     */
+    private Integer classId;
+
+    /**
+     * 班级名称
+     */
+    private String className;
+
+    /**
+     * 报名开始时间
+     */
+    private Date enrollStartTime;
+
+    /**
+     * 报名结束时间
+     */
+    private Date enrollEndTime;
+
+    /**
+     * 少儿姓名
+     */
+    private String childName;
+
+    /**
+     * 监护人姓名
      */
     private String guardianName;
 
     /**
-     * 性别
-     */
-    private String guardianSex;
-
-    /**
-     * 身份证
-     */
-    private String guardianIdCard;
-
-    /**
-     * 与少儿的关系
-     */
-    private String guardianRelation;
-
-    /**
-     * 联系方式
+     * 监护人联系方式
      */
     private String guardianPhone;
+
+    /**
+     * 是否缴费（1：是，0：否）
+     */
+    private Boolean isPay;
 
     /**
      * 是否删除（0：正常，1：已删）
@@ -44,12 +64,12 @@ public class Guardian {
     private Boolean isDel;
 
     /**
-     * 创建者
+     * 创建者（此处相当于报名者）
      */
     private String createBy;
 
     /**
-     * 创建时间
+     * 创建时间（此处相当于报名时间）
      */
     private Date createTime;
 
@@ -84,6 +104,54 @@ public class Guardian {
         this.childId = childId;
     }
 
+    public Integer getGuardianId() {
+        return guardianId;
+    }
+
+    public void setGuardianId(Integer guardianId) {
+        this.guardianId = guardianId;
+    }
+
+    public Integer getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Integer classId) {
+        this.classId = classId;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className == null ? null : className.trim();
+    }
+
+    public Date getEnrollStartTime() {
+        return enrollStartTime;
+    }
+
+    public void setEnrollStartTime(Date enrollStartTime) {
+        this.enrollStartTime = enrollStartTime;
+    }
+
+    public Date getEnrollEndTime() {
+        return enrollEndTime;
+    }
+
+    public void setEnrollEndTime(Date enrollEndTime) {
+        this.enrollEndTime = enrollEndTime;
+    }
+
+    public String getChildName() {
+        return childName;
+    }
+
+    public void setChildName(String childName) {
+        this.childName = childName == null ? null : childName.trim();
+    }
+
     public String getGuardianName() {
         return guardianName;
     }
@@ -92,36 +160,20 @@ public class Guardian {
         this.guardianName = guardianName == null ? null : guardianName.trim();
     }
 
-    public String getGuardianSex() {
-        return guardianSex;
-    }
-
-    public void setGuardianSex(String guardianSex) {
-        this.guardianSex = guardianSex == null ? null : guardianSex.trim();
-    }
-
-    public String getGuardianIdCard() {
-        return guardianIdCard;
-    }
-
-    public void setGuardianIdCard(String guardianIdCard) {
-        this.guardianIdCard = guardianIdCard == null ? null : guardianIdCard.trim();
-    }
-
-    public String getGuardianRelation() {
-        return guardianRelation;
-    }
-
-    public void setGuardianRelation(String guardianRelation) {
-        this.guardianRelation = guardianRelation == null ? null : guardianRelation.trim();
-    }
-
     public String getGuardianPhone() {
         return guardianPhone;
     }
 
     public void setGuardianPhone(String guardianPhone) {
         this.guardianPhone = guardianPhone == null ? null : guardianPhone.trim();
+    }
+
+    public Boolean getIsPay() {
+        return isPay;
+    }
+
+    public void setIsPay(Boolean isPay) {
+        this.isPay = isPay;
     }
 
     public Boolean getIsDel() {
@@ -174,14 +226,18 @@ public class Guardian {
 
     @Override
     public String toString() {
-        return "Guardian{" +
+        return "EnrollRecordDTO{" +
                 "id=" + id +
                 ", childId=" + childId +
+                ", guardianId=" + guardianId +
+                ", classId=" + classId +
+                ", className='" + className + '\'' +
+                ", enrollStartTime=" + enrollStartTime +
+                ", enrollEndTime=" + enrollEndTime +
+                ", childName='" + childName + '\'' +
                 ", guardianName='" + guardianName + '\'' +
-                ", guardianSex='" + guardianSex + '\'' +
-                ", guardianIdCard='" + guardianIdCard + '\'' +
-                ", guardianRelation='" + guardianRelation + '\'' +
                 ", guardianPhone='" + guardianPhone + '\'' +
+                ", isPay=" + isPay +
                 ", isDel=" + isDel +
                 ", createBy='" + createBy + '\'' +
                 ", createTime=" + createTime +
