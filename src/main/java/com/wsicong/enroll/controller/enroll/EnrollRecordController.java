@@ -136,17 +136,17 @@ public class EnrollRecordController {
         return map;
     }
 
-    @GetMapping("/getEnrollRecordren")
+    @GetMapping("/getEnrollRecords")
     @ResponseBody
-    public List<EnrollRecord> getEnrollRecordren() {
+    public List<EnrollRecord> getEnrollRecords() {
         logger.debug("查找所有报名记录（未删除）！");
-        List<EnrollRecord> enrollRecordren = null;
+        List<EnrollRecord> enrollRecords = null;
         try {
             return enrollRecordService.getEnrollRecords();
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error("查找所有监护人（未删除）异常！", e);
+            logger.error("查找所有报名记录（未删除）异常！", e);
         }
-        return enrollRecordren;
+        return enrollRecords;
     }
 }

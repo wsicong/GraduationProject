@@ -144,7 +144,7 @@ public class ChildController {
             return childService.getChildren();
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error("查找所有监护人（未删除）异常！", e);
+            logger.error("查找所有儿童（未删除）异常！", e);
         }
         return children;
     }
