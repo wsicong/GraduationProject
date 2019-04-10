@@ -1,4 +1,4 @@
-package com.wsicong.enroll.controller;
+package com.wsicong.enroll.controller.enroll;
 
 import com.wsicong.enroll.dto.GuardianSearchDTO;
 import com.wsicong.enroll.model.Guardian;
