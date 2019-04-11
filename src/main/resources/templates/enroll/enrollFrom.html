@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:include="layout :: htmlhead" th:with="title='少儿兴趣班在线报名表'">
+</head>
+<body>
+<div class="layui-container layui-fluid">
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 6%">
+        <legend style="margin-left: 40%"><span style="font-weight: bold;font-size:22px;">少儿兴趣班在线报名表</span></legend>
+    </fieldset>
+
+    <div style="display:none;" id="currentUser">
+        <shiro:principal property="id"></shiro:principal>
+    </div>
+
+    <form id="enrollForm" class="layui-form" action="" method="post">
+        <input id="id" type="hidden" name="id"/>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">兴趣班id：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="hobbyClassId" name="hobbyClassId" required lay-verify="required"
+                           placeholder="兴趣班id" class="layui-input"/>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">兴趣班：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="hobbyClassName" name="hobbyClassName" required lay-verify="required"
+                           placeholder="兴趣班名称" class="layui-input"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">少儿姓名：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="childName" name="childName" required lay-verify="required"
+                           placeholder="请输入少儿姓名" class="layui-input"/>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">少儿性别：</label>
+                <div class="layui-input-inline">
+                    <input type="radio" name="childSex" value="1" title="男" required>
+                    <input type="radio" name="childSex" value="0" title="女" required>
+                    <!--<input type="text" id="childSex" name="childSex" required lay-verify="required"
+                           placeholder="请输入少儿性别" class="layui-input"/>-->
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">出生日期：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="childBirthStr" name="childBirthStr" required lay-verify="required"
+                           placeholder="请选择少儿出生日期" class="layui-input"/>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">少儿年龄：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="childAge" name="childAge" required lay-verify="required"
+                           placeholder="请输入少儿年龄" class="layui-input"/>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">家庭住址：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="childAdress" name="childAdress" required lay-verify="required"
+                           placeholder="请输入家庭住址" class="layui-input"/>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">籍贯：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="childRegion" name="childRegion" required lay-verify="required"
+                           placeholder="请输入籍贯" class="layui-input"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">民族：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="childNation" name="childNation" required lay-verify="required"
+                           placeholder="请输入民族" class="layui-input"/>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">身份证：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="childIdCard" name="childIdCard" required lay-verify="required"
+                           placeholder="请输入少儿身份证号码" class="layui-input"/>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">过敏食物或药物：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="childAllergies" name="childAllergies" required lay-verify="required"
+                           placeholder="请输入过敏食物或药物" class="layui-input"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">重大病史：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="childMedicalHistory" name="childMedicalHistory" required
+                           lay-verify="required"
+                           placeholder="重大病史" class="layui-input"/>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">监护人姓名：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="guardianName" name="guardianName" required lay-verify="required"
+                           placeholder="监护人姓名" class="layui-input"/>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">监护人性别：</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="guardianSex" value="1" title="男" required>
+                    <input type="radio" name="guardianSex" value="0" title="女" required>
+                    <!--<input type="text" id="guardianSex" name="guardianSex" required lay-verify="required"
+                           placeholder="监护人性别" class="layui-input"/>-->
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">监护人身份证：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="guardianIdCard" name="guardianIdCard" required lay-verify="required"
+                           placeholder="监护人身份证" class="layui-input"/>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">与少儿的关系：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="guardianRelation" name="guardianRelation" required lay-verify="required"
+                           placeholder="与少儿的关系" class="layui-input"/>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">联系方式：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="guardianPhone" name="guardianPhone" required lay-verify="required"
+                           placeholder="联系方式" class="layui-input"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block" style="margin-left: 10px;">
+                <button class="layui-btn" lay-submit="" lay-filter="enrollSubmit">报名</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="/js/dateUtils.js"></script>
+<script src="/js/enroll/enrollFrom.js"></script>
+</body>
+</html>

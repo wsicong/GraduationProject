@@ -30,7 +30,8 @@
     delete from e_guardian
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.wsicong.enroll.model.Guardian">
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
+            parameterType="com.wsicong.enroll.model.Guardian">
     insert into e_guardian (id, child_id, guardian_name, 
       guardian_sex, guardian_id_card, guardian_relation, 
       guardian_phone, is_del, create_by, 

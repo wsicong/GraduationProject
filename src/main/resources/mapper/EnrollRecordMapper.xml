@@ -35,7 +35,8 @@
     delete from e_enroll_record
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.wsicong.enroll.model.EnrollRecord">
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
+            parameterType="com.wsicong.enroll.model.EnrollRecord">
     insert into e_enroll_record (id, child_id, guardian_id, 
       class_id, class_name, enroll_start_time, 
       enroll_end_time, child_name, guardian_name, 

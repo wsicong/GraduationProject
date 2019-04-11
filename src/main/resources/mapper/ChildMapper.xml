@@ -35,7 +35,8 @@
     delete from e_child
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.wsicong.enroll.model.Child">
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
+            parameterType="com.wsicong.enroll.model.Child">
     insert into e_child (id, child_name, child_sex, 
       child_birth, child_age, child_adress, 
       child_region, child_nation, child_id_card, 

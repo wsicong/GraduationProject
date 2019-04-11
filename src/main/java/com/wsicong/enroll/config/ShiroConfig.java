@@ -83,6 +83,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/user/sendMsg", "anon");
         filterChainDefinitionMap.put("/user/login", "anon");
         filterChainDefinitionMap.put("/home", "anon");
+        //前台页面
+        filterChainDefinitionMap.put("/enrollRecord/enrollFrom", "anon");
 
         filterChainDefinitionMap.put("/user/delUser", "authc,perms[usermanage]");
         //authc:所有url都必须认证通过才可以访问;

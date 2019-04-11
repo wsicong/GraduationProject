@@ -1,5 +1,6 @@
 package com.wsicong.enroll.service;
 
+import com.wsicong.enroll.dto.ChildGuardianDTO;
 import com.wsicong.enroll.dto.EnrollRecordSearchDTO;
 import com.wsicong.enroll.model.EnrollRecord;
 import com.wsicong.enroll.util.PageDataResult;
@@ -46,4 +47,12 @@ public interface EnrollRecordService {
      * @return
      */
     List<EnrollRecord> getEnrollRecords();
+
+    /**
+     * 添加报名记录信息
+     *
+     * @param childGuardianDTO
+     * @return
+     */
+    String addEnrollRecord(ChildGuardianDTO childGuardianDTO);
 }

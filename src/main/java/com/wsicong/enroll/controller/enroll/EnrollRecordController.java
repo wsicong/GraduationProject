@@ -1,6 +1,7 @@
 package com.wsicong.enroll.controller.enroll;
 
 
+import com.wsicong.enroll.dto.ChildGuardianDTO;
 import com.wsicong.enroll.dto.EnrollRecordSearchDTO;
 import com.wsicong.enroll.model.EnrollRecord;
 import com.wsicong.enroll.model.User;
@@ -27,6 +28,11 @@ public class EnrollRecordController {
 
     @Autowired
     private EnrollRecordService enrollRecordService;
+
+    @RequestMapping("/enrollFrom")
+    public String toEnrollFrom() {
+        return "/enroll/enrollFrom";
+    }
 
     @RequestMapping("/enrollRecordList")
     public String toEnrollRecordList() {
@@ -148,5 +154,18 @@ public class EnrollRecordController {
             logger.error("查找所有报名记录（未删除）异常！", e);
         }
         return enrollRecords;
+    }
+
+    /**
+     * 添加报名记录信息
+     *
+     * @param childGuardianDTO
+     * @return
+     */
+    @PostMapping("/addEnrollRecord")
+    @ResponseBody
+    public String addEnrollRecord(ChildGuardianDTO childGuardianDTO) {
+        logger.debug("操作：添加报名记录信息：" + childGuardianDTO);
+        return enrollRecordService.addEnrollRecord(childGuardianDTO);
     }
 }
