@@ -1,5 +1,5 @@
 /**
- * 兴趣分类列表
+ * 兴趣班级列表
  */
 var pageCurr;
 $(function () {
@@ -31,20 +31,20 @@ $(function () {
                 , {field: 'className', title: '班级名称'}
                 , {field: 'hobbyTypeId', title: '兴趣类别id', hide: true}
                 , {field: 'hobbyTypeName', title: '兴趣类别'}
-                , {field: 'studentDescribe', title: '招生说明'}
-                , {field: 'studentAge', title: '招生年龄', width: 95}
+                , {field: 'studentDescribe', title: '招生对象'}
+                , {field: 'studentAge', title: '招生年龄（岁）'}
                 , {field: 'enrollNum', title: '招生人数', width: 95}
-                , {field: 'classTime', title: '上课时间', templet: '#classTimeTpl', width: 195}
+                , {field: 'classTime', title: '上课时间', templet: '#classTimeTpl'}
                 , {field: 'classStartDate', title: '开始日期', hide: true}
                 , {field: 'classEndDate', title: '结束日期', hide: true}
                 , {field: 'classWeeks', title: '上课星期', hide: true}
                 , {field: 'classStartTime', title: '开始时间', hide: true}
                 , {field: 'classEndTime', title: '结束时间', hide: true}
-                , {field: 'costAndHour', title: '收费/课时', templet: '#costAndHourTpl', width: 135}
+                , {field: 'costAndHour', title: '收费/课时', templet: '#costAndHourTpl'}
                 , {field: 'classCost', title: '收费', hide: true}
                 , {field: 'classHour', title: '课时', hide: true}
-                , {field: 'status', title: '状态'}
-                , {field: 'enable', title: '是否启用', width: 95, templet: '#enableTpl'}
+                , {field: 'status', title: '状态', hide: true}
+                , {field: 'enable', title: '是否启用', width: 95, templet: '#enableTpl', hide: true}
                 , {field: 'createBy', title: '创建者', hide: true}
                 , {field: 'createTime', title: '创建时间', width: 160, sort: true, hide: true}
                 , {field: 'updateBy', title: '更新者', hide: true}
@@ -242,17 +242,17 @@ function cleanHobbyClass() {
 
 //异步获取兴趣下拉列表
 function initHobbySelect() {
-    $.get('/hobbyType/getHobbyTypes', function (data) {
+    $.get('/hobby/getHobbies', function (data) {
         var list = data;//返回的list
         if (null != list) {
-            var hobby = document.getElementById("hobbyTypeId");//hobbyTypeId为select定义的id
+            var hobby = document.getElementById("hobbyId");//hobbyId为select定义的id
             for (var p in list) {
                 var option = document.createElement('option');//创建添加option属性
                 option.setAttribute('value', list[p].id);//给option的value添加值
-                option.innerText = list[p].hobbyTypeName;//打印option对应的纯文本
+                option.innerText = list[p].hobbyName;//打印option对应的纯文本
                 hobby.appendChild(option);//给select添加option子标签
             }
-            /*openHobbyClass(null, '新增兴趣分类');*/
+            /*openHobbyType(null, '新增兴趣分类');*/
             layui.form.render('select');//刷新select，显示数据
         }
         /*else {

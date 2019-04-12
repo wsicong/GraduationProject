@@ -198,4 +198,14 @@ public class HobbyClassController {
         }
         return msg;
     }
+
+    /**
+     * 跳转到前台班级列表
+     *
+     * @return
+     */
+    @RequestMapping("/enrollClassShow")
+    public String toEnrollClassShow() {
+        return "/enroll/enrollTableShow";
+    }
 }

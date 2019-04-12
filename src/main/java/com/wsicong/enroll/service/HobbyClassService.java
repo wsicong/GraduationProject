@@ -46,4 +46,6 @@ public interface HobbyClassService {
      * @return
      */
     String setEnable(Integer id, Integer isEnable);
+
+
 }
