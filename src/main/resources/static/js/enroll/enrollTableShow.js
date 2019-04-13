@@ -74,10 +74,13 @@ $(function () {
         //监听工具条，编辑和删除操作
         table.on('tool(hobbyClassTable)', function (obj) {
             var data = obj.data;
-            if (obj.event === 'del') {
+            /*if (obj.event === 'del') {
                 delHobbyClass(data, data.id, data.className);
             } else if (obj.event === 'edit') {
                 editHobbyClass(data, data.id);
+            }*/
+            if (obj.event === 'enrollNowBtn') {
+                checkRemainNum(data, data.id, data.className);
             }
         });
 
@@ -135,6 +138,37 @@ $(function () {
 
     initHobbySelect();
 });
+
+function checkRemainNum(obj, id, className) {
+    console.log('进入跳转方法');
+    window.location.href = '/enrollRecord/enrollFrom?hobbyClassId=' + id + '&hobbyClassName=' + className;
+    /*if (null != id) {
+        layer.confirm('您确定要报名班级：' + className + '吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.post("/hobbyClass/delete", {"id": id}, function (data) {
+                if (isLogin(data)) {
+                    if (data == "ok") {
+                        //回调弹框
+                        layer.alert("删除成功！", function () {
+                            layer.closeAll();
+                            //加载load方法
+                            load(obj);//自定义
+                        });
+                    } else {
+                        layer.alert(data, function () {
+                            layer.closeAll();
+                            //加载load方法
+                            load(obj);//自定义
+                        });
+                    }
+                }
+            });
+        }, function () {
+            layer.closeAll();
+        });
+    }*/
+}
 
 //设置是否启用该兴趣分类
 function setHobbyClassEnable(obj, id, hobbyClassName, checked) {

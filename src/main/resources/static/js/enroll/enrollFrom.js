@@ -19,7 +19,33 @@ $(function () {
             return false;
         });
     });
+
+    initForm();
 });
+
+function initForm() {
+    var urlMsg = parseUrl(window.location.search);
+    /*console.log('什么'+urlMsg.hobbyClassId+urlMsg.hobbyClassName);*/
+    $('#hobbyClassId').val(urlMsg.hobbyClassId);
+    $('#hobbyClassName').val(urlMsg.hobbyClassName);
+
+    layui.form.render();
+}
+
+function parseUrl(url) {
+    if (url.indexOf("?") == -1) {
+        return {};
+    }
+    var query = url.split("?")[1];
+    var queryArr = query.split("&");
+    var obj = {};
+    queryArr.forEach(function (item) {
+        var key = item.split("=")[0];
+        var value = item.split("=")[1];
+        obj[key] = decodeURIComponent(value);
+    });
+    return obj;
+}
 
 //提交表单
 function formSubmit(obj) {
