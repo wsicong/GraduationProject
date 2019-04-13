@@ -11,11 +11,13 @@
 
     <div class="layui-body" style="margin: 1%">
 
-        <form id="hobbySearch" class="layui-form layui-form-pane" method="post" action="" style="margin-top: 20px;">
+        <form id="enrollResultSearch" class="layui-form layui-form-pane" method="post" action=""
+              style="margin-top: 20px;">
             <div class="layui-form-item">
                 <label class="layui-form-label">兴趣名称</label>
                 <div class="layui-input-inline">
-                    <input id="hobbyNameSearch" name="hobbyNameSearch" autocomplete="off" class="layui-input"
+                    <input id="enrollResultNameSearch" name="enrollResultNameSearch" autocomplete="off"
+                           class="layui-input"
                            type="text"/>
                 </div>
 
@@ -44,9 +46,9 @@
             </div>
         </form>
 
-        <button class="layui-btn" onclick="addHobby();">新增</button>
+        <!--<button class="layui-btn" onclick="addHobby();">新增</button>-->
 
-        <table id="hobbyList" lay-filter="hobbyTable"></table>
+        <table id="enrollResultList" lay-filter="enrollResultTable"></table>
 
         <div style="display:none;" id="currentUser">
             <shiro:principal property="id"></shiro:principal>
@@ -55,14 +57,22 @@
         <!--开关，是否启用兴趣-->
         <script id="enableTpl" type="text/html">
             {{# if(d.enable){}}
-            <input type="checkbox" name="{{d.hobbyName}}" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用"
+            <input type="checkbox" name="{{d.enrollResultName}}" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用"
                    lay-filter="isEnableTpl" checked="checked"/>
             {{#  } else { }}
-            <input type="checkbox" name="{{d.hobbyName}}" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用"
+            <input type="checkbox" name="{{d.enrollResultName}}" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用"
                    lay-filter="isEnableTpl"/>
             {{#  } }}
         </script>
 
+        <!--是否缴费-->
+        <script id="isPayTpl" type="text/html">
+            {{# if(d.isPay){}}
+            是
+            {{#  } else { }}
+            否
+            {{#  } }}
+        </script>
         <!--操作栏-->
         <script id="optBar" type="text/html">
             <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
@@ -88,20 +98,20 @@
 
     <!--添加或编辑兴趣类别-->
     <div id="setHobby" class="layer_self_wrap" style="display:none;">
-        <form id="hobbyForm" class="layui-form" method="post" action="" style="margin: 10px;">
+        <form id="enrollResultForm" class="layui-form" method="post" action="" style="margin: 10px;">
             <input id="pageNum" type="hidden" name="pageNum"/>
             <input id="id" type="hidden" name="id"/>
             <div class="layui-form-item">
                 <label class="layui-form-label">兴趣名称：</label>
                 <div class="layui-input-block">
-                    <input type="text" id="hobbyName" name="hobbyName" required lay-verify="required"
+                    <input type="text" id="enrollResultName" name="enrollResultName" required lay-verify="required"
                            placeholder="请输入兴趣名称" autocomplete="off" class="layui-input"/>
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">简介：</label>
                 <div class="layui-input-block">
-                    <textarea type="text" id="hobbyInfo" name="hobbyInfo" placeholder="请输入兴趣简介"
+                    <textarea type="text" id="enrollResultInfo" name="enrollResultInfo" placeholder="请输入兴趣简介"
                               class="layui-textarea"></textarea>
                 </div>
             </div>
@@ -113,7 +123,7 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block" style="margin-left: 10px;">
-                    <button class="layui-btn" lay-submit="" lay-filter="hobbySubmit">提交</button>
+                    <button class="layui-btn" lay-submit="" lay-filter="enrollResultSubmit">提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
@@ -123,7 +133,7 @@
     <!--底部-->
     <!--<div th:replace="fragments/footer :: footer"></div>-->
     <script src="/js/dateUtils.js"></script>
-    <script src="/js/enroll/hobbyList.js"></script>
+    <script src="/js/enroll/enrollResult.js"></script>
 </div>
 </body>
 </html>

@@ -34,9 +34,9 @@ public class EnrollRecordController {
         return "/enroll/enrollFrom";
     }
 
-    @RequestMapping("/enrollRecordList")
-    public String toEnrollRecordList() {
-        return "/enroll/enrollRecordList";
+    @RequestMapping("/enrollResult")
+    public String toEnrollResult() {
+        return "/enroll/enrollResult";
     }
 
     /**
@@ -47,6 +47,10 @@ public class EnrollRecordController {
     @ResponseBody
     public PageDataResult getHobbyList(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit, EnrollRecordSearchDTO enrollRecordSearch) {
         logger.debug("分页查询报名记录信息列表！搜索条件：enrollRecordSearch：" + enrollRecordSearch + ",page:" + page + ",每页记录数量limit:" + limit);
+
+        //获取当前用户
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        enrollRecordSearch.setUserId(user.getId());
 
         PageDataResult result = new PageDataResult();
         try {

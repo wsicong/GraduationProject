@@ -65,7 +65,7 @@ function submitAjax(obj, currentUser) {
             if (isLogin(data)) {
                 if (data == 'ok') {
                     layer.alert('报名成功', function () {
-
+                        window.location.href = '/enrollRecord/enrollResult';
                     });
                 } else {
                     layer.alert(data, function () {

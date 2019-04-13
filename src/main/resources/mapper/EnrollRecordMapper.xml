@@ -265,6 +265,7 @@
             <if test="enrollRecordSearch.insertTimeEnd!=null and enrollRecordSearch.insertTimeEnd!=''">
                 AND create_time &lt;= #{enrollRecordSearch.insertTimeEnd}
             </if>
+            AND create_by = #{enrollRecordSearch.userId}
             <!--<if test="enrollRecordSearch.enableSearch != null and enrollRecordSearch.enableSearch != ''">
                 AND is_enable = #{enrollRecordSearch.enableSearch}
             </if>-->

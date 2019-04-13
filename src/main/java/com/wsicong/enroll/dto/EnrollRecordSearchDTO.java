@@ -3,6 +3,7 @@ package com.wsicong.enroll.dto;
 public class EnrollRecordSearchDTO {
     private Integer page;
     private Integer limit;
+    private Integer userId;
     private String childIdSearch;
     private String insertTimeStart;
     private String insertTimeEnd;
@@ -21,6 +22,14 @@ public class EnrollRecordSearchDTO {
 
     public void setLimit(Integer limit) {
         this.limit = limit;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getChildIdSearch() {
@@ -52,6 +61,7 @@ public class EnrollRecordSearchDTO {
         return "EnrollRecordSearchDTO{" +
                 "page=" + page +
                 ", limit=" + limit +
+                ", userId=" + userId +
                 ", childIdSearch='" + childIdSearch + '\'' +
                 ", insertTimeStart='" + insertTimeStart + '\'' +
                 ", insertTimeEnd='" + insertTimeEnd + '\'' +
