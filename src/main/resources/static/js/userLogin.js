@@ -123,7 +123,7 @@ function login() {
             console.log("data:" + (data.obj == "7"))
             if (data.code == "1000") {
                 layer.alert("登录成功", function () {
-                        window.location.href = "/home";
+                    window.location.href = "/hobbyClass/enrollClassShow";
                 });
             } else {
                 //$("#password").val("");

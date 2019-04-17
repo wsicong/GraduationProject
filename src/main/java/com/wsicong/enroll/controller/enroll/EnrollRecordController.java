@@ -29,6 +29,11 @@ public class EnrollRecordController {
     @Autowired
     private EnrollRecordService enrollRecordService;
 
+    @RequestMapping("/enrollList")
+    public String toEnrollList() {
+        return "/enroll/enrollList";
+    }
+
     @RequestMapping("/enrollFrom")
     public String toEnrollFrom() {
         return "/enroll/enrollFrom";

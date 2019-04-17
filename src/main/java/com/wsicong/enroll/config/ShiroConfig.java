@@ -84,6 +84,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/user/login", "anon");
         filterChainDefinitionMap.put("/home", "anon");
         //前台页面
+        filterChainDefinitionMap.put("/userLogin", "anon");
+        filterChainDefinitionMap.put("/userRegister", "anon");
         filterChainDefinitionMap.put("/enrollRecord/enrollFrom", "anon");
         filterChainDefinitionMap.put("/hobbyClass/enrollClassShow", "anon");
         filterChainDefinitionMap.put("/enrollRecord/enrollResult", "anon");

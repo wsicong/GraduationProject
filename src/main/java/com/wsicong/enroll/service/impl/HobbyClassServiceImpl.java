@@ -72,6 +72,7 @@ public class HobbyClassServiceImpl implements HobbyClassService {
             if (null != existHobbyClass) {
                 return "该兴趣班级已存在，不能重复添加";
             } else {
+                hobbyClass.setStatus(1);
                 hobbyClass.setCreateTime(new Date());
                 hobbyClass.setCreateBy(existUser.getId().toString());
                 hobbyClassMapper.insert(hobbyClass);

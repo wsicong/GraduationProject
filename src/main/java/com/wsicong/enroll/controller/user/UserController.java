@@ -305,13 +305,10 @@ public class UserController {
     public ResponseResult login(UserDTO user, @RequestParam(value = "rememberMe", required = false) boolean rememberMe) {
         logger.debug("用户登录，请求参数=user:" + user + "，是否记住我：" + rememberMe);
         ResponseResult responseResult = new ResponseResult();
-
         //根据用户id获取角色id
-
-
         //添加角色信息，跳转不同的页面
-        int roleId = 1;
-        responseResult.setObj(roleId);
+        /*int roleId = 1;
+        responseResult.setObj(roleId);*/
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + responseResult.getObj());
 
         responseResult.setCode(IStatusMessage.SystemStatus.ERROR.getCode());

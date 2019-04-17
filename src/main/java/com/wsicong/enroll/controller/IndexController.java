@@ -32,6 +32,18 @@ public class IndexController {
         return "login";
     }
 
+    @RequestMapping("/userLogin")
+    public String touserLogin() {
+        logger.debug("===111-------------login------------");
+        return "userLogin";
+    }
+
+    @RequestMapping("/userRegister")
+    public String touserRegister() {
+        logger.debug("===111-------------login------------");
+        return "userRegister";
+    }
+
     @RequestMapping("/{page}")
     public String toPage(@PathVariable("page") String page) {
         logger.debug("-------------toindex------------" + page);

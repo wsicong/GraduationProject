@@ -77,6 +77,19 @@
             上课星期：{{d.classWeeks}}
         </script>
 
+        <!--状态-->
+        <script id="statusTpl" type="text/html">
+            {{# if(d.status=='1'){}}
+            正在招生
+            {{#  } else if(d.status=='2'){ }}
+            招生结束
+            {{#  } else if(d.status=='3'){ }}
+            正在授课
+            {{#  } else { }}
+            授课结束
+            {{#  } }}
+        </script>
+
         <!--收费和课时-->
         <script id="costAndHourTpl" type="text/html">
             {{d.classCost}}元 / {{d.classHour}}课时

@@ -43,7 +43,7 @@ $(function () {
                 , {field: 'costAndHour', title: '收费/课时', templet: '#costAndHourTpl', width: 135}
                 /*, {field: 'classCost', title: '收费', hide: true}
                 , {field: 'classHour', title: '课时', hide: true}*/
-                , {field: 'status', title: '状态'}
+                , {field: 'status', title: '状态', templet: '#statusTpl'}
                 , {field: 'enable', title: '是否启用', width: 95, templet: '#enableTpl'}
                 /*, {field: 'createBy', title: '创建者', hide: true}
                 , {field: 'createTime', title: '创建时间', width: 160, sort: true, hide: true}
