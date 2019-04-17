@@ -27,21 +27,21 @@ $(function () {
             }
             , cols: [[
                 {type: 'numbers', title: '序号'}
-                , {field: 'id', title: 'ID', width: 80, unresize: true, sort: true, hide: true}
+                /*, {field: 'id', title: 'ID', width: 80, unresize: true, sort: true, hide: true}*/
                 , {field: 'className', title: '班级名称'}
-                , {field: 'hobbyTypeId', title: '兴趣类别id', hide: true}
+                /*, {field: 'hobbyTypeId', title: '兴趣类别id', hide: true}*/
                 , {field: 'hobbyTypeName', title: '兴趣类别'}
                 , {field: 'studentDescribe', title: '招生对象'}
                 , {field: 'studentAge', title: '招生年龄（岁）'}
                 , {field: 'enrollNum', title: '招生人数', width: 95}
                 , {field: 'classTime', title: '上课时间', templet: '#classTimeTpl'}
-                , {field: 'classStartDate', title: '开始日期', hide: true}
-                , {field: 'classEndDate', title: '结束日期', hide: true}
-                , {field: 'classWeeks', title: '上课星期', hide: true}
-                , {field: 'classStartTime', title: '开始时间', hide: true}
-                , {field: 'classEndTime', title: '结束时间', hide: true}
+                /*, {field: 'classStartDate', title: '开始日期', hide: true}*/
+                /*, {field: 'classEndDate', title: '结束日期', hide: true}
+                , {field: 'classWeeks', title: '上课星期', hide: true}*/
+                /*, {field: 'classStartTime', title: '开始时间', hide: true}
+                , {field: 'classEndTime', title: '结束时间', hide: true}*/
                 , {field: 'costAndHour', title: '收费/课时', templet: '#costAndHourTpl'}
-                , {field: 'classCost', title: '收费', hide: true}
+                /*, {field: 'classCost', title: '收费', hide: true}
                 , {field: 'classHour', title: '课时', hide: true}
                 , {field: 'status', title: '状态', hide: true}
                 , {field: 'enable', title: '是否启用', width: 95, templet: '#enableTpl', hide: true}
@@ -49,7 +49,7 @@ $(function () {
                 , {field: 'createTime', title: '创建时间', width: 160, sort: true, hide: true}
                 , {field: 'updateBy', title: '更新者', hide: true}
                 , {field: 'updateTime', title: '更新时间', width: 160, sort: true, hide: true}
-                , {field: 'remark', title: '备注', hide: true}
+                , {field: 'remark', title: '备注', hide: true}*/
                 , {fixed: 'right', title: '操作', width: 140, align: 'center', toolbar: '#optBar'}
             ]]
             , done: function (res, curr, count) {
