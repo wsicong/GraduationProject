@@ -26,10 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -53,6 +50,25 @@ public class UserController {
     @RequestMapping("/userList")
     public String toUserList() {
         return "/auth/userList";
+    }
+
+    /**
+     * 普通用户注册
+     *
+     * @param roleIds
+     * @param user
+     * @return
+     */
+    @PostMapping("addOrdinaryUser")
+    @ResponseBody
+    public String addOrdinaryUser(@RequestParam("roleIds") String roleIds, User user) {
+        //根据普通用户code：ordinaryUser获取对应的roleId(必须设置普通用户的code为ordinaryUser)
+        // 此处先写死roleId为7
+        if (null == user) {
+            logger.debug("用户注册，结果=请您填写用户注册信息");
+            return "请您填写用户注册信息";
+        }
+        return userService.addUser(user, roleIds);
     }
 
     /**

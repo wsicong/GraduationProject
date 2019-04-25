@@ -30,21 +30,6 @@ public class HobbyClassServiceImpl implements HobbyClassService {
 
     @Override
     public PageDataResult list(int page, int limit, HobbyClassSearchDTO hobbyClassSearch) {
-        //时间处理
-        /*if (null != hobbyTypeSearch) {
-            if (StringUtils.isNotEmpty(hobbyTypeSearch.getInsertTimeStart()) && StringUtils.isEmpty(hobbyTypeSearch.getInsertTimeEnd())) {
-                hobbyTypeSearch.setInsertTimeEnd(DateUtil.format(new Date()));
-            } else if (StringUtils.isEmpty(hobbyTypeSearch.getInsertTimeStart()) && StringUtils.isNotEmpty(hobbyTypeSearch.getInsertTimeEnd())) {
-                hobbyTypeSearch.setInsertTimeStart(DateUtil.format(new Date()));
-            }
-            if (StringUtils.isNotEmpty(hobbyTypeSearch.getInsertTimeStart()) && StringUtils.isNotEmpty(hobbyTypeSearch.getInsertTimeEnd())) {
-                if (hobbyTypeSearch.getInsertTimeEnd().compareTo(hobbyTypeSearch.getInsertTimeStart()) < 0) {
-                    String temp = hobbyTypeSearch.getInsertTimeStart();
-                    hobbyTypeSearch.setInsertTimeStart(hobbyTypeSearch.getInsertTimeEnd());
-                    hobbyTypeSearch.setInsertTimeEnd(temp);
-                }
-            }
-        }*/
         PageDataResult result = new PageDataResult();
         PageHelper.startPage(page, limit);
         List<HobbyClass> hobbyClassList = hobbyClassMapper.selectHobbyClassList(hobbyClassSearch);

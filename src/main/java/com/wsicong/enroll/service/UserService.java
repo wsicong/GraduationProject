@@ -93,4 +93,13 @@ public interface UserService {
      * @return
      */
     int setUserLockNum(Integer id, int isLock);
+
+    /**
+     * 普通用户注册
+     *
+     * @param user
+     * @param roleIds
+     * @return
+     */
+    String addUser(User user, String roleIds);
 }

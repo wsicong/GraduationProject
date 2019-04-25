@@ -24,7 +24,8 @@
         </div>
         <div class="layui-col-xs6">
             <div class="grid-demo">
-                <form id="useLogin" class="layui-form" action="" style="margin-left: 100px">
+                <form id="userRegister" class="layui-form" action="" style="margin-left: 100px">
+                    <input id="roleIds" name="roleIds" value="7" type="hidden"/>
                     <div class="layui-form-item">
                         <label class="layui-form-label">用户名</label>
                         <div class="layui-input-inline">
@@ -115,7 +116,7 @@
                     <div class="layui-form-item">
                         <div class="layui-input-block">
                             <button class="layui-btn layui-btn-primary" type="reset">重置</button>
-                            <button id="loginBtn" class="layui-btn" lay-submit="" lay-filter="login">
+                            <button id="registerBtn" class="layui-btn" lay-submit="" lay-filter="register">
                                 马上注册
                             </button>
                         </div>
@@ -126,7 +127,7 @@
     </div>
 </div>
 
-<script type="text/javascript" src="/js/userLogin.js"></script>
+<script type="text/javascript" src="/js/userRegister.js"></script>
 <script type="text/javascript" src="/js/validate.js"></script>
 </body>
 </html>

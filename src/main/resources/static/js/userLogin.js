@@ -119,8 +119,6 @@ function login() {
             return false;
         }
         $.post("/user/login", $("#useLogin").serialize(), function (data) {
-            console.log("data:" + data.obj)
-            console.log("data:" + (data.obj == "7"))
             if (data.code == "1000") {
                 layer.alert("登录成功", function () {
                     window.location.href = "/hobbyClass/enrollClassShow";

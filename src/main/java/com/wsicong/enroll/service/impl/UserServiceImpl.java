@@ -45,6 +45,45 @@ public class UserServiceImpl implements UserService {
     private UserRoleMapper userRoleMapper;
 
     /**
+     * 普通用户注册
+     *
+     * @param user
+     * @param roleIds
+     * @return
+     */
+    @Override
+    public String addUser(User user, String roleIds) {
+        //通过手机号判断用户是否已经存在
+        User existUser = this.userMapper.findUserByMobile(user.getMobile());
+        if (null != existUser) {
+            return "该手机号已经注册";
+        }
+
+        //新增用户
+        user.setInsertTime(new Date());
+        user.setIsDel(false);
+        user.setIsJob(false);
+        //设置加密密码
+        if (StringUtils.isNotBlank(user.getPassword())) {
+            user.setPassword(DigestUtils.md5Hex(user.getPassword()));
+        } else {
+            return "请输入密码";
+        }
+        this.userMapper.insert(user);
+        int userId = user.getId();
+
+        //给用户授权限
+        String[] arrys = roleIds.split(",");
+        for (String roleId : arrys) {
+            UserRoleKey urk = new UserRoleKey();
+            urk.setRoleId(Integer.valueOf(roleId));
+            urk.setUserId(userId);
+            this.userRoleMapper.insert(urk);
+        }
+        return "ok";
+    }
+
+    /**
      * 分页查询用户列表
      *
      * @param userSearch
