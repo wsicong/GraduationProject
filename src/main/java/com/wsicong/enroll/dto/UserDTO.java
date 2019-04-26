@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class UserDTO {
     private Integer id;
-    @NotNull(message = "用户名不能为空，请您先填写用户名")
+    /*@NotNull(message = "用户名不能为空，请您先填写用户名")*/
     private String username;
     @NotNull(message = "手机号不能为空，请您先填写手机号")
     private String mobile;

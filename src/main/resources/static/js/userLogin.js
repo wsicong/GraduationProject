@@ -109,7 +109,7 @@ function login() {
     var flag = checkParams();
     if (flag != false) {
         //校验短信验证码
-        var smsCode = $("#smsCode").val();
+        /*var smsCode = $("#smsCode").val();
         if ("ok" != ValidateUtils.checkCode(smsCode)) {
             //tips层-右
             layer.tips(ValidateUtils.checkCode(smsCode), '#smsCode', {
@@ -117,7 +117,7 @@ function login() {
                 tipsMore: true
             });
             return false;
-        }
+        }*/
         $.post("/user/login", $("#useLogin").serialize(), function (data) {
             if (data.code == "1000") {
                 layer.alert("登录成功", function () {
@@ -127,7 +127,7 @@ function login() {
                 //$("#password").val("");
                 picCode = drawPic();
                 $("#code").val("");
-                $("#smsCode").val("");
+                /*$("#smsCode").val("");*/
                 layer.alert(data.message, function () {
                     layer.closeAll();//关闭所有弹框
                     //关闭发送验证码按钮倒计时
@@ -140,12 +140,16 @@ function login() {
 
 function checkParams() {
     //  校验
-    var username = $("#username").val();
+    /*var username = $("#username").val();*/
     var password = $("#password").val();
     var mobile = $("#mobile").val();
     var code = $("#code").val();
-    if ("ok" != ValidateUtils.checkUserName(username) || "ok" != ValidateUtils.checkSimplePassword(password)) {
+    /*if ("ok" != ValidateUtils.checkUserName(username) || "ok" != ValidateUtils.checkSimplePassword(password)) {
         layer.alert("请您输入正确的用户名和密码");
+        return false;
+    }*/
+    if ("ok" != ValidateUtils.checkMobile(mobile) || "ok" != ValidateUtils.checkSimplePassword(password)) {
+        layer.alert("请您输入正确的手机号和密码");
         return false;
     }
     if ("ok" != ValidateUtils.checkMobile(mobile)) {
