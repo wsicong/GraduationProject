@@ -67,7 +67,7 @@
 
         <!--是否缴费-->
         <script id="isPayTpl" type="text/html">
-            {{# if(d.isPay){}}
+            {{# if(d.pay){}}
             是
             {{#  } else { }}
             否
@@ -75,7 +75,7 @@
         </script>
         <!--操作栏-->
         <script id="optBar" type="text/html">
-            <a class="layui-btn layui-btn-xs" lay-event="">确认缴费</a>
+            <a class="layui-btn layui-btn-xs" lay-event="confirmPay">修改缴费状态</a>
             <!--<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>-->
         </script>
 

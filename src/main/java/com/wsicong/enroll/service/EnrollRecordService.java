@@ -55,4 +55,13 @@ public interface EnrollRecordService {
      * @return
      */
     String addEnrollRecord(ChildGuardianDTO childGuardianDTO);
+
+    /**
+     * 修改用户缴费状态
+     *
+     * @param id
+     * @param isPay
+     * @return
+     */
+    String setPayStatus(Integer id, Integer isPay);
 }

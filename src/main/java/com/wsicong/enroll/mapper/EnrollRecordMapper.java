@@ -4,6 +4,7 @@ import com.wsicong.enroll.dto.EnrollRecordDTO;
 import com.wsicong.enroll.dto.EnrollRecordSearchDTO;
 import com.wsicong.enroll.model.EnrollRecord;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -42,4 +43,13 @@ public interface EnrollRecordMapper {
      * @return
      */
     List<EnrollRecord> selectEnrollRecords();
+
+    /**
+     * 修改用户缴费状态
+     *
+     * @param id
+     * @param isPay
+     * @return
+     */
+    int updatePayStatus(@Param("id") Integer id, @Param("isPay") Integer isPay);
 }

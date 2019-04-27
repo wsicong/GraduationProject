@@ -177,4 +177,36 @@ public class EnrollRecordController {
         logger.debug("操作：添加报名记录信息：" + childGuardianDTO);
         return enrollRecordService.addEnrollRecord(childGuardianDTO);
     }
+
+    /**
+     * 设置用户缴费状态
+     *
+     * @param id
+     * @param isPay
+     * @return
+     */
+    @PostMapping("/setPayStatus")
+    @ResponseBody
+    public String setPayStatus(@RequestParam("id") Integer id, @RequestParam("isPay") Integer isPay) {
+        logger.debug("设置用户是否缴费！id:" + id + ",isPay:" + isPay);
+        String msg = "";
+        try {
+            if (null == id || null == isPay) {
+                logger.debug("设置用户是否缴费，结果=请求参数有误，请您稍后再试");
+                return "请求参数有误，请您稍后再试";
+            }
+            User existUser = (User) SecurityUtils.getSubject().getPrincipal();
+            if (null == existUser) {
+                logger.debug("设置用户是否缴费，结果=您未登录或登录超时，请您登录后再试");
+                return "您未登录或登录超时，请您登录后再试";
+            }
+            //设置兴趣是否启用
+            msg = enrollRecordService.setPayStatus(id, isPay);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("设置用户是否缴费异常！", e);
+            msg = "操作异常，请您稍后再试！";
+        }
+        return msg;
+    }
 }

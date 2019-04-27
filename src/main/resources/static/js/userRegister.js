@@ -17,12 +17,13 @@ $(function () {
 //普通用户注册请求
 function register() {
     $.post("/user/addOrdinaryUser", $('#userRegister').serialize(), function (data) {
+        console.log(data)
         if (data == 'ok') {
             layer.msg('注册成功,即将返回登录页面。。。', {icon: 1, time: 1000, shade: 0.4}, function () {
                 window.location.href = '/userLogin';
             });
         } else {
-            layer.alert(data);
+            layer.alert('提示：' + data);
         }
     });
 }

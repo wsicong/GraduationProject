@@ -290,4 +290,15 @@
         where
         is_del=0
     </select>
+
+    <!--更新用户缴费状态-->
+    <update id="updatePayStatus">
+        update
+        e_enroll_record
+        set
+        is_pay=#{isPay,jdbcType=INTEGER},
+        update_time=NOW()
+        where
+        id=#{id,jdbcType=INTEGER}
+    </update>
 </mapper>

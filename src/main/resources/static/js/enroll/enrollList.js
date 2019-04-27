@@ -59,11 +59,15 @@ $(function () {
         //监听工具条，编辑和删除操作
         table.on('tool(enrollResultTable)', function (obj) {
             var data = obj.data;
-            if (obj.event === 'del') {
+            console.log(obj.data.id + "shenem" + obj.data.pay);
+            if (obj.event === 'confirmPay') {
+                confirmPay(obj, data.id, data.pay);
+            }
+            /*if (obj.event === 'del') {
                 delHobby(data, data.id, data.enrollResultName);
             } else if (obj.event === 'edit') {
                 editHobby(data, data.id);
-            }
+            }*/
         });
 
         //监听提交
@@ -97,6 +101,44 @@ $(function () {
         });
     });
 });
+
+//确认缴费状态
+function confirmPay(obj, id, isPay) {
+    var pay = isPay ? 0 : 1;
+    var isPayName = isPay ? "已缴费" : "未缴费";
+    layer.confirm('您确定要修改该用户的缴费状态：' + isPayName + '吗？', {
+        btn: ['确认', '取消']
+        , yes: function () {
+            $.post('/enrollRecord/setPayStatus', {"id": id, "isPay": pay}, function (data) {
+                if (isLogin(data)) {
+                    if (data == 'ok') {
+                        //回调弹框
+                        layer.alert("操作成功！", function () {
+                            layer.closeAll();
+                            //加载load方法
+                            load(obj);
+                        });
+                    } else {
+                        layer.alert(data, function () {
+                            layer.closeAll();
+                            //加载load方法
+                            load(obj);//自定义
+                        });
+                    }
+                }
+            })
+        }, btn2: function () {
+            layer.closeAll();
+            //加载load方法
+            load(obj);
+        }, cancel: function () {
+            layer.closeAll();
+            //加载load方法
+            load(obj);
+        }
+    });
+}
+
 
 //设置是否启用该兴趣
 function setHobbyEnable(obj, id, enrollResultName, checked) {

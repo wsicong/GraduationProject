@@ -160,4 +160,16 @@ public class EnrollRecordServiceImpl implements EnrollRecordService {
         }
         return "ok";
     }
+
+    /**
+     * 修改用户缴费状态
+     *
+     * @param id
+     * @param isPay
+     * @return
+     */
+    @Override
+    public String setPayStatus(Integer id, Integer isPay) {
+        return enrollRecordMapper.updatePayStatus(id, isPay) == 1 ? "ok" : "操作失败，请您稍后再试";
+    }
 }
