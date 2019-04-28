@@ -285,7 +285,7 @@
         class_end_time,
         class_cost,
         class_hour,
-        status,
+        `status`,
         hc.is_enable as enable ,
         hc.create_by,
         hc.create_time,
@@ -305,6 +305,9 @@
             </if>
             <if test="hobbyClassSearch.insertTimeEnd!=null and hobbyClassSearch.insertTimeEnd!=''">
                 AND hc.create_time &lt;= #{hobbyClassSearch.insertTimeEnd}
+            </if>
+            <if test="hobbyClassSearch.status!=null and hobbyClassSearch.status!=''">
+                AND hc.`status` = #{hobbyClassSearch.status}
             </if>
             <!--<if test="hobbyTypeSearch.enableSearch != null and hobbyTypeSearch.enableSearch != ''">
                 AND is_enable = #{hobbyTypeSearch.enableSearch}
@@ -333,4 +336,32 @@
         id = #{id,jdbcType=INTEGER}
     </update>
 
+    <!--更新班级状态-->
+    <update id="updateEnrollStatus">
+        update
+        e_hobby_class
+        set
+        `status`=1,
+        update_time=NOW()
+        where
+        class_start_date&gt;date_sub(NOW(),interval 1 day)
+    </update>
+    <update id="updateStartStatus">
+        update
+        e_hobby_class
+        set
+        `status`=2,
+        update_time=NOW()
+        where
+        class_start_date&lt;date_sub(NOW(),interval 1 day) and class_end_date&gt;date_sub(NOW(),interval 1 day)
+    </update>
+    <update id="updateEndStatus">
+        update
+        e_hobby_class
+        set
+        `status`=3,
+        update_time=NOW()
+        where
+        class_end_date&lt;date_sub(NOW(),interval 1 day)
+    </update>
 </mapper>

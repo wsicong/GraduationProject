@@ -9,7 +9,7 @@ $(function () {
 
         tableIns = table.render({
             elem: '#hobbyClassList'
-            , url: '/hobbyClass/getHobbyClassList'
+            , url: '/hobbyClass/getUserHobbyList'
             , method: 'post'//默认：get请求
             , cellMinWidth: 80//全局定义所有常规单元格的最小宽度（默认：60）
             , page: true//开启分页

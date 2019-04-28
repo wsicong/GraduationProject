@@ -32,6 +32,34 @@ public class HobbyClassController {
         return "/enroll/hobbyClassList";
     }
 
+
+    /**
+     * 分页查询兴趣班级列表
+     */
+    /*@RequiresPermissions("hobbyTypeList")*/
+    @PostMapping("/getUserHobbyList")
+    @ResponseBody
+    public PageDataResult getUserHobbyList(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit, HobbyClassSearchDTO hobbyClassSearch) {
+        logger.debug("分页查询用户兴趣班级列表！搜索条件：hobbyClassSearch：" + hobbyClassSearch + ",page:" + page + ",每页记录数量limit:" + limit);
+
+        PageDataResult result = new PageDataResult();
+        try {
+            if (null == page) {
+                page = 1;
+            }
+            if (null == limit) {
+                limit = 10;
+            }
+            // 获取兴趣班级列表
+            result = hobbyClassService.listUserClass(page, limit, hobbyClassSearch);
+            logger.debug("用户兴趣班级列表查询=result:" + result);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("用户兴趣班级列表查询异常！", e);
+        }
+        return result;
+    }
+
     /**
      * 分页查询兴趣班级列表
      */

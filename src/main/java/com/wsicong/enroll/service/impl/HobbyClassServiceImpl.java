@@ -28,8 +28,25 @@ public class HobbyClassServiceImpl implements HobbyClassService {
     @Autowired
     private HobbyClassMapper hobbyClassMapper;
 
+
+    @Override
+    public PageDataResult listUserClass(int page, int limit, HobbyClassSearchDTO hobbyClassSearch) {
+        //更新班级状态
+        setStatus();
+        PageDataResult result = new PageDataResult();
+        hobbyClassSearch.setStatus(1);
+        PageHelper.startPage(page, limit);
+        List<HobbyClass> hobbyClassList = hobbyClassMapper.selectHobbyClassList(hobbyClassSearch);
+        PageInfo<HobbyClass> pageInfo = new PageInfo<>(hobbyClassList);
+        result.setTotals(Long.valueOf(pageInfo.getTotal()).intValue());
+        result.setList(hobbyClassList);
+        return result;
+    }
+
     @Override
     public PageDataResult list(int page, int limit, HobbyClassSearchDTO hobbyClassSearch) {
+        //更新班级状态
+        setStatus();
         PageDataResult result = new PageDataResult();
         PageHelper.startPage(page, limit);
         List<HobbyClass> hobbyClassList = hobbyClassMapper.selectHobbyClassList(hobbyClassSearch);
@@ -80,4 +97,14 @@ public class HobbyClassServiceImpl implements HobbyClassService {
     public String setEnable(Integer id, Integer isEnable) {
         return hobbyClassMapper.updateEnable(id, isEnable) == 1 ? "ok" : "操作失败，请您稍后再试";
     }
+
+    @Override
+    public String setStatus() {
+        hobbyClassMapper.updateEnrollStatus();
+        hobbyClassMapper.updateStartStatus();
+        hobbyClassMapper.updateEndStatus();
+        return "ok";
+    }
+
+
 }

@@ -47,5 +47,20 @@ public interface HobbyClassService {
      */
     String setEnable(Integer id, Integer isEnable);
 
+    /**
+     * 设置班级状态
+     *
+     * @return
+     */
+    String setStatus();
 
+    /**
+     * 分页查询班级列表（status为1，is_enable为1）
+     *
+     * @param page
+     * @param limit
+     * @param hobbyClassSearch
+     * @return
+     */
+    PageDataResult listUserClass(int page, int limit, HobbyClassSearchDTO hobbyClassSearch);
 }

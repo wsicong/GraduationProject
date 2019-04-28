@@ -43,4 +43,15 @@ public interface HobbyClassMapper {
      * @return
      */
     int updateEnable(@Param("id") Integer id, @Param("isEnable") Integer isEnable);
+
+    /**
+     * 更新班级状态 （1：正在招生，2：正在授课，3：课程结束）
+     *
+     * @return
+     */
+    int updateEnrollStatus();
+
+    int updateStartStatus();
+
+    int updateEndStatus();
 }

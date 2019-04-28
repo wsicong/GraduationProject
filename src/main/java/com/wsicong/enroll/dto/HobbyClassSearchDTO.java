@@ -8,6 +8,17 @@ public class HobbyClassSearchDTO {
     private String insertTimeStart;
     private String insertTimeEnd;
 
+    //班级状态
+    private Integer status;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public Integer getPage() {
         return page;
     }
@@ -65,6 +76,7 @@ public class HobbyClassSearchDTO {
                 ", enableSearch=" + enableSearch +
                 ", insertTimeStart='" + insertTimeStart + '\'' +
                 ", insertTimeEnd='" + insertTimeEnd + '\'' +
+                ", status=" + status +
                 '}';
     }
 }
