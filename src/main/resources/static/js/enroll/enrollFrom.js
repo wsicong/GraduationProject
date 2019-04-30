@@ -64,20 +64,16 @@ function submitAjax(obj, currentUser) {
             //判断是否登录
             if (isLogin(data)) {
                 if (data == 'ok') {
-                    layer.alert('报名成功', function () {
+                    layer.alert('报名成功', {icon: 1}, function () {
                         window.location.href = '/enrollRecord/enrollResult';
                     });
                 } else {
-                    layer.alert(data, function () {
-
-                    });
+                    layer.alert(data, {icon: 2});
                 }
             }
         },
         error: function () {
-            layer.alert('操作请求有误，请稍后再试', function () {
-
-            });
+            layer.alert('操作请求有误，请稍后再试');
         }
     });
 }

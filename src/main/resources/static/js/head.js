@@ -76,6 +76,6 @@ function updateUsePwd() {
         resize: false,
         shadeClose: true,
         area: ['450px'],
-        content: $('#useDetail')
+        content: $('#pwdDiv')
     });
 }

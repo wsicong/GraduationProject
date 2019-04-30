@@ -26,7 +26,7 @@ public class Child {
     /**
      * 年龄
      */
-    private String childAge;
+    private Integer childAge;
 
     /**
      * 住址
@@ -120,12 +120,20 @@ public class Child {
         this.childBirth = childBirth;
     }
 
-    public String getChildAge() {
+    public Integer getChildAge() {
         return childAge;
     }
 
-    public void setChildAge(String childAge) {
-        this.childAge = childAge == null ? null : childAge.trim();
+    public void setChildAge(Integer childAge) {
+        this.childAge = childAge;
+    }
+
+    public Boolean getDel() {
+        return isDel;
+    }
+
+    public void setDel(Boolean del) {
+        isDel = del;
     }
 
     public String getChildAdress() {
@@ -231,7 +239,7 @@ public class Child {
                 ", childName='" + childName + '\'' +
                 ", childSex='" + childSex + '\'' +
                 ", childBirth=" + childBirth +
-                ", childAge='" + childAge + '\'' +
+                ", childAge=" + childAge +
                 ", childAdress='" + childAdress + '\'' +
                 ", childRegion='" + childRegion + '\'' +
                 ", childNation='" + childNation + '\'' +

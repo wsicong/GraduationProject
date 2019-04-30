@@ -32,7 +32,7 @@ public class ChildGuardianDTO {
     /**
      * 年龄
      */
-    private String childAge;
+    private Integer childAge;
 
     /**
      * 住址
@@ -129,11 +129,11 @@ public class ChildGuardianDTO {
         this.childBirthStr = childBirthStr;
     }
 
-    public String getChildAge() {
+    public Integer getChildAge() {
         return childAge;
     }
 
-    public void setChildAge(String childAge) {
+    public void setChildAge(Integer childAge) {
         this.childAge = childAge;
     }
 

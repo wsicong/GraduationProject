@@ -105,13 +105,19 @@ public class EnrollRecordServiceImpl implements EnrollRecordService {
         //获取当前用户
         User existUser = (User) SecurityUtils.getSubject().getPrincipal();
         //判断报名人数是否已经满
-        HobbyClass hobbyClass = new HobbyClass();
-        hobbyClass = hobbyClassMapper.selectByPrimaryKey(childGuardianDTO.getHobbyClassId());
+        HobbyClass hobbyClass = hobbyClassMapper.selectByPrimaryKey(childGuardianDTO.getHobbyClassId());
         if (hobbyClass.getEnrolledNum() >= hobbyClass.getEnrollNum()) {
             return "该班报名人数已达上限，无法报名";
         } else {
             hobbyClass.setEnrolledNum(hobbyClass.getEnrolledNum() + 1);
             hobbyClassMapper.updateByPrimaryKeySelective(hobbyClass);
+        }
+
+        //判断报名年龄是否符合条件
+        int minAge = Integer.parseInt(hobbyClass.getStudentAge().split("-")[0]);
+        int maxAge = Integer.parseInt(hobbyClass.getStudentAge().split("-")[1]);
+        if (minAge > childGuardianDTO.getChildAge() || maxAge < childGuardianDTO.getChildAge()) {
+            return "该班级只接受" + hobbyClass.getStudentAge() + "岁的少儿报名，请检查报名少儿年龄";
         }
 
         try {
