@@ -34,6 +34,7 @@ $(function () {
                 , {field: 'studentDescribe', title: '招生对象'}
                 , {field: 'studentAge', title: '招生年龄（岁）'}
                 , {field: 'enrollNum', title: '招生人数', width: 95}
+                , {field: 'enrolledNum', title: '报名人数', width: 95}
                 , {field: 'classTime', title: '上课时间', templet: '#classTimeTpl'}
                 /*, {field: 'classStartDate', title: '开始日期', hide: true}*/
                 /*, {field: 'classEndDate', title: '结束日期', hide: true}

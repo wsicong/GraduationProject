@@ -113,7 +113,11 @@
 
         <!--操作栏-->
         <script id="optBar" type="text/html">
+            {{#  if(d.enrollNum>d.enrolledNum){ }}
             <a class="layui-btn layui-btn-xs" lay-event="enrollNowBtn">立即报名</a>
+            {{#  } else { }}
+            <a class="layui-btn layui-btn-xs layui-btn-disabled" lay-event="">人数已满</a>
+            {{#  } }}
             <!--<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>-->
         </script>

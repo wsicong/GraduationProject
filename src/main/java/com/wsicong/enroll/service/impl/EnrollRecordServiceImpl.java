@@ -7,10 +7,8 @@ import com.wsicong.enroll.dto.EnrollRecordSearchDTO;
 import com.wsicong.enroll.mapper.ChildMapper;
 import com.wsicong.enroll.mapper.EnrollRecordMapper;
 import com.wsicong.enroll.mapper.GuardianMapper;
-import com.wsicong.enroll.model.Child;
-import com.wsicong.enroll.model.EnrollRecord;
-import com.wsicong.enroll.model.Guardian;
-import com.wsicong.enroll.model.User;
+import com.wsicong.enroll.mapper.HobbyClassMapper;
+import com.wsicong.enroll.model.*;
 import com.wsicong.enroll.service.EnrollRecordService;
 import com.wsicong.enroll.util.DateUtil;
 import com.wsicong.enroll.util.PageDataResult;
@@ -39,6 +37,9 @@ public class EnrollRecordServiceImpl implements EnrollRecordService {
 
     @Autowired
     private GuardianMapper guardianMapper;
+
+    @Autowired
+    private HobbyClassMapper hobbyClassMapper;
 
     @Override
     public PageDataResult list(int page, int limit, EnrollRecordSearchDTO enrollRecordSearch) {
@@ -103,6 +104,16 @@ public class EnrollRecordServiceImpl implements EnrollRecordService {
     public String addEnrollRecord(ChildGuardianDTO childGuardianDTO) {
         //获取当前用户
         User existUser = (User) SecurityUtils.getSubject().getPrincipal();
+        //判断报名人数是否已经满
+        HobbyClass hobbyClass = new HobbyClass();
+        hobbyClass = hobbyClassMapper.selectByPrimaryKey(childGuardianDTO.getHobbyClassId());
+        if (hobbyClass.getEnrolledNum() >= hobbyClass.getEnrollNum()) {
+            return "该班报名人数已达上限，无法报名";
+        } else {
+            hobbyClass.setEnrolledNum(hobbyClass.getEnrolledNum() + 1);
+            hobbyClassMapper.updateByPrimaryKeySelective(hobbyClass);
+        }
+
         try {
             //封装儿童信息
             Child child = new Child();

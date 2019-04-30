@@ -34,7 +34,12 @@ public class HobbyClass {
     /**
      * 招生人数
      */
-    private String enrollNum;
+    private Integer enrollNum;
+
+    /**
+     * 已报名人数
+     */
+    private Integer enrolledNum;
 
     /**
      * 上课开始日期（年月日）
@@ -106,6 +111,14 @@ public class HobbyClass {
      */
     private String remark;
 
+    public Integer getEnrolledNum() {
+        return enrolledNum;
+    }
+
+    public void setEnrolledNum(Integer enrolledNum) {
+        this.enrolledNum = enrolledNum;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -146,11 +159,11 @@ public class HobbyClass {
         this.studentAge = studentAge;
     }
 
-    public String getEnrollNum() {
+    public Integer getEnrollNum() {
         return enrollNum;
     }
 
-    public void setEnrollNum(String enrollNum) {
+    public void setEnrollNum(Integer enrollNum) {
         this.enrollNum = enrollNum;
     }
 
@@ -274,7 +287,8 @@ public class HobbyClass {
                 ", className='" + className + '\'' +
                 ", studentDescribe='" + studentDescribe + '\'' +
                 ", studentAge='" + studentAge + '\'' +
-                ", enrollNum='" + enrollNum + '\'' +
+                ", enrollNum=" + enrollNum +
+                ", enrolledNum=" + enrolledNum +
                 ", classStartDate=" + classStartDate +
                 ", classEndDate=" + classEndDate +
                 ", classWeeks='" + classWeeks + '\'' +

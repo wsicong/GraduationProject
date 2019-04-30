@@ -7,7 +7,8 @@
         <result column="class_name" property="className" jdbcType="VARCHAR"/>
         <result column="student_describe" property="studentDescribe" jdbcType="VARCHAR"/>
         <result column="student_age" property="studentAge" jdbcType="VARCHAR"/>
-        <result column="enroll_num" property="enrollNum" jdbcType="VARCHAR"/>
+        <result column="enroll_num" property="enrollNum" jdbcType="INTEGER"/>
+        <result column="enrolled_num" property="enrolledNum" jdbcType="INTEGER"/>
         <result column="class_start_date" property="classStartDate" jdbcType="DATE"/>
         <result column="class_end_date" property="classEndDate" jdbcType="DATE"/>
         <result column="class_weeks" property="classWeeks" jdbcType="VARCHAR"/>
@@ -24,7 +25,7 @@
         <result column="remark" property="remark" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, hobby_type_id, class_name, student_describe, student_age, enroll_num, class_start_date, 
+    id, hobby_type_id, class_name, student_describe, student_age, enroll_num,enrolled_num, class_start_date,
     class_end_date, class_weeks, class_start_time, class_end_time, class_cost, class_hour, 
     status, is_enable, create_by, create_time, update_by, update_time, remark
   </sql>
@@ -40,14 +41,14 @@
   </delete>
     <insert id="insert" parameterType="com.wsicong.enroll.model.HobbyClass">
     insert into e_hobby_class (id, hobby_type_id, class_name, 
-      student_describe, student_age, enroll_num, 
+      student_describe, student_age, enroll_num, enrolled_num,
       class_start_date, class_end_date, class_weeks, 
       class_start_time, class_end_time, class_cost, 
       class_hour, status, is_enable, 
       create_by, create_time, update_by, 
       update_time, remark)
     values (#{id,jdbcType=INTEGER}, #{hobbyTypeId,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, 
-      #{studentDescribe,jdbcType=VARCHAR}, #{studentAge,jdbcType=VARCHAR}, #{enrollNum,jdbcType=VARCHAR}, 
+      #{studentDescribe,jdbcType=VARCHAR}, #{studentAge,jdbcType=VARCHAR}, #{enrollNum,jdbcType=INTEGER}, #{enrolledNum,jdbcType=INTEGER},
       #{classStartDate,jdbcType=DATE}, #{classEndDate,jdbcType=DATE}, #{classWeeks,jdbcType=VARCHAR}, 
       #{classStartTime,jdbcType=TIME}, #{classEndTime,jdbcType=TIME}, #{classCost,jdbcType=VARCHAR}, 
       #{classHour,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{enable,jdbcType=BIT}, 
@@ -74,6 +75,9 @@
             </if>
             <if test="enrollNum != null">
                 enroll_num,
+            </if>
+            <if test="enrolledNum != null">
+                enrolled_num,
             </if>
             <if test="classStartDate != null">
                 class_start_date,
@@ -135,7 +139,10 @@
                 #{studentAge,jdbcType=VARCHAR},
             </if>
             <if test="enrollNum != null">
-                #{enrollNum,jdbcType=VARCHAR},
+                #{enrollNum,jdbcType=INTEGER},
+            </if>
+            <if test="enrolledNum != null">
+                #{enrolledNum,jdbcType=INTEGER},
             </if>
             <if test="classStartDate != null">
                 #{classStartDate,jdbcType=DATE},
@@ -197,7 +204,10 @@
                 student_age = #{studentAge,jdbcType=VARCHAR},
             </if>
             <if test="enrollNum != null">
-                enroll_num = #{enrollNum,jdbcType=VARCHAR},
+                enroll_num = #{enrollNum,jdbcType=INTEGER},
+            </if>
+            <if test="enrollNum != null">
+                enrolled_num = #{enrolledNum,jdbcType=INTEGER},
             </if>
             <if test="classStartDate != null">
                 class_start_date = #{classStartDate,jdbcType=DATE},
@@ -250,7 +260,8 @@
       class_name = #{className,jdbcType=VARCHAR},
       student_describe = #{studentDescribe,jdbcType=VARCHAR},
       student_age = #{studentAge,jdbcType=VARCHAR},
-      enroll_num = #{enrollNum,jdbcType=VARCHAR},
+      enroll_num = #{enrollNum,jdbcType=INTEGER},
+      enrolled_num = #{enrolledNum,jdbcType=INTEGER},
       class_start_date = #{classStartDate,jdbcType=DATE},
       class_end_date = #{classEndDate,jdbcType=DATE},
       class_weeks = #{classWeeks,jdbcType=VARCHAR},
@@ -278,6 +289,7 @@
         student_describe,
         student_age,
         enroll_num,
+        enrolled_num,
         class_start_date,
         class_end_date,
         class_weeks,

@@ -1,5 +1,7 @@
 package com.wsicong.enroll.dto;
 
+import io.swagger.models.auth.In;
+
 /**
  * 兴趣班DTO
  */
@@ -37,7 +39,12 @@ public class HobbyClassDTO {
     /**
      * 招生人数
      */
-    private String enrollNum;
+    private Integer enrollNum;
+
+    /**
+     * 报名人数
+     */
+    private Integer enrolledNum;
 
     /**
      * 上课开始日期（年月日）
@@ -157,12 +164,20 @@ public class HobbyClassDTO {
         this.studentAge = studentAge;
     }
 
-    public String getEnrollNum() {
+    public Integer getEnrollNum() {
         return enrollNum;
     }
 
-    public void setEnrollNum(String enrollNum) {
+    public void setEnrollNum(Integer enrollNum) {
         this.enrollNum = enrollNum;
+    }
+
+    public Integer getEnrolledNum() {
+        return enrolledNum;
+    }
+
+    public void setEnrolledNum(Integer enrolledNum) {
+        this.enrolledNum = enrolledNum;
     }
 
     public String getClassStartDate() {
@@ -287,6 +302,7 @@ public class HobbyClassDTO {
                 ", studentDescribe='" + studentDescribe + '\'' +
                 ", studentAge='" + studentAge + '\'' +
                 ", enrollNum='" + enrollNum + '\'' +
+                ", enrolledNum='" + enrolledNum + '\'' +
                 ", classStartDate='" + classStartDate + '\'' +
                 ", classEndDate='" + classEndDate + '\'' +
                 ", classWeeks='" + classWeeks + '\'' +
