@@ -301,4 +301,13 @@
         where
         id=#{id,jdbcType=INTEGER}
     </update>
+
+    <select id="selectEnrollCount">
+      select
+      count(1)
+      from
+      e_hobby_class
+      where
+      id=#{id,jdbcType=INTEGER}
+    </select>
 </mapper>

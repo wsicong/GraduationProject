@@ -7,7 +7,7 @@ public class ChildGuardianDTO {
     /**
      * 兴趣班级id
      */
-    private String hobbyClassId;
+    private Integer hobbyClassId;
 
     /**
      * 兴趣班级名称
@@ -89,11 +89,11 @@ public class ChildGuardianDTO {
      */
     private String guardianPhone;
 
-    public String getHobbyClassId() {
+    public Integer getHobbyClassId() {
         return hobbyClassId;
     }
 
-    public void setHobbyClassId(String hobbyClassId) {
+    public void setHobbyClassId(Integer hobbyClassId) {
         this.hobbyClassId = hobbyClassId;
     }
 
@@ -228,7 +228,7 @@ public class ChildGuardianDTO {
     @Override
     public String toString() {
         return "ChildGuardianDTO{" +
-                "hobbyClassId='" + hobbyClassId + '\'' +
+                "hobbyClassId=" + hobbyClassId +
                 ", hobbyClassName='" + hobbyClassName + '\'' +
                 ", childName='" + childName + '\'' +
                 ", childSex='" + childSex + '\'' +

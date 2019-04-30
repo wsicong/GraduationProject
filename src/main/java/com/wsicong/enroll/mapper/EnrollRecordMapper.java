@@ -52,4 +52,11 @@ public interface EnrollRecordMapper {
      * @return
      */
     int updatePayStatus(@Param("id") Integer id, @Param("isPay") Integer isPay);
+
+    /**
+     * 查询报名人数
+     *
+     * @return
+     */
+    int selectEnrollCount(@Param("id") Integer id);
 }

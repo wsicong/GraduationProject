@@ -141,7 +141,7 @@ public class EnrollRecordServiceImpl implements EnrollRecordService {
             EnrollRecord enrollRecord = new EnrollRecord();
             enrollRecord.setChildId(childId);
             enrollRecord.setGuardianId(guardianId);
-            /*enrollRecord.setClassId(childGuardianDTO.getHobbyClassId());*/
+            enrollRecord.setClassId(childGuardianDTO.getHobbyClassId());
             enrollRecord.setClassName(childGuardianDTO.getHobbyClassName());
             enrollRecord.setChildName(childGuardianDTO.getChildName());
             enrollRecord.setGuardianName(childGuardianDTO.getGuardianName());
