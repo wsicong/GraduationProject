@@ -277,17 +277,17 @@ function cleanHobbyClass() {
 
 //异步获取兴趣下拉列表
 function initHobbySelect() {
-    $.get('/hobby/getHobbies', function (data) {
+    $.get('/hobbyType/getHobbyTypes', function (data) {
         var list = data;//返回的list
         if (null != list) {
-            var hobby = document.getElementById("hobbyId");//hobbyId为select定义的id
+            var hobby = document.getElementById("hobbyTypeId");//hobbyTypeId为select定义的id
             for (var p in list) {
                 var option = document.createElement('option');//创建添加option属性
                 option.setAttribute('value', list[p].id);//给option的value添加值
-                option.innerText = list[p].hobbyName;//打印option对应的纯文本
+                option.innerText = list[p].hobbyTypeName;//打印option对应的纯文本
                 hobby.appendChild(option);//给select添加option子标签
             }
-            /*openHobbyType(null, '新增兴趣分类');*/
+            /*openHobbyClass(null, '新增兴趣分类');*/
             layui.form.render('select');//刷新select，显示数据
         }
         /*else {

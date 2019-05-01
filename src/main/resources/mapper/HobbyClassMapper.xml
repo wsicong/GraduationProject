@@ -324,6 +324,9 @@
             <if test="hobbyClassSearch.isEnable!=null and hobbyClassSearch.isEnable!=''">
                 AND hc.is_enable = #{hobbyClassSearch.isEnable}
             </if>
+            <if test="hobbyClassSearch.hobbyTypeId!=null and hobbyClassSearch.hobbyTypeId!=''">
+                AND hc.hobby_type_id = #{hobbyClassSearch.hobbyTypeId}
+            </if>
             <!--<if test="hobbyTypeSearch.enableSearch != null and hobbyTypeSearch.enableSearch != ''">
                 AND is_enable = #{hobbyTypeSearch.enableSearch}
             </if>-->

@@ -8,11 +8,22 @@ public class HobbyClassSearchDTO {
     private String insertTimeStart;
     private String insertTimeEnd;
 
+    //兴趣分类
+    private Integer hobbyTypeId;
+
     //班级是否启用
     private boolean isEnable;
 
     //班级状态
     private Integer status;
+
+    public Integer getHobbyTypeId() {
+        return hobbyTypeId;
+    }
+
+    public void setHobbyTypeId(Integer hobbyTypeId) {
+        this.hobbyTypeId = hobbyTypeId;
+    }
 
     public boolean isEnable() {
         return isEnable;
@@ -87,6 +98,7 @@ public class HobbyClassSearchDTO {
                 ", enableSearch=" + enableSearch +
                 ", insertTimeStart='" + insertTimeStart + '\'' +
                 ", insertTimeEnd='" + insertTimeEnd + '\'' +
+                ", hobbyTypeId=" + hobbyTypeId +
                 ", isEnable=" + isEnable +
                 ", status=" + status +
                 '}';
