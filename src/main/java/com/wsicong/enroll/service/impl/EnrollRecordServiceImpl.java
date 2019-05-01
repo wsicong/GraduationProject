@@ -106,19 +106,20 @@ public class EnrollRecordServiceImpl implements EnrollRecordService {
         User existUser = (User) SecurityUtils.getSubject().getPrincipal();
         //判断报名人数是否已经满
         HobbyClass hobbyClass = hobbyClassMapper.selectByPrimaryKey(childGuardianDTO.getHobbyClassId());
+        int minAge = Integer.parseInt(hobbyClass.getStudentAge().split("-")[0]);
+        int maxAge = Integer.parseInt(hobbyClass.getStudentAge().split("-")[1]);
+        EnrollRecord existRecord = enrollRecordMapper.selectRecordUnique(childGuardianDTO.getChildName(), childGuardianDTO.getHobbyClassId());
         if (hobbyClass.getEnrolledNum() >= hobbyClass.getEnrollNum()) {
             return "该班报名人数已达上限，无法报名";
+        } else if (minAge > childGuardianDTO.getChildAge() || maxAge < childGuardianDTO.getChildAge()) {
+            return "该班级只接受" + hobbyClass.getStudentAge() + "岁的少儿报名，请检查报名少儿年龄";
+        } else if (null != existRecord) {
+            return "该少儿已经报名了该兴趣班，无法重复报名";
         } else {
             hobbyClass.setEnrolledNum(hobbyClass.getEnrolledNum() + 1);
             hobbyClassMapper.updateByPrimaryKeySelective(hobbyClass);
         }
 
-        //判断报名年龄是否符合条件
-        int minAge = Integer.parseInt(hobbyClass.getStudentAge().split("-")[0]);
-        int maxAge = Integer.parseInt(hobbyClass.getStudentAge().split("-")[1]);
-        if (minAge > childGuardianDTO.getChildAge() || maxAge < childGuardianDTO.getChildAge()) {
-            return "该班级只接受" + hobbyClass.getStudentAge() + "岁的少儿报名，请检查报名少儿年龄";
-        }
 
         try {
             //封装儿童信息
@@ -138,7 +139,8 @@ public class EnrollRecordServiceImpl implements EnrollRecordService {
             child.setCreateBy(existUser.getId().toString());
             child.setCreateTime(new Date());
             //插入后返回的id值
-            int childId = childMapper.insert(child);
+            childMapper.insert(child);
+            int childId = child.getId();
 
             //封装监护人信息
             Guardian guardian = new Guardian();
@@ -152,7 +154,8 @@ public class EnrollRecordServiceImpl implements EnrollRecordService {
             guardian.setCreateBy(existUser.getId().toString());
             guardian.setCreateTime(new Date());
             //插入监护人信息后返回的id值
-            int guardianId = guardianMapper.insert(guardian);
+            guardianMapper.insert(guardian);
+            int guardianId = guardian.getId();
 
             //封装报名记录信息
             EnrollRecord enrollRecord = new EnrollRecord();

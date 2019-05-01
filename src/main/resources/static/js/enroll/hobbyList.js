@@ -28,14 +28,14 @@ $(function () {
             , cols: [[
                 {type: 'numbers', title: '序号'}
                 /*, {field: 'id', title: 'ID', width: 80, unresize: true, sort: true, hide: true}*/
-                , {field: 'hobbyName', title: '兴趣类别名称'}
+                , {field: 'hobbyName', title: '兴趣分类名称'}
                 , {field: 'hobbyInfo', title: '简介'}
                 , {field: 'enable', title: '是否启用', width: 95, templet: '#enableTpl'}
                 /*, {field: 'createBy', title: '创建者', hide: true}*/
                 , {field: 'createTime', title: '创建时间', width: 160, sort: true}
                 /*, {field: 'updateBy', title: '更新者', hide: true}*/
                 , {field: 'updateTime', title: '更新时间', width: 160, sort: true}
-                , {field: 'remark', title: '备注'}
+                /*, {field: 'remark', title: '备注'}*/
                 , {fixed: 'right', title: '操作', width: 140, align: 'center', toolbar: '#optBar'}
             ]]
             , done: function (res, curr, count) {
@@ -160,10 +160,11 @@ function submitAjax(obj, currentUser) {
                         load(obj);
                     });
                 } else {
-                    layer.alert(data, function () {
+                    layer.alert(data);
+                    /*layer.alert(data, function () {
                         layer.closeAll();
                         load(obj);
-                    });
+                    });*/
                 }
             }
         },
@@ -189,7 +190,7 @@ function cleanHobby() {
 }
 
 function addHobby() {
-    openHobby(null, '新增兴趣大类');
+    openHobby(null, '新增兴趣分类');
     /*//重新渲染下form表单 否则复选框无效
     layui.form.render('checkbox');*/
 }

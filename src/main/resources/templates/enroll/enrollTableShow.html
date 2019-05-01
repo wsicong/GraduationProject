@@ -10,7 +10,7 @@
     <!--<div th:replace="fragments/head :: header"></div>-->
 
     <div class="layui-header">
-        <a href="javascript:;" class="layui-hide-xs"><a href="#" style="font-weight: bold;">
+        <a href="javascript:;" class="layui-hide-xs"><a href="javascript:void(0)" style="font-weight: bold;">
             <div class="layui-logo">少儿兴趣班在线报名系统</div>
         </a>
         </a>
@@ -52,20 +52,20 @@
         <form id="hobbyClassSearch" class="layui-form layui-form-pane" method="post" action=""
               style="margin-top: 20px;">
             <div class="layui-form-item">
-                <label class="layui-form-label" style="width: 140px">班级名称</label>
+                <label class="layui-form-label">班级名称</label>
                 <div class="layui-input-inline">
                     <input id="classNameSearch" name="classNameSearch" autocomplete="off" class="layui-input"
                            type="text"/>
                 </div>
 
-                <label class="layui-form-label">兴趣大类：</label>
+                <!--<label class="layui-form-label">兴趣分类：</label>
                 <div class="layui-input-inline">
-                    <select id="hobbyId" name="hobbyId" lay-verify="required" lay-search>
+                    <select id="hobbyId" name="hobbyId" lay-search>
                         <option value="">请选择</option>
-                        <!--<option value="1">舞蹈类</option>
-                        <option value="0">文化类</option>-->
+                        &lt;!&ndash;<option value="1">舞蹈类</option>
+                        <option value="0">文化类</option>&ndash;&gt;
                     </select>
-                </div>
+                </div>-->
 
                 <!--<label class="layui-form-label">是否启用</label>
                 <div class="layui-input-inline">

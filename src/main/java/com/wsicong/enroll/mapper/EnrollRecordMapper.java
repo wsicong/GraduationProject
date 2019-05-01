@@ -58,5 +58,14 @@ public interface EnrollRecordMapper {
      *
      * @return
      */
-    int selectEnrollCount(@Param("id") Integer id);
+    /* int selectEnrollCount(@Param("id") Integer id);*/
+
+    /**
+     * 查询报名记录（根据少儿id、班级id）
+     *
+     * @param childName
+     * @param classId
+     * @return
+     */
+    EnrollRecord selectRecordUnique(@Param("childName") String childName, @Param("classId") Integer classId);
 }

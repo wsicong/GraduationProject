@@ -64,4 +64,6 @@ public interface EnrollRecordService {
      * @return
      */
     String setPayStatus(Integer id, Integer isPay);
+
+
 }

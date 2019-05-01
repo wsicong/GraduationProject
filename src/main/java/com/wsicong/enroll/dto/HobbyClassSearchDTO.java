@@ -8,8 +8,19 @@ public class HobbyClassSearchDTO {
     private String insertTimeStart;
     private String insertTimeEnd;
 
+    //班级是否启用
+    private boolean isEnable;
+
     //班级状态
     private Integer status;
+
+    public boolean isEnable() {
+        return isEnable;
+    }
+
+    public void setEnable(boolean enable) {
+        isEnable = enable;
+    }
 
     public Integer getStatus() {
         return status;
@@ -76,6 +87,7 @@ public class HobbyClassSearchDTO {
                 ", enableSearch=" + enableSearch +
                 ", insertTimeStart='" + insertTimeStart + '\'' +
                 ", insertTimeEnd='" + insertTimeEnd + '\'' +
+                ", isEnable=" + isEnable +
                 ", status=" + status +
                 '}';
     }

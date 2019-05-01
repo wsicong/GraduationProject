@@ -30,7 +30,7 @@ $(function () {
                 /*, {field: 'id', title: 'ID', width: 80, unresize: true, sort: true, hide: true}*/
                 , {field: 'className', title: '班级名称'}
                 /*, {field: 'hobbyTypeId', title: '兴趣类别id', hide: true}*/
-                , {field: 'hobbyTypeName', title: '兴趣类别'}
+                , {field: 'hobbyTypeName', title: '兴趣名称'}
                 , {field: 'studentDescribe', title: '招生对象'}
                 , {field: 'studentAge', title: '招生年龄（岁）'}
                 , {field: 'enrollNum', title: '招生人数', width: 95}

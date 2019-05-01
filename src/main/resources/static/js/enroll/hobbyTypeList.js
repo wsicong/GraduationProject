@@ -30,7 +30,7 @@ $(function () {
                 /*, {field: 'id', title: 'ID', width: 80, unresize: true, sort: true, hide: true}*/
                 , {field: 'hobbyTypeName', title: '兴趣名称'}
                 /*, {field: 'hobbyId', title: '兴趣类别id', hide: true}*/
-                , {field: 'hobbyName', title: '兴趣类别'}
+                , {field: 'hobbyName', title: '兴趣分类'}
                 , {field: 'hobbyTypeInfo', title: '学习内容'}
                 , {field: 'studyMaterials', title: '学习用品'}
                 , {field: 'enable', title: '是否启用', width: 95, templet: '#enableTpl'}
@@ -38,7 +38,7 @@ $(function () {
                 , {field: 'createTime', title: '创建时间', width: 160, sort: true}
                 /*, {field: 'updateBy', title: '更新者', hide: true}*/
                 , {field: 'updateTime', title: '更新时间', width: 160, sort: true}
-                , {field: 'remark', title: '备注'}
+                /*, {field: 'remark', title: '备注'}*/
                 , {fixed: 'right', title: '操作', width: 140, align: 'center', toolbar: '#optBar'}
             ]]
             , done: function (res, curr, count) {

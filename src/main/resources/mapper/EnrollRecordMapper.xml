@@ -265,6 +265,9 @@
             <if test="enrollRecordSearch.insertTimeEnd!=null and enrollRecordSearch.insertTimeEnd!=''">
                 AND create_time &lt;= #{enrollRecordSearch.insertTimeEnd}
             </if>
+            <if test="enrollRecordSearch.childName!=null and enrollRecordSearch.childName!=''">
+                AND child_name like CONCAT(CONCAT('%',#{enrollRecordSearch.childName}),'%')
+            </if>
             AND create_by = #{enrollRecordSearch.userId}
             <!--<if test="enrollRecordSearch.enableSearch != null and enrollRecordSearch.enableSearch != ''">
                 AND is_enable = #{enrollRecordSearch.enableSearch}
@@ -302,12 +305,23 @@
         id=#{id,jdbcType=INTEGER}
     </update>
 
-    <select id="selectEnrollCount">
+    <!--<select id="selectEnrollCount">
       select
       count(1)
       from
       e_hobby_class
       where
       id=#{id,jdbcType=INTEGER}
+    </select>-->
+
+
+    <!--根据少儿姓名和班级id查询报名记录-->
+    <select id="selectRecordUnique" resultType="com.wsicong.enroll.model.EnrollRecord">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        e_enroll_record
+        where
+        child_name=#{childName,jdbcType=VARCHAR} and class_id=#{classId,jdbcType=INTEGER}
     </select>
 </mapper>

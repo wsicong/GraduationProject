@@ -8,6 +8,17 @@ public class EnrollRecordSearchDTO {
     private String insertTimeStart;
     private String insertTimeEnd;
 
+    //少儿姓名
+    private String childName;
+
+    public String getChildName() {
+        return childName;
+    }
+
+    public void setChildName(String childName) {
+        this.childName = childName;
+    }
+
     public Integer getPage() {
         return page;
     }
@@ -65,6 +76,7 @@ public class EnrollRecordSearchDTO {
                 ", childIdSearch='" + childIdSearch + '\'' +
                 ", insertTimeStart='" + insertTimeStart + '\'' +
                 ", insertTimeEnd='" + insertTimeEnd + '\'' +
+                ", childName='" + childName + '\'' +
                 '}';
     }
 }

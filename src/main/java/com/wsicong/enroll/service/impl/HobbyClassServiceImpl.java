@@ -35,6 +35,7 @@ public class HobbyClassServiceImpl implements HobbyClassService {
         setStatus();
         PageDataResult result = new PageDataResult();
         hobbyClassSearch.setStatus(1);
+        hobbyClassSearch.setEnable(true);
         PageHelper.startPage(page, limit);
         List<HobbyClass> hobbyClassList = hobbyClassMapper.selectHobbyClassList(hobbyClassSearch);
         PageInfo<HobbyClass> pageInfo = new PageInfo<>(hobbyClassList);
