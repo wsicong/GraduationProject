@@ -1,19 +1,21 @@
+var myChart;
+
 $(function () {
     //搜索框
-    /*layui.use(['form', 'laydate'], function () {
+    layui.use(['form', 'laydate'], function () {
         var form = layui.form
             , layer = layui.layer
             , laydate = layui.laydate;
         //TODO 数据校验
         //监听搜索框
-        form.on('submit(searchSubmit)', function (data) {
-            searchData();
+        form.on('submit(searchSubmit)', function () {
+            genData();
             return false;
         });
-    });*/
+    });
 
 
-    var myChart = echarts.init(document.getElementById('main'));
+    myChart = echarts.init(document.getElementById('main'));
 // 显示标题，图例和空的坐标轴
     myChart.setOption({
         title: {
@@ -60,13 +62,17 @@ $(function () {
         }]
     });
 
+    myChart.showLoading();    //数据加载完之前先显示一段简单的loading动画
+
+    var hobbyClassName = [];
+    var enrolledNum = [];
+    var enrollNum = [];
+
 // 异步加载数据
     $.post('/hobbyClass//getHobbyClass').done(function (data) {
-        var hobbyClassName = new Array();
-        var enrolledNum = new Array();
-        var enrollNum = new Array();
+        console.log(data)
         for (var p in data) {
-            hobbyClassName[p] = data[p].className;
+            hobbyClassName[p] = data[p].className + "(" + data[p].hobbyTypeName + ")";
             enrolledNum[p] = data[p].enrolledNum;
             enrollNum[p] = data[p].enrollNum;
         }
@@ -77,16 +83,77 @@ $(function () {
             },
             series: [{
                 name: '招生人数',
-                data: enrollNum
+                data: enrollNum,
+                itemStyle: {
+                    normal: {
+                        label: {
+                            show: true, //开启显示
+                            position: 'top', //在上方显示
+                            textStyle: { //数值样式
+                                color: 'black',
+                                fontSize: 16
+                            }
+                        }
+                    }
+                }
             }, {
                 // 根据名字对应到相应的系列
                 name: '报名人数',
-                data: enrolledNum
+                data: enrolledNum,
+                itemStyle: {
+                    normal: {
+                        label: {
+                            show: true, //开启显示
+                            position: 'top', //在上方显示
+                            textStyle: { //数值样式
+                                color: 'black',
+                                fontSize: 16
+                            }
+                        }
+                    }
+                }
             }]
         });
+        myChart.hideLoading();
     });
 });
 
+function genData() {
+    $.ajax({
+        type: 'POST',
+        data: $('#hobbyClassSearch').serialize(),
+        url: '/hobbyClass//getHobbyClass',
+        success: function (data) {
+            var hobbyClassName = [];
+            var enrolledNum = [];
+            var enrollNum = [];
+            for (var p in data) {
+                hobbyClassName[p] = data[p].className + "(" + data[p].hobbyTypeName + ")";
+                enrolledNum[p] = data[p].enrolledNum;
+                enrollNum[p] = data[p].enrollNum;
+            }
+            // 填入数据
+            myChart.setOption({
+                xAxis: {
+                    data: hobbyClassName
+                },
+                series: [{
+                    name: '招生人数',
+                    data: enrollNum
+                }, {
+                    // 根据名字对应到相应的系列
+                    name: '报名人数',
+                    data: enrolledNum
+                }]
+            });
+            myChart.hideLoading();
+        },
+        error: function () {
+            alert("图表请求数据失败!");
+            myChart.hideLoading();
+        }
+    });
+}
 /*
 function searchData() {
     $.ajax({
