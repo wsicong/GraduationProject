@@ -29,6 +29,18 @@ public class HobbyClassServiceImpl implements HobbyClassService {
     private HobbyClassMapper hobbyClassMapper;
 
 
+    /**
+     * 查询所有兴趣班
+     *
+     * @param hobbyClassSearchDTO
+     * @return
+     */
+    @Override
+    public List<HobbyClass> listHobbyClass(HobbyClassSearchDTO hobbyClassSearchDTO) {
+        List<HobbyClass> hobbyClassList = hobbyClassMapper.selectHobbyClassList(hobbyClassSearchDTO);
+        return hobbyClassList;
+    }
+
     @Override
     public PageDataResult listUserClass(int page, int limit, HobbyClassSearchDTO hobbyClassSearch) {
         //更新班级状态

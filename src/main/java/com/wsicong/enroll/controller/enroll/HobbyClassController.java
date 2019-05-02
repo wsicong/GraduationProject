@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -32,6 +33,17 @@ public class HobbyClassController {
         return "/enroll/hobbyClassList";
     }
 
+    /**
+     * 查询兴趣班列表
+     *
+     * @param hobbyClassSearch
+     * @return
+     */
+    @PostMapping("/getHobbyClass")
+    @ResponseBody
+    public List<HobbyClass> getHobbyClass(HobbyClassSearchDTO hobbyClassSearch) {
+        return hobbyClassService.listHobbyClass(hobbyClassSearch);
+    }
 
     /**
      * 分页查询兴趣班级列表

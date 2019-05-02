@@ -4,7 +4,18 @@ import com.wsicong.enroll.dto.HobbyClassSearchDTO;
 import com.wsicong.enroll.model.HobbyClass;
 import com.wsicong.enroll.util.PageDataResult;
 
+import java.util.List;
+
 public interface HobbyClassService {
+
+    /**
+     * 查询所有兴趣班
+     *
+     * @param hobbyClassSearchDTO
+     * @return
+     */
+    List<HobbyClass> listHobbyClass(HobbyClassSearchDTO hobbyClassSearchDTO);
+
     /**
      * 分页查询兴趣班级列表
      *

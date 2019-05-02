@@ -44,6 +44,10 @@ public class EnrollRecordController {
         return "/enroll/enrollResult";
     }
 
+    @RequestMapping("/enrollResultEcharts")
+    public String toEnrollResultEcharts() {
+        return "/enroll/enrollResultEcharts";
+    }
     /**
      * 分页查询报名记录列表
      */

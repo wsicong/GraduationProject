@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<!--head部分-->
+<head th:include="layout :: htmlhead" th:with="title='报名详情图表'">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <!--头-->
+    <div th:replace="fragments/head :: header"></div>
+
+    <div class="layui-body" style="margin: 1%">
+
+        <!--<form id="hobbyClassSearch" class="layui-form layui-form-pane" method="post" action=""
+              style="margin-top: 20px;">
+            <div class="layui-form-item">
+                <label class="layui-form-label">班级名称</label>
+                <div class="layui-input-inline">
+                    <input id="classNameSearch" name="classNameSearch" autocomplete="off" class="layui-input"
+                           type="text"/>
+                </div>
+
+
+                <label class="layui-form-label">班级状态</label>
+                <div class="layui-input-inline">
+                    <select id="status" name="status" lay-search>
+                        <option value="" selected>请选择</option>
+                        <option value="1">正在招生</option>
+                        <option value="2">正在授课</option>
+                        <option value="3">课程结束</option>
+                    </select>
+                </div>
+
+
+                &lt;!&ndash;<label class="layui-form-label">是否启用</label>
+                <div class="layui-input-inline">
+                    <select id="enableSearch" name="enableSearch" lay-verify="" lay-search>
+                        <option value="">请选择</option>
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select>
+                </div>&ndash;&gt;
+
+                &lt;!&ndash;<label class="layui-form-label">创建时间</label>
+                <div class="layui-input-inline" style="width: 175px;">
+                    <input name="insertTimeStart" id="insertTimeStart" placeholder="yyyy-MM-dd HH:mm:ss"
+                           autocomplete="off"
+                           class="layui-input" type="text"/>
+                </div>
+                <div class="layui-form-mid">-</div>
+                <div class="layui-input-inline" style="width: 175px;">
+                    <input name="insertTimeEnd" id="insertTimeEnd" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off"
+                           class="layui-input" type="text"/>
+                </div>&ndash;&gt;
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <button class="layui-btn" lay-submit="" lay-filter="searchSubmit">搜索</button>
+            </div>
+        </form>-->
+
+        <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+        <div id="main" style="width: 1200px;height:500px;"></div>
+    </div>
+
+    <!--底部-->
+    <div th:replace="fragments/footer :: footer"></div>
+    <script src="/js/echarts.js"></script>
+    <script src="/js/dateUtils.js"></script>
+    <script src="/js/enroll/enrollResultEcharts.js"></script>
+</div>
+</body>
+</html>
