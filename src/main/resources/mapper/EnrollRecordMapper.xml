@@ -237,43 +237,46 @@
     <!--分页查询报名记录信息列表-->
     <select id="selectEnrollRecordList" resultType="com.wsicong.enroll.dto.EnrollRecordDTO">
         select
-        id,
-        child_id,
-        guardian_id,
-        class_id,
-        class_name,
-        enroll_start_time,
-        enroll_end_time,
-        child_name,
-        guardian_name,
-        guardian_phone,
-        is_pay,
-        is_del,
-        create_by,
-        create_time,
-        update_by,
-        update_time,
-        remark
-        from e_enroll_record
+        ht.hobby_type_name as hobbyName,
+        e.id,
+        e.child_id,
+        e.guardian_id,
+        e.class_id,
+        e.class_name,
+        e.enroll_start_time,
+        e.enroll_end_time,
+        e.child_name,
+        e.guardian_name,
+        e.guardian_phone,
+        e.is_pay,
+        e.is_del,
+        e.create_by,
+        e.create_time,
+        e.update_by,
+        e.update_time,
+        e.remark
+        from e_enroll_record e
+        left join e_hobby_class hc on e.class_id=hc.id
+        left join e_hobby_type ht on hc.hobby_type_id=ht.id
         <where>
             <if test="enrollRecordSearch.childIdSearch != null and enrollRecordSearch.childIdSearch != ''">
-                AND child_id like CONCAT(CONCAT('%',#{enrollRecordSearch.childIdSearch}),'%')
+                AND e.child_id like CONCAT(CONCAT('%',#{enrollRecordSearch.childIdSearch}),'%')
             </if>
             <if test="enrollRecordSearch.insertTimeStart!=null and enrollRecordSearch.insertTimeStart!=''">
-                AND create_time &gt;= #{enrollRecordSearch.insertTimeStart}
+                AND e.create_time &gt;= #{enrollRecordSearch.insertTimeStart}
             </if>
             <if test="enrollRecordSearch.insertTimeEnd!=null and enrollRecordSearch.insertTimeEnd!=''">
-                AND create_time &lt;= #{enrollRecordSearch.insertTimeEnd}
+                AND e.create_time &lt;= #{enrollRecordSearch.insertTimeEnd}
             </if>
             <if test="enrollRecordSearch.childName!=null and enrollRecordSearch.childName!=''">
-                AND child_name like CONCAT(CONCAT('%',#{enrollRecordSearch.childName}),'%')
+                AND e.child_name like CONCAT(CONCAT('%',#{enrollRecordSearch.childName}),'%')
             </if>
-            AND create_by = #{enrollRecordSearch.userId}
+            AND e.create_by = #{enrollRecordSearch.userId}
             <!--<if test="enrollRecordSearch.enableSearch != null and enrollRecordSearch.enableSearch != ''">
                 AND is_enable = #{enrollRecordSearch.enableSearch}
             </if>-->
         </where>
-        order by create_time desc
+        order by e.create_time desc
     </select>
 
     <!--根据儿童id和班级id查找报名记录-->

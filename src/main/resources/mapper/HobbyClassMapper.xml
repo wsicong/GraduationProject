@@ -206,7 +206,7 @@
             <if test="enrollNum != null">
                 enroll_num = #{enrollNum,jdbcType=INTEGER},
             </if>
-            <if test="enrollNum != null">
+            <if test="enrolledNum != null">
                 enrolled_num = #{enrolledNum,jdbcType=INTEGER},
             </if>
             <if test="classStartDate != null">

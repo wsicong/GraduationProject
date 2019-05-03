@@ -1,6 +1,11 @@
 package com.wsicong.enroll.dto;
 
 public class EnrollRecordDTO {
+
+    /**
+     * 兴趣名
+     */
+    private String hobbyName;
     /**
      * 报名表ID
      */
@@ -85,6 +90,14 @@ public class EnrollRecordDTO {
      * 备注
      */
     private String remark;
+
+    public String getHobbyName() {
+        return hobbyName;
+    }
+
+    public void setHobbyName(String hobbyName) {
+        this.hobbyName = hobbyName;
+    }
 
     public Integer getId() {
         return id;

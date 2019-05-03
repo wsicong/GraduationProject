@@ -32,6 +32,7 @@ $(function () {
                 , {field: 'guardianId', title: '监护人信息ID', hide: true}
                 , {field: 'classId', title: '班级信息ID', hide: true}*/
                 , {field: 'className', title: '班级名称'}
+                , {field: 'hobbyName', title: '兴趣名称'}
                 , {field: 'childName', title: '少儿姓名'}
                 , {field: 'guardianName', title: '监护人'}
                 , {field: 'guardianPhone', title: '联系方式'}
